@@ -123,3 +123,31 @@ exports.createSchemaCustomization = ({ actions }) => {
     }
   `)
 }
+
+
+exports.createPages = async ({ graphql, actions }) => {
+  const { createPage } = actions
+  const result = await graphql(`
+    {
+      allMarkdownRemark {
+        edges {
+          node {
+            fields {
+              slug
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+    createPage({
+      path: `/news/${node.fields.slug}`,
+      component: require.resolve(`./src/templates/news-post.js`),
+      context: {
+        slug: node.fields.slug,
+      },
+    })
+  })
+}

@@ -1,0 +1,45 @@
+
+# The branch in your GitHub repo where changes are saved
+backend:
+  name: github
+  repo: mahdimma/DNG  # Your GitHub username and repository name
+  branch: main
+  auth_endpoint: https://api.netlify.com
+  base_url: https://dangepia.com
+  auth:
+    client_id: Ov23lijngtXYVHc3nVlv # Replace with the Client ID from GitHub
+    client_secret: 7a8adf1c721fb9af29cce9f8282a6316ed4642ca # Replace with the Client Secret from GitHub
+
+media_folder: static/uploads  # Where uploaded images will be stored
+public_folder: /uploads       # The public-facing URL for uploaded images
+
+collections:                  # Define different types of content you want to manage
+  - name: "news"
+    label: "News"
+    folder: "content/news"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "gallery"
+    label: "Gallery"
+    folder: "content/gallery"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Caption", name: "caption", widget: "string" }
+
+  - name: "financials"
+    label: "Financial Reports"
+    folder: "content/financials"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Income", name: "income", widget: "string" }
+      - { label: "Expenses", name: "expenses", widget: "string" }
