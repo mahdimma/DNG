@@ -1,13 +1,18 @@
 {
-  "name": "dang",
+  "name": "dangepia-village-website",
   "version": "1.0.0",
-  "description": "",
+  "description": "Official website for Dangepia Village with news, events, and village information",
   "main": "index.js",
   "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["gatsby", "village", "community", "iran", "website"],
+  "author": "Dangepia Village",
   "license": "ISC",
   "dependencies": {
     "gatsby": "^5.14.5",
