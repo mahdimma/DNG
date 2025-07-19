@@ -3,7 +3,7 @@ import { graphql, Link } from "gatsby"
 import Layout from "../components/Layout"
 
 const NewsPage = ({ data }) => {
-  const newsArticles = data.allMarkdownRemark.nodes
+  const newsArticles = data?.allMarkdownRemark?.nodes || []
 
   return (
     <Layout title="News" description="Stay updated with the latest news and announcements from Dangepia Village">

@@ -4,7 +4,7 @@ const preferDefault = m => (m && m.default) || m
 
 
 exports.components = {
-  "component---cache-dev-404-page-js": preferDefault(require("/workspaces/DANG/.cache/dev-404-page.js")),
+  "component---cache-caches-gatsby-plugin-offline-app-shell-js": preferDefault(require("/workspaces/DANG/.cache/caches/gatsby-plugin-offline/app-shell.js")),
   "component---src-pages-404-js": preferDefault(require("/workspaces/DANG/src/pages/404.js")),
   "component---src-pages-about-js": preferDefault(require("/workspaces/DANG/src/pages/about.js")),
   "component---src-pages-admin-js": preferDefault(require("/workspaces/DANG/src/pages/admin.js")),

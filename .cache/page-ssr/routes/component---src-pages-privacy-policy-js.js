@@ -1,399 +1,44 @@
 "use strict";
-exports.id = "component---src-pages-privacy-policy-js";
-exports.ids = ["component---src-pages-privacy-policy-js"];
+exports.id = 186;
+exports.ids = [186];
 exports.modules = {
 
-/***/ "./public/page-data/sq/d/2992646504.json":
-/*!***********************************************!*\
-  !*** ./public/page-data/sq/d/2992646504.json ***!
-  \***********************************************/
-/***/ ((module) => {
-
-module.exports = /*#__PURE__*/JSON.parse('{"data":{"site":{"siteMetadata":{"title":"Dangepia Village","description":"Official website of Dangepia Village","siteUrl":"https://dangepia.ir"}}}}');
-
-/***/ }),
-
-/***/ "./src/components/Footer.js":
-/*!**********************************!*\
-  !*** ./src/components/Footer.js ***!
-  \**********************************/
+/***/ 2310:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9761);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var gatsby__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gatsby */ "./.cache/gatsby-browser-entry.js");
-
-
-const Footer = () => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("footer", {
-  style: {
-    background: `#1a202c`,
-    color: `white`,
-    padding: `2rem 1rem`,
-    marginTop: `2rem`
-  }
-}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-  style: {
-    margin: `0 auto`,
-    maxWidth: 960,
-    display: `grid`,
-    gridTemplateColumns: `repeat(auto-fit, minmax(250px, 1fr))`,
-    gap: `2rem`
-  }
-}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Dangepia Village"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Welcome to our beautiful village. Stay connected with the latest news, events, and services.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h4", null, "Quick Links"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", {
-  style: {
-    listStyle: `none`,
-    padding: 0
-  }
-}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
-  style: {
-    marginBottom: `0.5rem`
-  }
-}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
-  to: "/about",
-  style: {
-    color: `#cbd5e0`,
-    textDecoration: `none`
-  }
-}, "About Us")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
-  style: {
-    marginBottom: `0.5rem`
-  }
-}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
-  to: "/news",
-  style: {
-    color: `#cbd5e0`,
-    textDecoration: `none`
-  }
-}, "News")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
-  style: {
-    marginBottom: `0.5rem`
-  }
-}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
-  to: "/services",
-  style: {
-    color: `#cbd5e0`,
-    textDecoration: `none`
-  }
-}, "Services")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
-  style: {
-    marginBottom: `0.5rem`
-  }
-}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
-  to: "/contact",
-  style: {
-    color: `#cbd5e0`,
-    textDecoration: `none`
-  }
-}, "Contact")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h4", null, "Legal"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", {
-  style: {
-    listStyle: `none`,
-    padding: 0
-  }
-}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
-  style: {
-    marginBottom: `0.5rem`
-  }
-}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
-  to: "/privacy-policy",
-  style: {
-    color: `#cbd5e0`,
-    textDecoration: `none`
-  }
-}, "Privacy Policy")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
-  style: {
-    marginBottom: `0.5rem`
-  }
-}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
-  to: "/terms-of-service",
-  style: {
-    color: `#cbd5e0`,
-    textDecoration: `none`
-  }
-}, "Terms of Service"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-  style: {
-    textAlign: `center`,
-    marginTop: `2rem`,
-    paddingTop: `2rem`,
-    borderTop: `1px solid #4a5568`
-  }
-}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "\xA9 ", new Date().getFullYear(), " Dangepia Village. All rights reserved.")));
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Footer);
+/* harmony import */ var _components_Layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3722);
+const PrivacyPolicyPage=()=>{return/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Layout__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .A,{title:"Privacy Policy",description:"Privacy policy for Dangepia Village website"},/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div",{style:{maxWidth:800,margin:`0 auto`,padding:`2rem 1rem`}},/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1",null,"Privacy Policy"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p",{style:{fontSize:`0.9rem`,color:`#666`,marginBottom:`2rem`}},"Last updated: ",new Date().toLocaleDateString()),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("section",{style:{marginBottom:`2rem`}},/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2",null,"Introduction"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p",null,"Dangepia Village (\"we,\" \"our,\" or \"us\") is committed to protecting your privacy. This Privacy Policy explains how your personal information is collected, used, and disclosed by Dangepia Village website.")),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("section",{style:{marginBottom:`2rem`}},/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2",null,"Information We Collect"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3",null,"Information You Provide to Us"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p",null,"We collect information you provide directly to us, such as when you:"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul",null,/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li",null,"Fill out our contact forms"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li",null,"Subscribe to our newsletter"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li",null,"Participate in village surveys"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li",null,"Submit feedback or requests"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li",null,"Register for village events")),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3",null,"Information We Collect Automatically"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p",null,"When you access our website, we automatically collect certain information, including:"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul",null,/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li",null,"Your IP address"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li",null,"Browser type and version"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li",null,"Pages you visit on our site"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li",null,"Time and date of your visit"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li",null,"Referring website"))),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("section",{style:{marginBottom:`2rem`}},/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2",null,"How We Use Your Information"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p",null,"We use the information we collect to:"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul",null,/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li",null,"Provide and improve our services"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li",null,"Communicate with you about village matters"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li",null,"Send you newsletters and updates (with your consent)"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li",null,"Respond to your inquiries and requests"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li",null,"Organize and manage village events"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li",null,"Analyze website usage to improve user experience"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li",null,"Comply with legal obligations"))),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("section",{style:{marginBottom:`2rem`}},/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2",null,"Information Sharing and Disclosure"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p",null,"We do not sell, trade, or otherwise transfer your personal information to third parties except in the following circumstances:"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul",null,/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li",null,"With your explicit consent"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li",null,"To comply with legal requirements"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li",null,"To protect our rights and safety"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li",null,"To service providers who assist us (under strict confidentiality agreements)"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li",null,"In case of a merger or acquisition (you will be notified)"))),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("section",{style:{marginBottom:`2rem`}},/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2",null,"Data Security"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p",null,"We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the internet is 100% secure.")),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("section",{style:{marginBottom:`2rem`}},/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2",null,"Cookies and Tracking Technologies"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p",null,"Our website may use cookies and similar tracking technologies to enhance your browsing experience. You can set your browser to refuse cookies, but this may limit some functionality of our website.")),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("section",{style:{marginBottom:`2rem`}},/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2",null,"Your Rights"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p",null,"You have the right to:"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul",null,/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li",null,"Access your personal information"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li",null,"Correct inaccurate information"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li",null,"Request deletion of your information"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li",null,"Object to processing of your information"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li",null,"Withdraw consent at any time"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li",null,"Receive a copy of your information"))),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("section",{style:{marginBottom:`2rem`}},/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2",null,"Children's Privacy"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p",null,"Our website is not directed to children under 13 years of age. We do not knowingly collect personal information from children under 13. If you believe we have collected information from a child under 13, please contact us immediately.")),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("section",{style:{marginBottom:`2rem`}},/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2",null,"Changes to This Privacy Policy"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p",null,"We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the \"Last updated\" date at the top of this page.")),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("section",{style:{marginBottom:`2rem`}},/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2",null,"Contact Us"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p",null,"If you have any questions about this Privacy Policy, please contact us:"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul",{style:{listStyle:`none`,padding:0}},/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li",null,/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("strong",null,"Email:")," privacy@dangepia.ir"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li",null,/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("strong",null,"Phone:")," +98-XXX-XXXX"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li",null,/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("strong",null,"Address:")," Village Office, Main Street, Dangepia Village"))),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div",{style:{background:`#f7fafc`,padding:`1.5rem`,borderRadius:`8px`,border:`1px solid #e2e8f0`,marginTop:`2rem`}},/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p",{style:{margin:0,fontSize:`0.9rem`,color:`#4a5568`}},"This privacy policy is compliant with Iranian data protection laws and international privacy standards. For specific legal questions, please consult with a legal professional."))));};/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PrivacyPolicyPage);
 
 /***/ }),
 
-/***/ "./src/components/Header.js":
-/*!**********************************!*\
-  !*** ./src/components/Header.js ***!
-  \**********************************/
+/***/ 3722:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var gatsby__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gatsby */ "./.cache/gatsby-browser-entry.js");
 
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  A: () => (/* binding */ components_Layout)
+});
 
-const Header = ({
-  siteTitle
-}) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("header", {
-  style: {
-    background: `#2c5282`,
-    marginBottom: `1.45rem`
-  }
-}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-  style: {
-    margin: `0 auto`,
-    maxWidth: 960,
-    padding: `1.45rem 1.0875rem`
-  }
-}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", {
-  style: {
-    margin: 0
-  }
-}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
-  to: "/",
-  style: {
-    color: `white`,
-    textDecoration: `none`
-  }
-}, siteTitle)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("nav", {
-  style: {
-    marginTop: `1rem`
-  }
-}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", {
-  style: {
-    display: `flex`,
-    listStyle: `none`,
-    margin: 0,
-    padding: 0,
-    gap: `1rem`
-  }
-}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
-  to: "/",
-  style: {
-    color: `white`,
-    textDecoration: `none`
-  }
-}, "Home")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
-  to: "/about",
-  style: {
-    color: `white`,
-    textDecoration: `none`
-  }
-}, "About")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
-  to: "/news",
-  style: {
-    color: `white`,
-    textDecoration: `none`
-  }
-}, "News")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
-  to: "/services",
-  style: {
-    color: `white`,
-    textDecoration: `none`
-  }
-}, "Services")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
-  to: "/contact",
-  style: {
-    color: `white`,
-    textDecoration: `none`
-  }
-}, "Contact")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
-  to: "/gallery",
-  style: {
-    color: `white`,
-    textDecoration: `none`
-  }
-}, "Gallery")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
-  to: "/maps",
-  style: {
-    color: `white`,
-    textDecoration: `none`
-  }
-}, "Maps")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
-  to: "/weather",
-  style: {
-    color: `white`,
-    textDecoration: `none`
-  }
-}, "Weather"))))));
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Header);
-
-/***/ }),
-
-/***/ "./src/components/Layout.js":
-/*!**********************************!*\
-  !*** ./src/components/Layout.js ***!
-  \**********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _public_page_data_sq_d_2992646504_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../public/page-data/sq/d/2992646504.json */ "./public/page-data/sq/d/2992646504.json");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/es/Helmet.js");
-/* harmony import */ var gatsby__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! gatsby */ "./.cache/gatsby-browser-entry.js");
-/* harmony import */ var _Header__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Header */ "./src/components/Header.js");
-/* harmony import */ var _Footer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Footer */ "./src/components/Footer.js");
-
-
-
-
-
-
-const Layout = ({
-  children,
-  title,
-  description
-}) => {
-  var _data$site$siteMetada, _data$site$siteMetada2;
-  const data = _public_page_data_sq_d_2992646504_json__WEBPACK_IMPORTED_MODULE_0__.data;
-  const siteTitle = (_data$site$siteMetada = data.site.siteMetadata) === null || _data$site$siteMetada === void 0 ? void 0 : _data$site$siteMetada.title;
-  const siteDescription = (_data$site$siteMetada2 = data.site.siteMetadata) === null || _data$site$siteMetada2 === void 0 ? void 0 : _data$site$siteMetada2.description;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement((react__WEBPACK_IMPORTED_MODULE_1___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_helmet__WEBPACK_IMPORTED_MODULE_2__.Helmet, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("title", null, title ? `${title} | ${siteTitle}` : siteTitle), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("meta", {
-    name: "description",
-    content: description || siteDescription
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("meta", {
-    property: "og:title",
-    content: title ? `${title} | ${siteTitle}` : siteTitle
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("meta", {
-    property: "og:description",
-    content: description || siteDescription
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("meta", {
-    property: "og:type",
-    content: "website"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("meta", {
-    name: "twitter:card",
-    content: "summary"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("meta", {
-    name: "twitter:title",
-    content: title ? `${title} | ${siteTitle}` : siteTitle
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("meta", {
-    name: "twitter:description",
-    content: description || siteDescription
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("html", {
-    lang: "en"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
-    style: {
-      minHeight: "100vh",
-      display: "flex",
-      flexDirection: "column"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Header__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    siteTitle: siteTitle
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("main", {
-    style: {
-      flex: 1
-    }
-  }, children), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Footer__WEBPACK_IMPORTED_MODULE_5__["default"], null)));
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Layout);
-
-/***/ }),
-
-/***/ "./src/pages/privacy-policy.js?export=default":
-/*!****************************************************!*\
-  !*** ./src/pages/privacy-policy.js?export=default ***!
-  \****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_Layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Layout */ "./src/components/Layout.js");
-
-
-const PrivacyPolicyPage = () => {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Layout__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    title: "Privacy Policy",
-    description: "Privacy policy for Dangepia Village website"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    style: {
-      maxWidth: 800,
-      margin: `0 auto`,
-      padding: `2rem 1rem`
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Privacy Policy"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-    style: {
-      fontSize: `0.9rem`,
-      color: `#666`,
-      marginBottom: `2rem`
-    }
-  }, "Last updated: ", new Date().toLocaleDateString()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("section", {
-    style: {
-      marginBottom: `2rem`
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Introduction"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Dangepia Village (\"we,\" \"our,\" or \"us\") is committed to protecting your privacy. This Privacy Policy explains how your personal information is collected, used, and disclosed by Dangepia Village website.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("section", {
-    style: {
-      marginBottom: `2rem`
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Information We Collect"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Information You Provide to Us"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "We collect information you provide directly to us, such as when you:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "Fill out our contact forms"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "Subscribe to our newsletter"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "Participate in village surveys"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "Submit feedback or requests"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "Register for village events")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Information We Collect Automatically"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "When you access our website, we automatically collect certain information, including:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "Your IP address"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "Browser type and version"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "Pages you visit on our site"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "Time and date of your visit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "Referring website"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("section", {
-    style: {
-      marginBottom: `2rem`
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "How We Use Your Information"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "We use the information we collect to:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "Provide and improve our services"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "Communicate with you about village matters"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "Send you newsletters and updates (with your consent)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "Respond to your inquiries and requests"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "Organize and manage village events"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "Analyze website usage to improve user experience"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "Comply with legal obligations"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("section", {
-    style: {
-      marginBottom: `2rem`
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Information Sharing and Disclosure"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "We do not sell, trade, or otherwise transfer your personal information to third parties except in the following circumstances:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "With your explicit consent"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "To comply with legal requirements"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "To protect our rights and safety"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "To service providers who assist us (under strict confidentiality agreements)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "In case of a merger or acquisition (you will be notified)"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("section", {
-    style: {
-      marginBottom: `2rem`
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Data Security"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the internet is 100% secure.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("section", {
-    style: {
-      marginBottom: `2rem`
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Cookies and Tracking Technologies"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Our website may use cookies and similar tracking technologies to enhance your browsing experience. You can set your browser to refuse cookies, but this may limit some functionality of our website.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("section", {
-    style: {
-      marginBottom: `2rem`
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Your Rights"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "You have the right to:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "Access your personal information"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "Correct inaccurate information"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "Request deletion of your information"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "Object to processing of your information"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "Withdraw consent at any time"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "Receive a copy of your information"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("section", {
-    style: {
-      marginBottom: `2rem`
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Children's Privacy"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Our website is not directed to children under 13 years of age. We do not knowingly collect personal information from children under 13. If you believe we have collected information from a child under 13, please contact us immediately.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("section", {
-    style: {
-      marginBottom: `2rem`
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Changes to This Privacy Policy"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the \"Last updated\" date at the top of this page.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("section", {
-    style: {
-      marginBottom: `2rem`
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Contact Us"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "If you have any questions about this Privacy Policy, please contact us:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", {
-    style: {
-      listStyle: `none`,
-      padding: 0
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("strong", null, "Email:"), " privacy@dangepia.ir"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("strong", null, "Phone:"), " +98-XXX-XXXX"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("strong", null, "Address:"), " Village Office, Main Street, Dangepia Village"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    style: {
-      background: `#f7fafc`,
-      padding: `1.5rem`,
-      borderRadius: `8px`,
-      border: `1px solid #e2e8f0`,
-      marginTop: `2rem`
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-    style: {
-      margin: 0,
-      fontSize: `0.9rem`,
-      color: `#4a5568`
-    }
-  }, "This privacy policy is compliant with Iranian data protection laws and international privacy standards. For specific legal questions, please consult with a legal professional."))));
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PrivacyPolicyPage);
+// EXTERNAL MODULE: external "/workspaces/DANG/node_modules/react/index.js"
+var index_js_ = __webpack_require__(9761);
+var index_js_default = /*#__PURE__*/__webpack_require__.n(index_js_);
+// EXTERNAL MODULE: ./node_modules/react-helmet/es/Helmet.js
+var Helmet = __webpack_require__(8154);
+// EXTERNAL MODULE: ./.cache/gatsby-browser-entry.js + 11 modules
+var gatsby_browser_entry = __webpack_require__(123);
+;// ./src/components/Header.js
+const Header=({siteTitle})=>/*#__PURE__*/index_js_default().createElement("header",{style:{background:`#2c5282`,marginBottom:`1.45rem`}},/*#__PURE__*/index_js_default().createElement("div",{style:{margin:`0 auto`,maxWidth:960,padding:`1.45rem 1.0875rem`}},/*#__PURE__*/index_js_default().createElement("h1",{style:{margin:0}},/*#__PURE__*/index_js_default().createElement(gatsby_browser_entry.Link,{to:"/",style:{color:`white`,textDecoration:`none`}},siteTitle)),/*#__PURE__*/index_js_default().createElement("nav",{style:{marginTop:`1rem`}},/*#__PURE__*/index_js_default().createElement("ul",{style:{display:`flex`,listStyle:`none`,margin:0,padding:0,gap:`1rem`}},/*#__PURE__*/index_js_default().createElement("li",null,/*#__PURE__*/index_js_default().createElement(gatsby_browser_entry.Link,{to:"/",style:{color:`white`,textDecoration:`none`}},"Home")),/*#__PURE__*/index_js_default().createElement("li",null,/*#__PURE__*/index_js_default().createElement(gatsby_browser_entry.Link,{to:"/about",style:{color:`white`,textDecoration:`none`}},"About")),/*#__PURE__*/index_js_default().createElement("li",null,/*#__PURE__*/index_js_default().createElement(gatsby_browser_entry.Link,{to:"/news",style:{color:`white`,textDecoration:`none`}},"News")),/*#__PURE__*/index_js_default().createElement("li",null,/*#__PURE__*/index_js_default().createElement(gatsby_browser_entry.Link,{to:"/services",style:{color:`white`,textDecoration:`none`}},"Services")),/*#__PURE__*/index_js_default().createElement("li",null,/*#__PURE__*/index_js_default().createElement(gatsby_browser_entry.Link,{to:"/contact",style:{color:`white`,textDecoration:`none`}},"Contact")),/*#__PURE__*/index_js_default().createElement("li",null,/*#__PURE__*/index_js_default().createElement(gatsby_browser_entry.Link,{to:"/gallery",style:{color:`white`,textDecoration:`none`}},"Gallery")),/*#__PURE__*/index_js_default().createElement("li",null,/*#__PURE__*/index_js_default().createElement(gatsby_browser_entry.Link,{to:"/maps",style:{color:`white`,textDecoration:`none`}},"Maps")),/*#__PURE__*/index_js_default().createElement("li",null,/*#__PURE__*/index_js_default().createElement(gatsby_browser_entry.Link,{to:"/weather",style:{color:`white`,textDecoration:`none`}},"Weather"))))));/* harmony default export */ const components_Header = (Header);
+;// ./src/components/Footer.js
+const Footer=()=>/*#__PURE__*/index_js_default().createElement("footer",{style:{background:`#1a202c`,color:`white`,padding:`2rem 1rem`,marginTop:`2rem`}},/*#__PURE__*/index_js_default().createElement("div",{style:{margin:`0 auto`,maxWidth:960,display:`grid`,gridTemplateColumns:`repeat(auto-fit, minmax(250px, 1fr))`,gap:`2rem`}},/*#__PURE__*/index_js_default().createElement("div",null,/*#__PURE__*/index_js_default().createElement("h3",null,"Dangepia Village"),/*#__PURE__*/index_js_default().createElement("p",null,"Welcome to our beautiful village. Stay connected with the latest news, events, and services.")),/*#__PURE__*/index_js_default().createElement("div",null,/*#__PURE__*/index_js_default().createElement("h4",null,"Quick Links"),/*#__PURE__*/index_js_default().createElement("ul",{style:{listStyle:`none`,padding:0}},/*#__PURE__*/index_js_default().createElement("li",{style:{marginBottom:`0.5rem`}},/*#__PURE__*/index_js_default().createElement(gatsby_browser_entry.Link,{to:"/about",style:{color:`#cbd5e0`,textDecoration:`none`}},"About Us")),/*#__PURE__*/index_js_default().createElement("li",{style:{marginBottom:`0.5rem`}},/*#__PURE__*/index_js_default().createElement(gatsby_browser_entry.Link,{to:"/news",style:{color:`#cbd5e0`,textDecoration:`none`}},"News")),/*#__PURE__*/index_js_default().createElement("li",{style:{marginBottom:`0.5rem`}},/*#__PURE__*/index_js_default().createElement(gatsby_browser_entry.Link,{to:"/services",style:{color:`#cbd5e0`,textDecoration:`none`}},"Services")),/*#__PURE__*/index_js_default().createElement("li",{style:{marginBottom:`0.5rem`}},/*#__PURE__*/index_js_default().createElement(gatsby_browser_entry.Link,{to:"/contact",style:{color:`#cbd5e0`,textDecoration:`none`}},"Contact")))),/*#__PURE__*/index_js_default().createElement("div",null,/*#__PURE__*/index_js_default().createElement("h4",null,"Legal"),/*#__PURE__*/index_js_default().createElement("ul",{style:{listStyle:`none`,padding:0}},/*#__PURE__*/index_js_default().createElement("li",{style:{marginBottom:`0.5rem`}},/*#__PURE__*/index_js_default().createElement(gatsby_browser_entry.Link,{to:"/privacy-policy",style:{color:`#cbd5e0`,textDecoration:`none`}},"Privacy Policy")),/*#__PURE__*/index_js_default().createElement("li",{style:{marginBottom:`0.5rem`}},/*#__PURE__*/index_js_default().createElement(gatsby_browser_entry.Link,{to:"/terms-of-service",style:{color:`#cbd5e0`,textDecoration:`none`}},"Terms of Service"))))),/*#__PURE__*/index_js_default().createElement("div",{style:{textAlign:`center`,marginTop:`2rem`,paddingTop:`2rem`,borderTop:`1px solid #4a5568`}},/*#__PURE__*/index_js_default().createElement("p",null,"\xA9 ",new Date().getFullYear()," Dangepia Village. All rights reserved.")));/* harmony default export */ const components_Footer = (Footer);
+;// ./src/components/Layout.js
+const Layout=({children,title,description})=>{var _data$site$siteMetada,_data$site$siteMetada2;const data=(0,gatsby_browser_entry.useStaticQuery)("2992646504");const siteTitle=(_data$site$siteMetada=data.site.siteMetadata)===null||_data$site$siteMetada===void 0?void 0:_data$site$siteMetada.title;const siteDescription=(_data$site$siteMetada2=data.site.siteMetadata)===null||_data$site$siteMetada2===void 0?void 0:_data$site$siteMetada2.description;return/*#__PURE__*/index_js_default().createElement((index_js_default()).Fragment,null,/*#__PURE__*/index_js_default().createElement(Helmet.Helmet,null,/*#__PURE__*/index_js_default().createElement("title",null,title?`${title} | ${siteTitle}`:siteTitle),/*#__PURE__*/index_js_default().createElement("meta",{name:"description",content:description||siteDescription}),/*#__PURE__*/index_js_default().createElement("meta",{property:"og:title",content:title?`${title} | ${siteTitle}`:siteTitle}),/*#__PURE__*/index_js_default().createElement("meta",{property:"og:description",content:description||siteDescription}),/*#__PURE__*/index_js_default().createElement("meta",{property:"og:type",content:"website"}),/*#__PURE__*/index_js_default().createElement("meta",{name:"twitter:card",content:"summary"}),/*#__PURE__*/index_js_default().createElement("meta",{name:"twitter:title",content:title?`${title} | ${siteTitle}`:siteTitle}),/*#__PURE__*/index_js_default().createElement("meta",{name:"twitter:description",content:description||siteDescription}),/*#__PURE__*/index_js_default().createElement("html",{lang:"en"})),/*#__PURE__*/index_js_default().createElement("div",{style:{minHeight:"100vh",display:"flex",flexDirection:"column"}},/*#__PURE__*/index_js_default().createElement(components_Header,{siteTitle:siteTitle}),/*#__PURE__*/index_js_default().createElement("main",{style:{flex:1}},children),/*#__PURE__*/index_js_default().createElement(components_Footer,null)));};/* harmony default export */ const components_Layout = (Layout);
 
 /***/ })
 

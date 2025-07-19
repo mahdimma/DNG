@@ -3,13 +3,13 @@ import { graphql, Link } from "gatsby"
 import Layout from "../components/Layout"
 
 const IndexPage = ({ data }) => {
-  const latestNews = data.allMarkdownRemark.nodes.filter(node => 
-    node.frontmatter.type === 'news'
-  ).slice(0, 3)
+  const latestNews = data?.allMarkdownRemark?.nodes?.filter(node => 
+    node.frontmatter?.type === 'news'
+  ).slice(0, 3) || []
   
-  const upcomingEvents = data.allMarkdownRemark.nodes.filter(node => 
-    node.frontmatter.type === 'event'
-  ).slice(0, 3)
+  const upcomingEvents = data?.allMarkdownRemark?.nodes?.filter(node => 
+    node.frontmatter?.type === 'event'
+  ).slice(0, 3) || []
 
   return (
     <Layout>
