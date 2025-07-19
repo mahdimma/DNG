@@ -1,21 +1,21 @@
-const path = require(`path`)
-const { createFilePath } = require(`gatsby-source-filesystem`)
+const path = require("path");
+const { createFilePath } = require("gatsby-source-filesystem");
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
-  const { createNodeField } = actions
+  const { createNodeField } = actions;
   
-  if (node.internal.type === `MarkdownRemark`) {
-    const slug = createFilePath({ node, getNode, basePath: `content` })
+  if (node.internal.type === "MarkdownRemark") {
+    const slug = createFilePath({ node, getNode, basePath: "content" });
     createNodeField({
       node,
-      name: `slug`,
+      name: "slug",
       value: slug,
-    })
+    });
   }
-}
+};
 
 exports.createPages = async ({ graphql, actions }) => {
-  const { createPage } = actions
+  const { createPage } = actions;
   
   const result = await graphql(`
     query {
@@ -32,12 +32,16 @@ exports.createPages = async ({ graphql, actions }) => {
         }
       }
     }
-  `)
+  `);
+
+  if (result.errors) {
+    throw result.errors;
+  }
 
   result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-    const templatePath = node.frontmatter.type === 'news' 
-      ? path.resolve(`src/templates/news-article.js`)
-      : path.resolve(`src/templates/event.js`)
+    const templatePath = node.frontmatter.type === "news" 
+      ? path.resolve("src/templates/news-article.js")
+      : path.resolve("src/templates/event.js");
     
     createPage({
       path: node.fields.slug,
@@ -45,6 +49,6 @@ exports.createPages = async ({ graphql, actions }) => {
       context: {
         slug: node.fields.slug,
       },
-    })
-  })
-}
+    });
+  });
+};
