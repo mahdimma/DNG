@@ -1,20 +1,17 @@
 import React from "react"
 import Layout from "../components/Layout"
+import HeroSection from "../components/HeroSection"
 
 const AboutPage = () => {
   return (
     <Layout title="درباره ما" description="درباره روستای دانگپیا، تاریخ، فرهنگ و جامعه آن بیاموزید">
       {/* Hero Section */}
-      <section className="gradient-bg text-white py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 animate-slide-in">
-            درباره روستای دانگپیا
-          </h1>
-          <p className="text-xl text-green-100 max-w-2xl mx-auto">
-            روستایی با تاریخ غنی، فرهنگ زنده و جامعه‌ای پرمحبت که نسل‌ها را به هم پیوند داده است
-          </p>
-        </div>
-      </section>
+      <HeroSection 
+        title="درباره روستای دانگپیا"
+        subtitle="روستایی با تاریخ غنی، فرهنگ زنده و جامعه‌ای پرمحبت که نسل‌ها را به هم پیوند داده است"
+        showButtons={false}
+        showScrollIndicator={true}
+      />
 
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">

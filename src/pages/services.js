@@ -1,5 +1,6 @@
 import React from "react"
 import Layout from "../components/Layout"
+import HeroSection from "../components/HeroSection"
 
 const ServicesPage = () => {
   const services = [
@@ -43,11 +44,17 @@ const ServicesPage = () => {
 
   return (
     <Layout title="Services" description="Explore the various services available to residents of Dangepia Village">
+      {/* Hero Section */}
+      <HeroSection 
+        title="خدمات روستا"
+        subtitle="روستای دانگپیا مجموعه‌ای جامع از خدمات را برای برآوردن نیازهای جامعه ارائه می‌دهد"
+        showButtons={false}
+        showScrollIndicator={true}
+      />
+      
       <div style={{ maxWidth: 960, margin: `0 auto`, padding: `2rem 1rem` }}>
-        <h1>Village Services</h1>
-        <p style={{ fontSize: `1.1rem`, marginBottom: `3rem` }}>
-          Dangepia Village provides a comprehensive range of services to meet the needs of our community.
-          Below you'll find information about available services, contact details, and operating hours.
+        <p style={{ fontSize: `1.1rem`, marginBottom: `3rem`, textAlign: `center` }}>
+          در زیر اطلاعات خدمات موجود، جزئیات تماس و ساعات کاری را مشاهده خواهید کرد.
         </p>
 
         <div style={{
