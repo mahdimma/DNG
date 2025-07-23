@@ -1,9 +1,16 @@
 import React from "react"
 import { Link } from "gatsby"
 import Layout from "../components/Layout"
+import HeroSection from "../components/HeroSection"
 
 const NotFoundPage = () => (
   <Layout title="Page Not Found">
+    <HeroSection 
+      title="404"
+      subtitle="صفحه مورد نظر یافت نشد"
+      showButtons={false}
+      showScrollIndicator={true}
+    />
     <div style={{
       textAlign: `center`,
       padding: `4rem 1rem`,

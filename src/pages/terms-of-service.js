@@ -1,9 +1,16 @@
 import React from "react"
 import Layout from "../components/Layout"
+import HeroSection from "../components/HeroSection"
 
 const TermsOfServicePage = () => {
   return (
     <Layout title="Terms of Service" description="Terms of service for Dangepia Village website">
+      <HeroSection 
+        title="شرایط استفاده از خدمات"
+        subtitle="قوانین و مقررات استفاده از وبسایت"
+        showButtons={false}
+        showScrollIndicator={true}
+      />
       <div style={{ maxWidth: 800, margin: `0 auto`, padding: `2rem 1rem` }}>
         <h1>Terms of Service</h1>
         <p style={{ fontSize: `0.9rem`, color: `#666`, marginBottom: `2rem` }}>

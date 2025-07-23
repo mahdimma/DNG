@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import Layout from "../components/Layout"
+import HeroSection from "../components/HeroSection"
 
 const MapsPage = () => {
   const [selectedLocation, setSelectedLocation] = useState(null)
@@ -86,6 +87,12 @@ const MapsPage = () => {
 
   return (
     <Layout title="Village Maps" description="Interactive maps and location guide for Dangepia Village">
+      <HeroSection 
+        title="نقشه روستا"
+        subtitle="نقشه ای کامل از کل روستا"
+        showButtons={false}
+        showScrollIndicator={true}
+      />
       <div style={{ maxWidth: 1200, margin: `0 auto`, padding: `2rem 1rem` }}>
         <h1>Village Maps & Locations</h1>
         <p style={{ fontSize: `1.1rem`, marginBottom: `3rem` }}>

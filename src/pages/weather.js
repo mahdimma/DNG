@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import Layout from "../components/Layout"
+import HeroSection from "../components/HeroSection"
 
 const WeatherPage = () => {
   const [currentWeather, setCurrentWeather] = useState({
@@ -79,6 +80,12 @@ const WeatherPage = () => {
 
   return (
     <Layout title="Weather" description="Current weather conditions and forecast for Dangepia Village">
+      <HeroSection 
+        title="آب و هوا"
+        subtitle="اطلاعات کامل از آب و هوای روستا"
+        showButtons={false}
+        showScrollIndicator={true}
+      />
       <div style={{ maxWidth: 1200, margin: `0 auto`, padding: `2rem 1rem` }}>
         <h1>Dangepia Village Weather</h1>
         <p style={{ fontSize: `1.1rem`, marginBottom: `3rem` }}>

@@ -1,5 +1,6 @@
 import React from "react";
 import Layout from "../components/Layout";
+import HeroSection from "../components/HeroSection";
 // Import Gatsby image plugins
 import { graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
@@ -61,6 +62,12 @@ const GalleryPage = () => {
       title="Gallery"
       description="Explore photos showcasing the beauty, culture, and life of Dangepia Village"
     >
+      <HeroSection 
+        title="گالری تصاویر"
+        subtitle="تصاویری از زیبایی های روستای دانگپیا"
+        showButtons={false}
+        showScrollIndicator={true}
+      />
       <div style={{ maxWidth: 1200, margin: `0 auto`, padding: `2rem 1rem` }}>
         <h1>Village Gallery</h1>
         <p style={{ fontSize: `1.1rem`, marginBottom: `3rem` }}>

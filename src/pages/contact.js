@@ -179,6 +179,12 @@ const ContactPage = () => {
 
   return (
     <Layout title="تماس با ما" description="با مسئولان و رهبران جامعه روستای دانگپیا در تماس باشید">
+      <HeroSection 
+        title="تماس با ما"
+        subtitle="راه های ارتباطی با ما"
+        showButtons={false}
+        showScrollIndicator={true}
+      />
       <Container>
         <h1>تماس با ما</h1>
         <p style={{ fontSize: `1.1rem`, marginBottom: `3rem` }}>

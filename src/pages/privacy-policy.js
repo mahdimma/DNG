@@ -1,9 +1,16 @@
 import React from "react"
 import Layout from "../components/Layout"
+import HeroSection from "../components/HeroSection"
 
 const PrivacyPolicyPage = () => {
   return (
     <Layout title="Privacy Policy" description="Privacy policy for Dangepia Village website">
+      <HeroSection 
+        title="سیاست حفظ حریم خصوصی"
+        subtitle="اطلاعاتی در مورد نحوه استفاده از اطلاعات شما"
+        showButtons={false}
+        showScrollIndicator={true}
+      />
       <div style={{ maxWidth: 800, margin: `0 auto`, padding: `2rem 1rem` }}>
         <h1>Privacy Policy</h1>
         <p style={{ fontSize: `0.9rem`, color: `#666`, marginBottom: `2rem` }}>
