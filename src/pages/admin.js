@@ -74,7 +74,8 @@ const AdminPage = () => {
   }
 
   const deleteItem = (type, id) => {
-    if (confirm('Are you sure you want to delete this item?')) {
+    // eslint-disable-next-line no-restricted-globals
+    if (confirm('آیا مطمئن هستید که می‌خواهید این مورد را حذف کنید؟')) {
       if (type === 'article') {
         setArticles(articles.filter(article => article.id !== id))
       } else {

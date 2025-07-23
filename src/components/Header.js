@@ -1,108 +1,161 @@
-import React from "react"
+import React, { useState } from "react"
 import { Link } from "gatsby"
-import styled from "styled-components"
 
-const HeaderContainer = styled.header`
-  background: #2c5282;
-  margin-bottom: 1.45rem;
-`
+const Header = ({ siteTitle }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-const HeaderContent = styled.div`
-  margin: 0 auto;
-  max-width: 960px;
-  padding: 1.45rem 1.0875rem;
-`
+  return (
+    <header className="gradient-bg shadow-lg sticky top-0 z-50">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center py-4">
+          {/* Logo/Site Title */}
+          <div className="flex-shrink-0">
+            <Link 
+              to="/" 
+              className="text-2xl font-bold text-white hover:text-green-100 transition-colors duration-200"
+            >
+              {siteTitle}
+            </Link>
+          </div>
 
-const SiteTitle = styled.h1`
-  margin: 0;
-  
-  a {
-    color: white;
-    text-decoration: none;
-  }
-`
-
-const Navigation = styled.nav`
-  margin-top: 1rem;
-`
-
-const NavList = styled.ul`
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  gap: 1rem;
-  flex-wrap: wrap;
-`
-
-const NavItem = styled.li`
-  a {
-    color: white;
-    text-decoration: none;
-    padding: 0.5rem;
-    border-radius: 4px;
-    transition: background-color 0.3s;
-    
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.1);
-    }
-  }
-`
-
-const Header = ({ siteTitle }) => (
-  <HeaderContainer>
-    <HeaderContent>
-      <SiteTitle>
-        <Link to="/">
-          {siteTitle}
-        </Link>
-      </SiteTitle>
-      <Navigation>
-        <NavList>
-          <NavItem>
-            <Link to="/">
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex space-x-reverse space-x-8">
+            <Link 
+              to="/" 
+              className="text-white hover:text-green-100 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-white/10"
+            >
               خانه
             </Link>
-          </NavItem>
-          <NavItem>
-            <Link to="/about">
+            <Link 
+              to="/about" 
+              className="text-white hover:text-green-100 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-white/10"
+            >
               درباره ما
             </Link>
-          </NavItem>
-          <NavItem>
-            <Link to="/news">
+            <Link 
+              to="/news" 
+              className="text-white hover:text-green-100 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-white/10"
+            >
               اخبار
             </Link>
-          </NavItem>
-          <NavItem>
-            <Link to="/services">
+            <Link 
+              to="/services" 
+              className="text-white hover:text-green-100 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-white/10"
+            >
               خدمات
             </Link>
-          </NavItem>
-          <NavItem>
-            <Link to="/contact">
+            <Link 
+              to="/contact" 
+              className="text-white hover:text-green-100 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-white/10"
+            >
               تماس با ما
             </Link>
-          </NavItem>
-          <NavItem>
-            <Link to="/gallery">
+            <Link 
+              to="/gallery" 
+              className="text-white hover:text-green-100 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-white/10"
+            >
               گالری تصاویر
             </Link>
-          </NavItem>
-          <NavItem>
-            <Link to="/maps">
+            <Link 
+              to="/maps" 
+              className="text-white hover:text-green-100 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-white/10"
+            >
               نقشه
             </Link>
-          </NavItem>
-          <NavItem>
-            <Link to="/weather">
+            <Link 
+              to="/weather" 
+              className="text-white hover:text-green-100 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-white/10"
+            >
               آب و هوا
             </Link>
-          </NavItem>
-        </NavList>
-      </Navigation>
-    </HeaderContent>
-  </HeaderContainer>
-)
+          </nav>
+
+          {/* Mobile menu button */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-green-100 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+            >
+              <span className="sr-only">باز کردن منوی اصلی</span>
+              {!isMenuOpen ? (
+                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              ) : (
+                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Navigation */}
+        {isMenuOpen && (
+          <div className="md:hidden">
+            <div className="px-2 pt-2 pb-3 space-y-1 bg-white/10 backdrop-blur-sm rounded-lg mb-4">
+              <Link 
+                to="/" 
+                className="text-white hover:text-green-100 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 hover:bg-white/10"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                خانه
+              </Link>
+              <Link 
+                to="/about" 
+                className="text-white hover:text-green-100 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 hover:bg-white/10"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                درباره ما
+              </Link>
+              <Link 
+                to="/news" 
+                className="text-white hover:text-green-100 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 hover:bg-white/10"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                اخبار
+              </Link>
+              <Link 
+                to="/services" 
+                className="text-white hover:text-green-100 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 hover:bg-white/10"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                خدمات
+              </Link>
+              <Link 
+                to="/contact" 
+                className="text-white hover:text-green-100 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 hover:bg-white/10"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                تماس با ما
+              </Link>
+              <Link 
+                to="/gallery" 
+                className="text-white hover:text-green-100 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 hover:bg-white/10"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                گالری تصاویر
+              </Link>
+              <Link 
+                to="/maps" 
+                className="text-white hover:text-green-100 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 hover:bg-white/10"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                نقشه
+              </Link>
+              <Link 
+                to="/weather" 
+                className="text-white hover:text-green-100 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 hover:bg-white/10"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                آب و هوا
+              </Link>
+            </div>
+          </div>
+        )}
+      </div>
+    </header>
+  )
+}
 
 export default Header

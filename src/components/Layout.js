@@ -1,36 +1,8 @@
 import React from "react"
 import { Helmet } from "react-helmet"
-import { useStaticQuery, graphql, Link } from "gatsby"
-import styled, { createGlobalStyle } from "styled-components"
+import { useStaticQuery, graphql } from "gatsby"
 import Header from "./Header"
 import Footer from "./Footer"
-
-const GlobalStyle = createGlobalStyle`
-  * {
-    box-sizing: border-box;
-  }
-  
-  html {
-    direction: rtl;
-    text-align: right;
-  }
-  
-  body {
-    font-family: 'Tahoma', 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    direction: rtl;
-  }
-  
-  a {
-    text-decoration: none;
-  }
-  
-  ul, ol {
-    padding-right: 1rem;
-    padding-left: 0;
-  }
-`
 
 const Layout = ({ children, title, description }) => {
   const data = useStaticQuery(graphql`
@@ -50,7 +22,6 @@ const Layout = ({ children, title, description }) => {
 
   return (
     <>
-      <GlobalStyle />
       <Helmet>
         <title>{title ? `${title} | ${siteTitle}` : siteTitle}</title>
         <meta name="description" content={description || siteDescription} />
@@ -62,9 +33,9 @@ const Layout = ({ children, title, description }) => {
         <meta name="twitter:description" content={description || siteDescription} />
         <html lang="fa" dir="rtl" />
       </Helmet>
-      <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+      <div className="min-h-screen flex flex-col bg-gray-50">
         <Header siteTitle={siteTitle} />
-        <main style={{ flex: 1 }}>
+        <main className="flex-1 animate-fade-in">
           {children}
         </main>
         <Footer />
