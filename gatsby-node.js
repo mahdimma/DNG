@@ -3,9 +3,16 @@ const { createFilePath } = require("gatsby-source-filesystem");
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions;
-  
+
   if (node.internal.type === "MarkdownRemark") {
-    const slug = createFilePath({ node, getNode, basePath: "content" });
+    const type = node.frontmatter && node.frontmatter.type;
+    const baseSlug = createFilePath({ node, getNode, basePath: "content", trailingSlash: false });
+    let slug = baseSlug;
+    if (type === "news") {
+      slug = `/news${baseSlug}`;
+    } else if (type === "event") {
+      slug = `/event${baseSlug}`;
+    }
     createNodeField({
       node,
       name: "slug",
@@ -16,7 +23,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
-  
+
   const result = await graphql(`
     query {
       allMarkdownRemark {
@@ -37,12 +44,15 @@ exports.createPages = async ({ graphql, actions }) => {
   if (result.errors) {
     throw result.errors;
   }
-
   result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-    const templatePath = node.frontmatter.type === "news" 
+    if (!node.fields || !node.fields.slug) {
+      // Skip nodes without a slug
+      return;
+    }
+    const templatePath = node.frontmatter.type === "news"
       ? path.resolve("src/templates/news-article.js")
       : path.resolve("src/templates/event.js");
-    
+
     createPage({
       path: node.fields.slug,
       component: templatePath,

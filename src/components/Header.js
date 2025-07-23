@@ -39,6 +39,12 @@ const Header = ({ siteTitle }) => {
               اخبار
             </Link>
             <Link 
+              to="/events" 
+              className="text-white hover:text-green-100 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-white/10"
+            >
+              رویدادها
+            </Link>
+            <Link 
               to="/services" 
               className="text-white hover:text-green-100 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-white/10"
             >
@@ -114,6 +120,13 @@ const Header = ({ siteTitle }) => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 اخبار
+              </Link>
+              <Link 
+                to="/events" 
+                className="text-white hover:text-green-100 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 hover:bg-white/10"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                رویدادها
               </Link>
               <Link 
                 to="/services" 

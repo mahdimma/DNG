@@ -52,7 +52,7 @@ const NewsPage = ({ data }) => {
                   {article.excerpt}
                 </p>
                 <Link 
-                  to={article.fields.slug}
+                  to={article.fields?.slug || '#'}
                   style={{
                     color: `#667eea`,
                     textDecoration: `none`,

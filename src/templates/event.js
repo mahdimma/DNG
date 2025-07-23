@@ -18,7 +18,7 @@ const EventTemplate = ({ data }) => {
         <header style={{ marginBottom: `3rem` }}>
           <div style={{ marginBottom: `1rem` }}>
             <Link 
-              to="/news"
+              to="/events"
               style={{
                 color: `#667eea`,
                 textDecoration: `none`,
@@ -26,7 +26,7 @@ const EventTemplate = ({ data }) => {
                 fontWeight: `bold`,
               }}
             >
-              ← Back to News & Events
+              ← Back to Events
             </Link>
           </div>
           

@@ -145,7 +145,7 @@ const IndexPage = ({ data }) => {
                     {node.excerpt}
                   </p>
                   <Link 
-                    to={`/news/${node.fields?.slug || '#'}`}
+                    to={`${node.fields?.slug || '#'}`}
                     className="text-primary-600 hover:text-primary-700 font-semibold inline-flex items-center group"
                   >
                     ادامه مطلب
@@ -206,7 +206,7 @@ const IndexPage = ({ data }) => {
                     {node.excerpt}
                   </p>
                   <Link 
-                    to={`/events/${node.fields?.slug || '#'}`}
+                    to={`${node.fields?.slug || '#'}`}
                     className="text-secondary-600 hover:text-secondary-700 font-semibold inline-flex items-center group"
                   >
                     جزئیات بیشتر
