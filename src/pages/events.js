@@ -1,6 +1,7 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 import Layout from "../components/Layout"
+import HeroSection from "../components/HeroSection"
 
 const EventsPage = ({ data }) => {
   const events = data?.allMarkdownRemark?.nodes || []
@@ -114,12 +115,16 @@ const EventsPage = ({ data }) => {
   )
 
   return (
-    <Layout title="Events" description="Discover upcoming events, festivals, and community gatherings in Dangepia Village">
+    <Layout title="رویدادها" description="رویدادها، جشنواره‌ها و گردهمایی‌های جامعه روستای دانگپیا را کشف کنید">
+      {/* Hero Section */}
+      <HeroSection 
+        title="رویدادها"
+        subtitle="در فعالیت‌ها و برنامه‌های جامعه شرکت کنید"
+        showButtons={false}
+        showScrollIndicator={true}
+      />
+      
       <div style={{ maxWidth: 960, margin: `0 auto`, padding: `2rem 1rem` }}>
-        <h1>Village Events</h1>
-        <p style={{ fontSize: `1.1rem`, marginBottom: `2rem` }}>
-          Join us for community events, festivals, meetings, and gatherings that bring our village together.
-        </p>
 
         {/* Upcoming Events Section */}
         {upcomingEvents.length > 0 && (

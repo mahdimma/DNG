@@ -1,17 +1,22 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 import Layout from "../components/Layout"
+import HeroSection from "../components/HeroSection"
 
 const NewsPage = ({ data }) => {
   const newsArticles = data?.allMarkdownRemark?.nodes || []
 
   return (
-    <Layout title="News" description="Stay updated with the latest news and announcements from Dangepia Village">
+    <Layout title="آخرین اخبار" description="از جدیدترین رویدادها و اخبار روستای دانگپیا مطلع باشید">
+      {/* Hero Section */}
+      <HeroSection 
+        title="آخرین اخبار"
+        subtitle="از جدیدترین رویدادها و اخبار روستا مطلع باشید"
+        showButtons={false}
+        showScrollIndicator={true}
+      />
+      
       <div style={{ maxWidth: 960, margin: `0 auto`, padding: `2rem 1rem` }}>
-        <h1>Village News</h1>
-        <p style={{ fontSize: `1.1rem`, marginBottom: `2rem` }}>
-          Stay informed about the latest happenings, announcements, and updates from our village community.
-        </p>
 
         <div style={{
           display: `grid`,
