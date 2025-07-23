@@ -1,5 +1,153 @@
 import React, { useState } from "react"
+import styled from "styled-components"
 import Layout from "../components/Layout"
+
+const Container = styled.div`
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+`
+
+const GridContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+`
+
+const FormSection = styled.div`
+  h2 {
+    margin-bottom: 1rem;
+  }
+`
+
+const ContactInfo = styled.div`
+  h2 {
+    margin-bottom: 1rem;
+  }
+`
+
+const InfoCard = styled.div`
+  background: #f7fafc;
+  padding: 2rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  
+  h3 {
+    margin-bottom: 1rem;
+  }
+  
+  div {
+    margin-bottom: 1rem;
+  }
+`
+
+const EmergencyCard = styled.div`
+  background: #fed7d7;
+  padding: 2rem;
+  border-radius: 8px;
+  border: 1px solid #feb2b2;
+  
+  h3 {
+    color: #c53030;
+    margin-bottom: 1rem;
+  }
+  
+  div {
+    margin-bottom: 0.5rem;
+  }
+`
+
+const Form = styled.form`
+  margin-bottom: 2rem;
+`
+
+const FormGroup = styled.div`
+  margin-bottom: 1rem;
+`
+
+const Label = styled.label`
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+`
+
+const Input = styled.input`
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 5px;
+  font-size: 1rem;
+  direction: rtl;
+  text-align: right;
+`
+
+const Select = styled.select`
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 5px;
+  font-size: 1rem;
+  direction: rtl;
+  text-align: right;
+`
+
+const TextArea = styled.textarea`
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 5px;
+  font-size: 1rem;
+  resize: vertical;
+  direction: rtl;
+  text-align: right;
+`
+
+const SubmitButton = styled.button`
+  background: #667eea;
+  color: white;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  
+  &:hover {
+    background: #5a67d8;
+  }
+`
+
+const SuccessMessage = styled.div`
+  background: #c6f6d5;
+  color: #22543d;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 2rem;
+  border: 1px solid #9ae6b4;
+`
+
+const MapSection = styled.section`
+  margin-top: 3rem;
+  background: #f7fafc;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+`
+
+const MapPlaceholder = styled.div`
+  background: #e2e8f0;
+  height: 300px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4a5568;
+`
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -20,10 +168,8 @@ const ContactPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // Here you would typically send the data to a server
     console.log('Form submitted:', formData)
     setIsSubmitted(true)
-    // Reset form after a delay
     setTimeout(() => {
       setIsSubmitted(false)
       setFormData({ name: '', email: '', subject: '', message: '' })
@@ -31,273 +177,166 @@ const ContactPage = () => {
   }
 
   return (
-    <Layout title="Contact Us" description="Get in touch with Dangepia Village officials and community leaders">
-      <div style={{ maxWidth: 960, margin: `0 auto`, padding: `2rem 1rem` }}>
-        <h1>Contact Us</h1>
+    <Layout title="تماس با ما" description="با مسئولان و رهبران جامعه روستای دانگپیا در تماس باشید">
+      <Container>
+        <h1>تماس با ما</h1>
         <p style={{ fontSize: `1.1rem`, marginBottom: `3rem` }}>
-          We'd love to hear from you! Get in touch with us for any questions, concerns, 
-          or suggestions about our village.
+          دوست داریم از شما بشنویم! برای هر گونه سوال، نگرانی یا پیشنهاد در مورد روستای ما با ما تماس بگیرید.
         </p>
 
-        <div style={{
-          display: `grid`,
-          gridTemplateColumns: `1fr 1fr`,
-          gap: `3rem`,
-          '@media (max-width: 768px)': {
-            gridTemplateColumns: `1fr`,
-          }
-        }}>
-          {/* Contact Form */}
-          <div>
-            <h2>Send us a Message</h2>
-            {isSubmitted ? (
-              <div style={{
-                background: `#c6f6d5`,
-                color: `#22543d`,
-                padding: `1rem`,
-                borderRadius: `5px`,
-                marginBottom: `2rem`,
-                border: `1px solid #9ae6b4`,
-              }}>
-                Thank you for your message! We'll get back to you soon.
-              </div>
-            ) : null}
+        <GridContainer>
+          <FormSection>
+            <h2>پیام خود را ارسال کنید</h2>
+            {isSubmitted && (
+              <SuccessMessage>
+                از پیام شما متشکریم! به زودی با شما تماس خواهیم گرفت.
+              </SuccessMessage>
+            )}
             
-            <form onSubmit={handleSubmit} style={{ marginBottom: `2rem` }}>
-              <div style={{ marginBottom: `1rem` }}>
-                <label htmlFor="name" style={{ 
-                  display: `block`, 
-                  marginBottom: `0.5rem`,
-                  fontWeight: `bold`,
-                }}>
-                  Full Name *
-                </label>
-                <input
+            <Form onSubmit={handleSubmit}>
+              <FormGroup>
+                <Label htmlFor="name">
+                  نام و نام خانوادگی *
+                </Label>
+                <Input
                   type="text"
                   id="name"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  style={{
-                    width: `100%`,
-                    padding: `0.75rem`,
-                    border: `1px solid #e2e8f0`,
-                    borderRadius: `5px`,
-                    fontSize: `1rem`,
-                  }}
+                  placeholder="نام کامل خود را وارد کنید"
                 />
-              </div>
+              </FormGroup>
 
-              <div style={{ marginBottom: `1rem` }}>
-                <label htmlFor="email" style={{ 
-                  display: `block`, 
-                  marginBottom: `0.5rem`,
-                  fontWeight: `bold`,
-                }}>
-                  Email Address *
-                </label>
-                <input
+              <FormGroup>
+                <Label htmlFor="email">
+                  آدرس ایمیل *
+                </Label>
+                <Input
                   type="email"
                   id="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  style={{
-                    width: `100%`,
-                    padding: `0.75rem`,
-                    border: `1px solid #e2e8f0`,
-                    borderRadius: `5px`,
-                    fontSize: `1rem`,
-                  }}
+                  placeholder="example@email.com"
                 />
-              </div>
+              </FormGroup>
 
-              <div style={{ marginBottom: `1rem` }}>
-                <label htmlFor="subject" style={{ 
-                  display: `block`, 
-                  marginBottom: `0.5rem`,
-                  fontWeight: `bold`,
-                }}>
-                  Subject *
-                </label>
-                <select
+              <FormGroup>
+                <Label htmlFor="subject">
+                  موضوع *
+                </Label>
+                <Select
                   id="subject"
                   name="subject"
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  style={{
-                    width: `100%`,
-                    padding: `0.75rem`,
-                    border: `1px solid #e2e8f0`,
-                    borderRadius: `5px`,
-                    fontSize: `1rem`,
-                  }}
                 >
-                  <option value="">Select a subject...</option>
-                  <option value="general">General Inquiry</option>
-                  <option value="services">Village Services</option>
-                  <option value="complaint">Complaint</option>
-                  <option value="suggestion">Suggestion</option>
-                  <option value="event">Event Inquiry</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
+                  <option value="">موضوع را انتخاب کنید...</option>
+                  <option value="general">استعلام عمومی</option>
+                  <option value="services">خدمات روستا</option>
+                  <option value="complaint">شکایت</option>
+                  <option value="suggestion">پیشنهاد</option>
+                  <option value="event">استعلام رویداد</option>
+                  <option value="other">سایر</option>
+                </Select>
+              </FormGroup>
 
-              <div style={{ marginBottom: `1.5rem` }}>
-                <label htmlFor="message" style={{ 
-                  display: `block`, 
-                  marginBottom: `0.5rem`,
-                  fontWeight: `bold`,
-                }}>
-                  Message *
-                </label>
-                <textarea
+              <FormGroup>
+                <Label htmlFor="message">
+                  پیام *
+                </Label>
+                <TextArea
                   id="message"
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
                   required
                   rows={6}
-                  style={{
-                    width: `100%`,
-                    padding: `0.75rem`,
-                    border: `1px solid #e2e8f0`,
-                    borderRadius: `5px`,
-                    fontSize: `1rem`,
-                    resize: `vertical`,
-                  }}
-                  placeholder="Please describe your inquiry in detail..."
+                  placeholder="لطفا درخواست خود را به تفصیل شرح دهید..."
                 />
-              </div>
+              </FormGroup>
 
-              <button
-                type="submit"
-                style={{
-                  background: `#667eea`,
-                  color: `white`,
-                  padding: `0.75rem 2rem`,
-                  border: `none`,
-                  borderRadius: `5px`,
-                  fontSize: `1rem`,
-                  fontWeight: `bold`,
-                  cursor: `pointer`,
-                  transition: `background-color 0.2s`,
-                }}
-                onMouseOver={(e) => e.target.style.background = '#5a67d8'}
-                onMouseOut={(e) => e.target.style.background = '#667eea'}
-              >
-                Send Message
-              </button>
-            </form>
-          </div>
+              <SubmitButton type="submit">
+                ارسال پیام
+              </SubmitButton>
+            </Form>
+          </FormSection>
 
-          {/* Contact Information */}
-          <div>
-            <h2>Contact Information</h2>
+          <ContactInfo>
+            <h2>اطلاعات تماس</h2>
             
-            <div style={{
-              background: `#f7fafc`,
-              padding: `2rem`,
-              borderRadius: `8px`,
-              marginBottom: `2rem`,
-            }}>
-              <h3 style={{ marginBottom: `1rem` }}>Village Office</h3>
-              <div style={{ marginBottom: `1rem` }}>
-                <strong>Address:</strong><br />
-                Dangepia Village Office<br />
-                Main Street, Dangepia<br />
-                [Postal Code], [Province], Iran
-              </div>
-              <div style={{ marginBottom: `1rem` }}>
-                <strong>Phone:</strong> +98-XXX-XXXX
-              </div>
-              <div style={{ marginBottom: `1rem` }}>
-                <strong>Email:</strong> info@dangepia.ir
+            <InfoCard>
+              <h3>دفتر روستا</h3>
+              <div>
+                <strong>آدرس:</strong><br />
+                دفتر روستای دانگپیا<br />
+                خیابان اصلی، دانگپیا<br />
+                [کدپستی]، [استان]، ایران
               </div>
               <div>
-                <strong>Office Hours:</strong><br />
-                Monday - Friday: 8:00 AM - 4:00 PM<br />
-                Saturday: 9:00 AM - 1:00 PM<br />
-                Sunday: Closed
-              </div>
-            </div>
-
-            <div style={{
-              background: `#f7fafc`,
-              padding: `2rem`,
-              borderRadius: `8px`,
-              marginBottom: `2rem`,
-            }}>
-              <h3 style={{ marginBottom: `1rem` }}>Village Council</h3>
-              <div style={{ marginBottom: `1rem` }}>
-                <strong>Mayor:</strong> [Mayor Name]<br />
-                <strong>Email:</strong> mayor@dangepia.ir
+                <strong>تلفن:</strong> ۰۹۸-XXX-XXXX
               </div>
               <div>
-                <strong>Council Meetings:</strong><br />
-                First Thursday of each month<br />
-                7:00 PM at Village Hall
-              </div>
-            </div>
-
-            <div style={{
-              background: `#fed7d7`,
-              padding: `2rem`,
-              borderRadius: `8px`,
-              border: `1px solid #feb2b2`,
-            }}>
-              <h3 style={{ color: `#c53030`, marginBottom: `1rem` }}>
-                Emergency Contacts
-              </h3>
-              <div style={{ marginBottom: `0.5rem` }}>
-                <strong>Police:</strong> 110
-              </div>
-              <div style={{ marginBottom: `0.5rem` }}>
-                <strong>Fire Department:</strong> 125
-              </div>
-              <div style={{ marginBottom: `0.5rem` }}>
-                <strong>Medical Emergency:</strong> 115
+                <strong>ایمیل:</strong> info@dangepia.ir
               </div>
               <div>
-                <strong>Village Emergency Line:</strong> +98-XXX-XXXX
+                <strong>ساعات کاری:</strong><br />
+                دوشنبه تا جمعه: ۸:۰۰ تا ۱۶:۰۰<br />
+                شنبه: ۹:۰۰ تا ۱۳:۰۰<br />
+                یکشنبه: تعطیل
               </div>
-            </div>
-          </div>
-        </div>
+            </InfoCard>
 
-        {/* Map Section Placeholder */}
-        <section style={{
-          marginTop: `3rem`,
-          background: `#f7fafc`,
-          padding: `2rem`,
-          borderRadius: `8px`,
-          textAlign: `center`,
-        }}>
-          <h3>Find Us</h3>
+            <InfoCard>
+              <h3>شورای روستا</h3>
+              <div>
+                <strong>دهیار:</strong> [نام دهیار]<br />
+                <strong>ایمیل:</strong> mayor@dangepia.ir
+              </div>
+              <div>
+                <strong>جلسات شورا:</strong><br />
+                پنجشنبه اول هر ماه<br />
+                ساعت ۱۹:۰۰ در سالن روستا
+              </div>
+            </InfoCard>
+
+            <EmergencyCard>
+              <h3>تماس‌های اضطراری</h3>
+              <div>
+                <strong>پلیس:</strong> ۱۱۰
+              </div>
+              <div>
+                <strong>آتش‌نشانی:</strong> ۱۲۵
+              </div>
+              <div>
+                <strong>اورژانس پزشکی:</strong> ۱۱۵
+              </div>
+              <div>
+                <strong>خط اضطراری روستا:</strong> ۰۹۸-XXX-XXXX
+              </div>
+            </EmergencyCard>
+          </ContactInfo>
+        </GridContainer>
+
+        <MapSection>
+          <h3>ما را پیدا کنید</h3>
           <p style={{ marginBottom: `1rem` }}>
-            Visit our village office during business hours or attend our monthly council meetings.
+            در ساعات اداری از دفتر روستا دیدن کنید یا در جلسات ماهانه شورا شرکت کنید.
           </p>
-          <div style={{
-            background: `#e2e8f0`,
-            height: `300px`,
-            borderRadius: `8px`,
-            display: `flex`,
-            alignItems: `center`,
-            justifyContent: `center`,
-            color: `#4a5568`,
-          }}>
+          <MapPlaceholder>
             <div>
-              <p>Interactive Map</p>
+              <p>نقشه تعاملی</p>
               <p style={{ fontSize: `0.9rem` }}>
-                (Map integration would be added here)
+                (ادغام نقشه در اینجا اضافه خواهد شد)
               </p>
             </div>
-          </div>
-        </section>
-      </div>
+          </MapPlaceholder>
+        </MapSection>
+      </Container>
     </Layout>
   )
 }

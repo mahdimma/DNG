@@ -1,79 +1,109 @@
 import React from "react"
 import { Link } from "gatsby"
+import styled from "styled-components"
+
+const FooterContainer = styled.footer`
+  background: #1a202c;
+  color: white;
+  padding: 2rem 1rem;
+  margin-top: 2rem;
+`
+
+const FooterContent = styled.div`
+  margin: 0 auto;
+  max-width: 960px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+`
+
+const FooterSection = styled.div`
+  h3, h4 {
+    margin-bottom: 1rem;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    
+    li {
+      margin-bottom: 0.5rem;
+      
+      a {
+        color: #cbd5e0;
+        text-decoration: none;
+        
+        &:hover {
+          color: white;
+        }
+      }
+    }
+  }
+`
+
+const Copyright = styled.div`
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #4a5568;
+`
 
 const Footer = () => (
-  <footer style={{
-    background: `#1a202c`,
-    color: `white`,
-    padding: `2rem 1rem`,
-    marginTop: `2rem`,
-  }}>
-    <div style={{
-      margin: `0 auto`,
-      maxWidth: 960,
-      display: `grid`,
-      gridTemplateColumns: `repeat(auto-fit, minmax(250px, 1fr))`,
-      gap: `2rem`,
-    }}>
-      <div>
-        <h3>Dangepia Village</h3>
+  <FooterContainer>
+    <FooterContent>
+      <FooterSection>
+        <h3>روستای دانگپیا</h3>
         <p>
-          Welcome to our beautiful village. Stay connected with the latest news,
-          events, and services.
+          به روستای زیبای ما خوش آمدید. با آخرین اخبار، رویدادها و خدمات در ارتباط باشید.
         </p>
-      </div>
-      <div>
-        <h4>Quick Links</h4>
-        <ul style={{ listStyle: `none`, padding: 0 }}>
-          <li style={{ marginBottom: `0.5rem` }}>
-            <Link to="/about" style={{ color: `#cbd5e0`, textDecoration: `none` }}>
-              About Us
+      </FooterSection>
+      <FooterSection>
+        <h4>پیوندهای سریع</h4>
+        <ul>
+          <li>
+            <Link to="/about">
+              درباره ما
             </Link>
           </li>
-          <li style={{ marginBottom: `0.5rem` }}>
-            <Link to="/news" style={{ color: `#cbd5e0`, textDecoration: `none` }}>
-              News
+          <li>
+            <Link to="/news">
+              اخبار
             </Link>
           </li>
-          <li style={{ marginBottom: `0.5rem` }}>
-            <Link to="/services" style={{ color: `#cbd5e0`, textDecoration: `none` }}>
-              Services
+          <li>
+            <Link to="/services">
+              خدمات
             </Link>
           </li>
-          <li style={{ marginBottom: `0.5rem` }}>
-            <Link to="/contact" style={{ color: `#cbd5e0`, textDecoration: `none` }}>
-              Contact
-            </Link>
-          </li>
-        </ul>
-      </div>
-      <div>
-        <h4>Legal</h4>
-        <ul style={{ listStyle: `none`, padding: 0 }}>
-          <li style={{ marginBottom: `0.5rem` }}>
-            <Link to="/privacy-policy" style={{ color: `#cbd5e0`, textDecoration: `none` }}>
-              Privacy Policy
-            </Link>
-          </li>
-          <li style={{ marginBottom: `0.5rem` }}>
-            <Link to="/terms-of-service" style={{ color: `#cbd5e0`, textDecoration: `none` }}>
-              Terms of Service
+          <li>
+            <Link to="/contact">
+              تماس با ما
             </Link>
           </li>
         </ul>
-      </div>
-    </div>
-    <div style={{
-      textAlign: `center`,
-      marginTop: `2rem`,
-      paddingTop: `2rem`,
-      borderTop: `1px solid #4a5568`,
-    }}>
+      </FooterSection>
+      <FooterSection>
+        <h4>قوانین</h4>
+        <ul>
+          <li>
+            <Link to="/privacy-policy">
+              حریم خصوصی
+            </Link>
+          </li>
+          <li>
+            <Link to="/terms-of-service">
+              شرایط خدمات
+            </Link>
+          </li>
+        </ul>
+      </FooterSection>
+    </FooterContent>
+    <Copyright>
       <p>
-        © {new Date().getFullYear()} Dangepia Village. All rights reserved.
+        © {new Date().getFullYear()} روستای دانگپیا. تمامی حقوق محفوظ است.
       </p>
-    </div>
-  </footer>
+    </Copyright>
+  </FooterContainer>
 )
 
 export default Footer

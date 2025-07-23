@@ -1,78 +1,78 @@
 ---
-title: "Annual Harvest Festival 2025"
+title: "جشنواره سالانه برداشت ۱۴۰۴"
 date: "2025-09-15"
 type: "event"
 eventDate: "2025-09-20"
-eventTime: "10:00 AM - 8:00 PM"
-location: "Village Central Square"
-organizer: "Cultural Committee"
+eventTime: "۱۰:۰۰ - ۲۰:۰۰"
+location: "میدان مرکزی روستا"
+organizer: "کمیته فرهنگی"
 featured: true
 ---
 
-# Annual Harvest Festival 2025
+# جشنواره سالانه برداشت ۱۴۰۴
 
-Join us for the most anticipated event of the year - the Annual Harvest Festival!
+به مهم‌ترین رویداد سال بپیوندید - جشنواره سالانه برداشت!
 
-## Event Details
+## جزئیات رویداد
 
-**Date:** September 20, 2025
-**Time:** 10:00 AM - 8:00 PM
-**Location:** Village Central Square
-**Admission:** Free for all
+**تاریخ:** ۲۹ شهریور ۱۴۰۴
+**زمان:** ۱۰:۰۰ - ۲۰:۰۰
+**مکان:** میدان مرکزی روستا
+**ورودی:** رایگان برای همه
 
-## Festival Activities
+## فعالیت‌های جشنواره
 
-### Traditional Performances
-- Folk music and dance performances
-- Poetry recitations
-- Traditional craft demonstrations
-- Storytelling sessions for children
+### اجراهای سنتی
+- اجرای موسیقی و رقص محلی
+- شعرخوانی
+- نمایش صنایع دستی سنتی
+- جلسات قصه‌گویی برای کودکان
 
-### Food and Market
-- Local agricultural products showcase
-- Traditional food stalls
-- Artisan crafts market
-- Fresh produce sales
+### غذا و بازار
+- نمایشگاه محصولات کشاورزی محلی
+- غرفه‌های غذای سنتی
+- بازار صنایع دستی
+- فروش محصولات تازه
 
-### Family Activities
-- Children's games and activities
-- Face painting
-- Pony rides
-- Traditional games competition
+### فعالیت‌های خانوادگی
+- بازی‌ها و فعالیت‌های کودکان
+- نقاشی روی صورت
+- سواری اسب پونی
+- مسابقه بازی‌های سنتی
 
-### Evening Program
-- Community dinner (6:00 PM)
-- Cultural awards ceremony
-- Live music performances
-- Traditional dancing
+### برنامه عصر
+- شام جامعه (۱۸:۰۰)
+- مراسم اهدای جوایز فرهنگی
+- اجراهای موسیقی زنده
+- رقص سنتی
 
-## How to Participate
+## نحوه مشارکت
 
-### Vendors and Artisans
-If you'd like to set up a stall, contact the Cultural Committee by August 15, 2025.
+### فروشندگان و صنعتگران
+اگر می‌خواهید غرفه‌ای برپا کنید، تا ۲۴ مرداد ۱۴۰۴ با کمیته فرهنگی تماس بگیرید.
 
-### Volunteers
-We need volunteers to help with:
-- Event setup and cleanup
-- Managing activity stations
-- Assisting visitors
-- Food service
+### داوطلبان
+ما به داوطلبان برای کمک در موارد زیر نیاز داریم:
+- راه‌اندازی و جمع‌آوری رویداد
+- مدیریت ایستگاه‌های فعالیت
+- کمک به بازدیدکنندگان
+- سرویس غذا
 
-### Performers
-Local artists and performers are welcome to participate. Contact us to register.
+### اجراکنندگان
+هنرمندان و اجراکنندگان محلی برای مشارکت خوش‌آمد هستند. برای ثبت‌نام با ما تماس بگیرید.
 
-## Registration
+## ثبت‌نام
 
-While attendance is free, we encourage registration for planning purposes:
-- Call: +98-XXX-XXXX
-- Email: events@dangepia.ir
-- Visit: Village Cultural Center
+اگرچه حضور رایگان است، ما تشویق می‌کنیم برای برنامه‌ریزی ثبت‌نام کنید:
+- تماس: ۰۹۸-XXX-XXXX
+- ایمیل: events@dangepia.ir
+- مراجعه: مرکز فرهنگی روستا
 
-## Important Notes
+## نکات مهم
 
-- Parking will be available at the school grounds
-- Free shuttle service from parking area
-- Weather contingency plans are in place
-- Lost and found station will be available
+- پارکینگ در محوطه مدرسه در دسترس خواهد بود
+- سرویس رایگان شاتل از منطقه پارکینگ
+- برنامه‌های اضطراری آب و هوایی در نظر گرفته شده است
+- ایستگاه اشیای گمشده در دسترس خواهد بود
 
-Come celebrate our community, culture, and the abundance of our harvest season!
+بیایید جامعه، فرهنگ و فراوانی فصل برداشت خود را جشن بگیریم!

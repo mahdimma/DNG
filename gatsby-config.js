@@ -3,8 +3,8 @@
  */
 module.exports = {
   siteMetadata: {
-    title: `Dangepia Village`,
-    description: `Official website of Dangepia Village`,
+    title: `روستای دانگپیا`,
+    description: `وبسایت رسمی روستای دانگپیا`,
     author: `@dangepia`,
     siteUrl: `https://dangepia.ir`,
   },
@@ -15,6 +15,7 @@ module.exports = {
     `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
+    `gatsby-plugin-styled-components`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {

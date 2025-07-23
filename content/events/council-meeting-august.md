@@ -1,74 +1,74 @@
 ---
-title: "Village Council Monthly Meeting"
+title: "جلسه ماهانه شورای روستا"
 date: "2025-07-15"
 type: "event"
 eventDate: "2025-08-01"
-eventTime: "7:00 PM - 9:00 PM"
-location: "Village Hall"
-organizer: "Village Council"
+eventTime: "۱۹:۰۰ - ۲۱:۰۰"
+location: "سالن روستا"
+organizer: "شورای روستا"
 featured: false
 ---
 
-# Village Council Monthly Meeting
+# جلسه ماهانه شورای روستا
 
-The Dangepia Village Council cordially invites all residents to attend the monthly council meeting.
+شورای روستای دانگپیا صمیمانه از همه ساکنان دعوت می‌کند تا در جلسه ماهانه شورا شرکت کنند.
 
-## Meeting Details
+## جزئیات جلسه
 
-**Date:** August 1, 2025
-**Time:** 7:00 PM - 9:00 PM
-**Location:** Village Hall, Main Street
-**Open to:** All village residents
+**تاریخ:** اول مرداد ۱۴۰۴
+**زمان:** ۱۹:۰۰ - ۲۱:۰۰
+**مکان:** سالن روستا، خیابان اصلی
+**باز برای:** همه ساکنان روستا
 
-## Agenda
+## دستور کار
 
-### Regular Business
-1. Approval of previous meeting minutes
-2. Financial report
-3. Infrastructure project updates
-4. Committee reports
+### کارهای معمول
+۱. تصویب صورتجلسه جلسه قبل
+۲. گزارش مالی
+۳. به‌روزرسانی پروژه‌های زیرساختی
+۴. گزارش کمیته‌ها
 
-### New Business
-1. Proposed changes to waste collection schedule
-2. Community garden project proposal
-3. Youth sports program funding request
-4. Street lighting improvement plan
+### کارهای جدید
+۱. تغییرات پیشنهادی در برنامه جمع‌آوری زباله
+۲. پیشنهاد پروژه باغ جامعه
+۳. درخواست بودجه برنامه ورزش جوانان
+۴. طرح بهبود روشنایی خیابان‌ها
 
-### Community Input
-- Public questions and concerns
-- Suggestions for village improvements
-- Volunteer opportunities discussion
+### مشارکت جامعه
+- سوالات و نگرانی‌های عمومی
+- پیشنهادات برای بهبود روستا
+- بحث فرصت‌های داوطلبی
 
-## How to Participate
+## نحوه مشارکت
 
-### Attending
-No registration required - simply attend on the evening.
+### حضور
+نیازی به ثبت‌نام نیست - فقط در شب جلسه حضور یابید.
 
-### Speaking
-If you wish to address the council:
-- Sign up at the beginning of the meeting
-- Limit presentations to 5 minutes
-- Written submissions are also welcome
+### سخنرانی
+اگر می‌خواهید با شورا صحبت کنید:
+- در ابتدای جلسه ثبت‌نام کنید
+- ارائه‌ها را به ۵ دقیقه محدود کنید
+- ارسال مطالب مکتوب نیز پذیرفته می‌شود
 
-### Submitting Items
-To add items to future agendas:
-- Submit requests 7 days before meeting
-- Contact the Village Office
-- Email: council@dangepia.ir
+### ارسال موضوعات
+برای اضافه کردن موضوعات به دستورکار جلسات آینده:
+- درخواست‌ها را ۷ روز قبل از جلسه ارسال کنید
+- با دفتر روستا تماس بگیرید
+- ایمیل: council@dangepia.ir
 
-## Meeting Minutes
+## صورتجلسه‌ها
 
-Previous meeting minutes are available:
-- Village Office during business hours
-- Village website
-- Community bulletin board
+صورتجلسه‌های جلسات قبل در دسترس است:
+- دفتر روستا در ساعات اداری
+- وبسایت روستا
+- تابلوی اطلاعات جامعه
 
-## Accessibility
+## دسترسی
 
-The Village Hall is wheelchair accessible. Sign language interpretation available upon request (48 hours notice required).
+سالن روستا برای ویلچر قابل دسترس است. ترجمه زبان اشاره در صورت درخواست موجود است (نیاز به اطلاع ۴۸ ساعته).
 
-## Refreshments
+## پذیرایی
 
-Light refreshments will be served after the meeting, courtesy of the Women's Auxiliary.
+پذیرایی سبک پس از جلسه به لطف انجمن خیریه زنان سرو خواهد شد.
 
-Your participation makes our community stronger. We look forward to seeing you there!
+مشارکت شما جامعه ما را قوی‌تر می‌کند. مشتاقانه منتظر دیدار شما هستیم!

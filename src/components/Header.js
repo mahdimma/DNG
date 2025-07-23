@@ -1,79 +1,108 @@
 import React from "react"
 import { Link } from "gatsby"
+import styled from "styled-components"
+
+const HeaderContainer = styled.header`
+  background: #2c5282;
+  margin-bottom: 1.45rem;
+`
+
+const HeaderContent = styled.div`
+  margin: 0 auto;
+  max-width: 960px;
+  padding: 1.45rem 1.0875rem;
+`
+
+const SiteTitle = styled.h1`
+  margin: 0;
+  
+  a {
+    color: white;
+    text-decoration: none;
+  }
+`
+
+const Navigation = styled.nav`
+  margin-top: 1rem;
+`
+
+const NavList = styled.ul`
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 1rem;
+  flex-wrap: wrap;
+`
+
+const NavItem = styled.li`
+  a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+`
 
 const Header = ({ siteTitle }) => (
-  <header style={{
-    background: `#2c5282`,
-    marginBottom: `1.45rem`,
-  }}>
-    <div style={{
-      margin: `0 auto`,
-      maxWidth: 960,
-      padding: `1.45rem 1.0875rem`,
-    }}>
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
+  <HeaderContainer>
+    <HeaderContent>
+      <SiteTitle>
+        <Link to="/">
           {siteTitle}
         </Link>
-      </h1>
-      <nav style={{ marginTop: `1rem` }}>
-        <ul style={{
-          display: `flex`,
-          listStyle: `none`,
-          margin: 0,
-          padding: 0,
-          gap: `1rem`,
-        }}>
-          <li>
-            <Link to="/" style={{ color: `white`, textDecoration: `none` }}>
-              Home
+      </SiteTitle>
+      <Navigation>
+        <NavList>
+          <NavItem>
+            <Link to="/">
+              خانه
             </Link>
-          </li>
-          <li>
-            <Link to="/about" style={{ color: `white`, textDecoration: `none` }}>
-              About
+          </NavItem>
+          <NavItem>
+            <Link to="/about">
+              درباره ما
             </Link>
-          </li>
-          <li>
-            <Link to="/news" style={{ color: `white`, textDecoration: `none` }}>
-              News
+          </NavItem>
+          <NavItem>
+            <Link to="/news">
+              اخبار
             </Link>
-          </li>
-          <li>
-            <Link to="/services" style={{ color: `white`, textDecoration: `none` }}>
-              Services
+          </NavItem>
+          <NavItem>
+            <Link to="/services">
+              خدمات
             </Link>
-          </li>
-          <li>
-            <Link to="/contact" style={{ color: `white`, textDecoration: `none` }}>
-              Contact
+          </NavItem>
+          <NavItem>
+            <Link to="/contact">
+              تماس با ما
             </Link>
-          </li>
-          <li>
-            <Link to="/gallery" style={{ color: `white`, textDecoration: `none` }}>
-              Gallery
+          </NavItem>
+          <NavItem>
+            <Link to="/gallery">
+              گالری تصاویر
             </Link>
-          </li>
-          <li>
-            <Link to="/maps" style={{ color: `white`, textDecoration: `none` }}>
-              Maps
+          </NavItem>
+          <NavItem>
+            <Link to="/maps">
+              نقشه
             </Link>
-          </li>
-          <li>
-            <Link to="/weather" style={{ color: `white`, textDecoration: `none` }}>
-              Weather
+          </NavItem>
+          <NavItem>
+            <Link to="/weather">
+              آب و هوا
             </Link>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+          </NavItem>
+        </NavList>
+      </Navigation>
+    </HeaderContent>
+  </HeaderContainer>
 )
 
 export default Header

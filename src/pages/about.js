@@ -1,66 +1,87 @@
 import React from "react"
+import styled from "styled-components"
 import Layout from "../components/Layout"
+
+const Container = styled.div`
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+`
+
+const Section = styled.section`
+  margin-bottom: 3rem;
+  
+  h2 {
+    color: #2d3748;
+    margin-bottom: 1rem;
+  }
+  
+  p {
+    line-height: 1.8;
+    color: #4a5568;
+    text-align: justify;
+  }
+`
 
 const AboutPage = () => {
   return (
-    <Layout title="About Us" description="Learn about Dangepia Village, its history, culture, and community">
-      <div style={{ maxWidth: 960, margin: `0 auto`, padding: `2rem 1rem` }}>
-        <h1>About Dangepia Village</h1>
+    <Layout title="درباره ما" description="درباره روستای دانگپیا، تاریخ، فرهنگ و جامعه آن بیاموزید">
+      <Container>
+        <h1>درباره روستای دانگپیا</h1>
         
-        <section style={{ marginBottom: `3rem` }}>
-          <h2>Our History</h2>
+        <Section>
+          <h2>تاریخ ما</h2>
           <p>
-            Dangepia Village has a rich history spanning centuries. Founded in the early days,
-            our village has been a center of community, culture, and tradition. The village
-            has preserved its historical charm while embracing modern amenities for its residents.
+            روستای دانگپیا دارای تاریخ غنی و قدمتی چندین قرنه است. این روستا از گذشته‌های دور
+            مرکز جامعه، فرهنگ و سنت بوده است. روستا جذابیت تاریخی خود را حفظ کرده در حالی که 
+            امکانات مدرن رو برای ساکنانش فراهم آورده است.
           </p>
-        </section>
+        </Section>
 
-        <section style={{ marginBottom: `3rem` }}>
-          <h2>Our Community</h2>
+        <Section>
+          <h2>جامعه ما</h2>
           <p>
-            Our village is home to a vibrant community of families who have lived here for
-            generations, as well as newcomers who have been welcomed with open arms. We pride
-            ourselves on our strong sense of community, mutual support, and shared values.
+            روستای ما خانه جامعه‌ای پر جنب و جوش از خانواده‌هایی است که نسل‌ها اینجا زندگی کرده‌اند،
+            همچنین تازه واردهایی که با آغوش باز پذیرفته شده‌اند. ما به حس قوی جامعه، حمایت متقابل
+            و ارزش‌های مشترکمان افتخار می‌کنیم.
           </p>
-        </section>
+        </Section>
 
-        <section style={{ marginBottom: `3rem` }}>
-          <h2>Culture & Traditions</h2>
+        <Section>
+          <h2>فرهنگ و سنت‌ها</h2>
           <p>
-            Dangepia Village maintains its cultural heritage through various festivals,
-            celebrations, and traditional practices. Our annual events bring the community
-            together and help preserve our unique identity for future generations.
+            روستای دانگپیا میراث فرهنگی خود را از طریق جشنواره‌ها، جشن‌ها و آداب سنتی مختلف
+            حفظ می‌کند. رویدادهای سالانه ما جامعه را گرد هم می‌آورد و به حفظ هویت منحصر به فرد
+            ما برای نسل‌های آینده کمک می‌کند.
           </p>
-        </section>
+        </Section>
 
-        <section style={{ marginBottom: `3rem` }}>
-          <h2>Geography & Location</h2>
+        <Section>
+          <h2>جغرافیا و موقعیت</h2>
           <p>
-            Located in a beautiful natural setting, Dangepia Village offers stunning views
-            and a peaceful environment. The village is strategically positioned with good
-            access to transportation while maintaining its rural charm.
+            روستای دانگپیا در محیطی طبیعی زیبا قرار دارد و مناظر خیره‌کننده و محیطی آرام
+            ارائه می‌دهد. روستا در موقعیت استراتژیکی با دسترسی خوب به حمل و نقل قرار دارد
+            در حالی که جذابیت روستایی خود را حفظ کرده است.
           </p>
-        </section>
+        </Section>
 
-        <section style={{ marginBottom: `3rem` }}>
-          <h2>Village Leadership</h2>
+        <Section>
+          <h2>رهبری روستا</h2>
           <p>
-            Our village is governed by a dedicated council of community leaders who work
-            tirelessly to ensure the well-being of all residents. The village council meets
-            regularly to discuss community matters and plan for the future.
+            روستای ما توسط شورایی از رهبران جامعه اداره می‌شود که بی‌وقفه برای تامین رفاه
+            همه ساکنان تلاش می‌کنند. شورای روستا به طور منظم جلسه برگزار می‌کند تا درباره
+            مسائل جامعه بحث کرده و برای آینده برنامه‌ریزی کند.
           </p>
-        </section>
+        </Section>
 
-        <section>
-          <h2>Vision for the Future</h2>
+        <Section>
+          <h2>چشم‌انداز آینده</h2>
           <p>
-            We are committed to sustainable development that preserves our heritage while
-            providing modern amenities and opportunities for our residents. Our goal is to
-            maintain the balance between tradition and progress.
+            ما متعهد به توسعه پایدار هستیم که میراث ما را حفظ کرده در حالی که امکانات مدرن
+            و فرصت‌هایی برای ساکنانمان فراهم می‌آورد. هدف ما حفظ تعادل بین سنت و پیشرفت است.
           </p>
-        </section>
-      </div>
+        </Section>
+      </Container>
     </Layout>
   )
 }

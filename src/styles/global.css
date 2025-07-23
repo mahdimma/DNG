@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  direction: rtl;
+  text-align: right;
+  font-family: 'Vazirmatn', 'Tahoma', 'Arial', sans-serif;
+}
+
+body {
+  font-family: 'Vazirmatn', 'Tahoma', 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  direction: rtl;
+  line-height: 1.6;
+}
+
+/* RTL specific styles */
+ul, ol {
+  padding-right: 1rem;
+  padding-left: 0;
+}
+
+/* Fix for styled-components and RTL */
+.rtl-fix {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Ensure proper text direction for form elements */
+input, textarea, select {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Fix for buttons in RTL */
+button {
+  font-family: 'Vazirmatn', 'Tahoma', 'Arial', sans-serif;
+}
+
+/* Responsive font sizes */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Custom scrollbar for RTL */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

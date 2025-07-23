@@ -1,47 +1,47 @@
 ---
-title: "Village Council Announces New Infrastructure Projects"
+title: "شورای روستا پروژه‌های زیرساختی جدید را اعلام کرد"
 date: "2025-01-15"
 type: "news"
-author: "Village Council"
-category: "announcements"
+author: "شورای روستا"
+category: "اعلانات"
 featured: true
 ---
 
-# Village Council Announces New Infrastructure Projects
+# شورای روستا پروژه‌های زیرساختی جدید را اعلام کرد
 
-The Dangepia Village Council is pleased to announce several exciting infrastructure development projects that will begin this spring.
+شورای روستای دانگپیا با خرسندی چندین پروژه توسعه زیرساختی هیجان‌انگیز را که در بهار امسال شروع خواهد شد، اعلام می‌کند.
 
-## Road Improvement Project
+## پروژه بهسازی جاده‌ها
 
-Starting in March 2025, the main village roads will undergo significant improvements including:
+از اسفند ماه ۱۴۰۳، جاده‌های اصلی روستا دچار بهبودهای قابل توجهی خواهند شد که شامل:
 
-- Resurfacing of the primary road network
-- Installation of proper drainage systems
-- Addition of sidewalks for pedestrian safety
-- Improved street lighting throughout the village
+- روکش مجدد شبکه جاده‌های اصلی
+- نصب سیستم‌های زهکشی مناسب
+- اضافه کردن پیاده‌روها برای ایمنی عابران
+- بهبود روشنایی خیابان‌ها در سراسر روستا
 
-## Water System Upgrades
+## ارتقای سیستم آب
 
-Our water infrastructure will be modernized with:
+زیرساخت آب ما با موارد زیر مدرن خواهد شد:
 
-- New water treatment facilities
-- Replacement of aging pipes
-- Installation of smart water meters
-- Improved water pressure for all residents
+- تاسیسات جدید تصفیه آب
+- تعویض لوله‌های فرسوده
+- نصب کنتورهای هوشمند آب
+- بهبود فشار آب برای همه ساکنان
 
-## Community Center Renovation
+## بازسازی مرکز جامعه
 
-The village community center will receive a complete renovation featuring:
+مرکز جامعه روستا بازسازی کاملی دریافت خواهد کرد که شامل:
 
-- Expanded meeting spaces
-- Modern audio-visual equipment
-- Improved accessibility features
-- Energy-efficient heating and cooling systems
+- گسترش فضاهای جلسات
+- تجهیزات صوتی و تصویری مدرن
+- بهبود امکانات دسترسی
+- سیستم‌های گرمایش و سرمایش انرژی‌کارآمد
 
-## Timeline and Impact
+## زمان‌بندی و تاثیر
 
-These projects are scheduled to be completed by the end of 2025. While there may be temporary inconveniences during construction, we will work to minimize disruption to daily life.
+این پروژه‌ها قرار است تا پایان ۱۴۰۴ تکمیل شوند. اگرچه ممکن است در طول ساخت‌وساز مزاحمت‌های موقتی وجود داشته باشد، ما تلاش خواهیم کرد تا اختلال در زندگی روزمره را به حداقل برسانیم.
 
-Regular updates will be provided through our website and community meetings.
+به‌روزرسانی‌های منظم از طریق وبسایت ما و جلسات جامعه ارائه خواهد شد.
 
-For questions or concerns, please contact the Village Office at +98-XXX-XXXX or visit us during office hours.
+برای سوالات یا نگرانی‌ها، لطفاً با دفتر روستا به شماره ۰۹۸-XXX-XXXX تماس بگیرید یا در ساعات اداری از ما دیدن کنید.

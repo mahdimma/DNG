@@ -1,48 +1,48 @@
 ---
-title: "New Health Clinic Services Available"
+title: "خدمات جدید کلینیک بهداشت در دسترس قرار گرفت"
 date: "2025-01-10"
 type: "news"
-author: "Dr. Ahmad Rezaei"
-category: "healthcare"
+author: "دکتر احمد رضایی"
+category: "بهداشت"
 featured: false
 ---
 
-# New Health Clinic Services Available
+# خدمات جدید کلینیک بهداشت در دسترس قرار گرفت
 
-We are excited to announce the expansion of healthcare services at the Dangepia Village Health Clinic.
+با خرسندی گسترش خدمات بهداشتی در کلینیک بهداشت روستای دانگپیا را اعلام می‌کنیم.
 
-## New Services
+## خدمات جدید
 
-### Specialist Consultations
-- Cardiology consultations (twice monthly)
-- Pediatric care (weekly)
-- Dermatology services (monthly)
+### مشاوره‌های تخصصی
+- مشاوره قلب (دو بار در ماه)
+- مراقبت اطفال (هفتگی)
+- خدمات پوست (ماهانه)
 
-### Diagnostic Services
-- Basic laboratory tests
-- Blood pressure monitoring
-- Diabetes screening
-- Eye examinations
+### خدمات تشخیصی
+- آزمایش‌های پایه آزمایشگاه
+- نظارت فشار خون
+- غربالگری دیابت
+- معاینات چشم
 
-### Preventive Care
-- Vaccination programs for all ages
-- Health check-ups
-- Nutrition counseling
-- Mental health support
+### مراقبت پیشگیرانه
+- برنامه‌های واکسیناسیون برای همه سنین
+- معاینات سلامت
+- مشاوره تغذیه
+- حمایت سلامت روان
 
-## Schedule
+## برنامه زمانی
 
-The clinic is now open extended hours:
-- Monday to Friday: 8:00 AM - 6:00 PM
-- Saturday: 9:00 AM - 2:00 PM
-- Emergency services: 24/7
+کلینیک اکنون با ساعات کاری گسترده باز است:
+- دوشنبه تا جمعه: ۸:۰۰ تا ۱۸:۰۰
+- شنبه: ۹:۰۰ تا ۱۴:۰۰
+- خدمات اورژانس: ۲۴/۷
 
-## How to Book an Appointment
+## نحوه رزرو نوبت
 
-Call us at +98-XXX-XXXX or visit the clinic in person. We also accept walk-in patients for urgent care.
+با شماره ۰۹۸-XXX-XXXX با ما تماس بگیرید یا شخصاً از کلینیک دیدن کنید. ما همچنین بیماران مراجعه کننده بدون قرار قبلی را برای مراقبت‌های فوری می‌پذیریم.
 
-## Insurance and Payment
+## بیمه و پرداخت
 
-We accept all major insurance plans and offer affordable payment options for uninsured patients.
+ما همه طرح‌های بیمه اصلی را می‌پذیریم و گزینه‌های پرداخت مقرون به صرفه برای بیماران بدون بیمه ارائه می‌دهیم.
 
-Your health is our priority. We look forward to serving the Dangepia community with these enhanced services.
+سلامت شما اولویت ماست. مشتاقانه منتظر خدمت‌رسانی به جامعه دانگپیا با این خدمات بهبود یافته هستیم.
