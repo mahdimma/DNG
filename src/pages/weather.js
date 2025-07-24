@@ -3,347 +3,398 @@ import Layout from "../components/Layout"
 import HeroSection from "../components/HeroSection"
 
 const WeatherPage = () => {
-  const [currentWeather, setCurrentWeather] = useState({
-    temperature: 22,
-    condition: "Partly Cloudy",
-    humidity: 65,
-    windSpeed: 12,
-    pressure: 1013,
-    visibility: 10,
-    uvIndex: 5,
-    icon: "⛅"
-  })
+  const [weatherData, setWeatherData] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
-  const [forecast, setForecast] = useState([
-    { day: "Today", high: 24, low: 18, condition: "Partly Cloudy", icon: "⛅" },
-    { day: "Tomorrow", high: 26, low: 19, condition: "Sunny", icon: "☀️" },
-    { day: "Wednesday", high: 23, low: 17, condition: "Cloudy", icon: "☁️" },
-    { day: "Thursday", high: 21, low: 15, condition: "Rain", icon: "🌧️" },
-    { day: "Friday", high: 25, low: 18, condition: "Sunny", icon: "☀️" },
-    { day: "Saturday", high: 27, low: 20, condition: "Sunny", icon: "☀️" },
-    { day: "Sunday", high: 24, low: 17, condition: "Partly Cloudy", icon: "⛅" }
-  ])
-
-  const [alerts, setAlerts] = useState([
-    {
-      type: "advisory",
-      title: "High UV Index Expected",
-      message: "UV index will reach 8 tomorrow. Please take sun protection measures.",
-      icon: "☀️"
-    }
-  ])
-
-  // In a real app, this would fetch data from a weather API
   useEffect(() => {
-    // Simulate API call
-    const fetchWeatherData = () => {
-      // This would be replaced with actual API calls
-      console.log("Fetching weather data...")
+    const fetchWeatherData = async () => {
+      try {
+        setLoading(true)
+        const response = await fetch('https://api.weatherapi.com/v1/forecast.json?key=979ae4a2dd0e48b9a0b72713242608&q=36.5145,52.4795&days=7&aqi=no&alerts=yes')
+        if (!response.ok) {
+          throw new Error(`خطای شبکه: ${response.status}`)
+        }
+        const data = await response.json()
+        setWeatherData(data)
+        setError(null)
+      } catch (e) {
+        setError(e.message)
+        setWeatherData(null)
+      } finally {
+        setLoading(false)
+      }
     }
-    
+
     fetchWeatherData()
-    
-    // Set up periodic updates
+
     const interval = setInterval(fetchWeatherData, 300000) // Update every 5 minutes
-    
     return () => clearInterval(interval)
   }, [])
 
-  const getBackgroundGradient = (condition) => {
-    switch (condition.toLowerCase()) {
-      case "sunny":
-        return "linear-gradient(135deg, #74b9ff 0%, #0984e3 100%)"
-      case "cloudy":
-        return "linear-gradient(135deg, #636e72 0%, #2d3436 100%)"
-      case "rain":
-        return "linear-gradient(135deg, #636e72 0%, #2d3436 100%)"
-      default:
-        return "linear-gradient(135deg, #74b9ff 0%, #0984e3 100%)"
-    }
-  }
-
   const getUVIndexColor = (uvIndex) => {
-    if (uvIndex <= 2) return "#22c55e" // Green - Low
-    if (uvIndex <= 5) return "#eab308" // Yellow - Moderate
-    if (uvIndex <= 7) return "#f97316" // Orange - High
-    if (uvIndex <= 10) return "#dc2626" // Red - Very High
-    return "#7c3aed" // Purple - Extreme
+    if (uvIndex <= 2) return "text-green-500"
+    if (uvIndex <= 5) return "text-yellow-500"
+    if (uvIndex <= 7) return "text-orange-500"
+    if (uvIndex <= 10) return "text-red-500"
+    return "text-purple-500"
   }
 
   const getUVIndexLabel = (uvIndex) => {
-    if (uvIndex <= 2) return "Low"
-    if (uvIndex <= 5) return "Moderate"
-    if (uvIndex <= 7) return "High"
-    if (uvIndex <= 10) return "Very High"
-    return "Extreme"
+    if (uvIndex <= 2) return "پایین"
+    if (uvIndex <= 5) return "متوسط"
+    if (uvIndex <= 7) return "زیاد"
+    if (uvIndex <= 10) return "بسیار زیاد"
+    return "شدید"
+  }
+  
+  const getDayName = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('fa-IR', { weekday: 'long' });
   }
 
+  const weatherConditions = {
+    "Sunny": "آفتابی",
+    "Clear": "صاف",
+    "Partly cloudy": "کمی ابری",
+    "Cloudy": "ابری",
+    "Overcast": "تمام ابری",
+    "Mist": "مه آلود",
+    "Patchy rain possible": "احتمال بارش پراکنده",
+    "Patchy snow possible": "احتمال برف پراکنده",
+    "Patchy sleet possible": "احتمال باران و برف پراکنده",
+    "Patchy freezing drizzle possible": "احتمال نم نم باران یخ زده پراکنده",
+    "Thundery outbreaks possible": "احتمال رگبار و رعد و برق",
+    "Blowing snow": "بوران برف",
+    "Blizzard": "کولاک",
+    "Fog": "مه",
+    "Freezing fog": "مه یخ زده",
+    "Patchy light drizzle": "نم نم باران خفیف پراکنده",
+    "Light drizzle": "نم نم باران خفیف",
+    "Freezing drizzle": "نم نم باران یخ زده",
+    "Heavy freezing drizzle": "نم نم باران یخ زده شدید",
+    "Patchy light rain": "باران خفیف پراکنده",
+    "Light rain": "باران خفیف",
+    "Moderate rain at times": "باران متوسط در بعضی ساعات",
+    "Moderate rain": "باران متوسط",
+    "Heavy rain at times": "باران شدید در بعضی ساعات",
+    "Heavy rain": "باران شدید",
+    "Light freezing rain": "باران یخ زده خفیف",
+    "Moderate or heavy freezing rain": "باران یخ زده متوسط یا شدید",
+    "Light sleet": "باران و برف خفیف",
+    "Moderate or heavy sleet": "باران و برف متوسط یا شدید",
+    "Patchy light snow": "برف خفیف پراکنده",
+    "Light snow": "برف خفیف",
+    "Patchy moderate snow": "برف متوسط پراکنده",
+    "Moderate snow": "برف متوسط",
+    "Patchy heavy snow": "برف شدید پراکنده",
+    "Heavy snow": "برف شدید",
+    "Ice pellets": "تگرگ",
+    "Light rain shower": "رگبار باران خفیف",
+    "Moderate or heavy rain shower": "رگبار باران متوسط یا شدید",
+    "Torrential rain shower": "رگبار باران سیل آسا",
+    "Light sleet showers": "رگبار باران و برف خفیف",
+    "Moderate or heavy sleet showers": "رگبار باران و برف متوسط یا شدید",
+    "Light snow showers": "رگبار برف خفیف",
+    "Moderate or heavy snow showers": "رگبار برف متوسط یا شدید",
+    "Light showers of ice pellets": "رگبار تگرگ خفیف",
+    "Moderate or heavy showers of ice pellets": "رگبار تگرگ متوسط یا شدید",
+    "Patchy light rain with thunder": "باران خفیف پراکنده همراه با رعد و برق",
+    "Moderate or heavy rain with thunder": "باران متوسط یا شدید همراه با رعد و برق",
+    "Patchy light snow with thunder": "برف خفیف پراکنده همراه با رعد و برق",
+    "Moderate or heavy snow with thunder": "برف متوسط یا شدید همراه با رعد و برق"
+  };
+
+  const translateCondition = (conditionText) => {
+    return weatherConditions[conditionText] || conditionText;
+  }
+
+  const toPersianDigits = (str) => {
+    const persianDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+    return String(str).replace(/[0-9]/g, (w) => persianDigits[+w]);
+  };
+
+  const windDirections = {
+    "N": "شمال",
+    "NNE": "شمال-شمال شرقی",
+    "NE": "شمال شرقی",
+    "ENE": "شرق-شمال شرقی",
+    "E": "شرق",
+    "ESE": "شرق-جنوب شرقی",
+    "SE": "جنوب شرقی",
+    "SSE": "جنوب-جنوب شرقی",
+    "S": "جنوب",
+    "SSW": "جنوب-جنوب غربی",
+    "SW": "جنوب غربی",
+    "WSW": "غرب-جنوب غربی",
+    "W": "غرب",
+    "WNW": "غرب-شمال غربی",
+    "NW": "شمال غربی",
+    "NNW": "شمال-شمال غربی",
+  };
+
+  const translateWindDirection = (direction) => {
+    return windDirections[direction] || direction;
+  };
+
   return (
-    <Layout title="Weather" description="Current weather conditions and forecast for Dangepia Village">
+    <Layout title="آب و هوا" description="اطلاعات لحظه‌ای آب و هوا و پیش‌بینی برای روستای دانگپیا">
       <HeroSection 
-        title="آب و هوا"
-        subtitle="اطلاعات کامل از آب و هوای روستا"
+        title="آب و هوای روستا"
+        subtitle="آخرین اطلاعات آب و هوا و پیش‌بینی روزهای آینده را اینجا ببینید"
         showButtons={false}
         showScrollIndicator={true}
       />
-      <div style={{ maxWidth: 1200, margin: `0 auto`, padding: `2rem 1rem` }}>
-        <h1>Dangepia Village Weather</h1>
-        <p style={{ fontSize: `1.1rem`, marginBottom: `3rem` }}>
-          Stay informed about current weather conditions and upcoming forecasts for our village.
-          Updated every 5 minutes from local weather stations.
-        </p>
-
-        {/* Weather Alerts */}
-        {alerts.length > 0 && (
-          <section style={{ marginBottom: `2rem` }}>
-            {alerts.map((alert, index) => (
-              <div key={index} style={{
-                background: alert.type === "warning" ? "#fed7d7" : "#bee3f8",
-                border: `1px solid ${alert.type === "warning" ? "#feb2b2" : "#90cdf4"}`,
-                borderRadius: `8px`,
-                padding: `1rem`,
-                marginBottom: `1rem`,
-              }}>
-                <div style={{ display: `flex`, alignItems: `center`, gap: `0.5rem` }}>
-                  <span style={{ fontSize: `1.2rem` }}>{alert.icon}</span>
-                  <strong style={{ 
-                    color: alert.type === "warning" ? "#c53030" : "#2b6cb0" 
-                  }}>
-                    {alert.title}
-                  </strong>
-                </div>
-                <p style={{ 
-                  margin: `0.5rem 0 0 0`,
-                  color: alert.type === "warning" ? "#744210" : "#2c5282"
-                }}>
-                  {alert.message}
-                </p>
-              </div>
-            ))}
-          </section>
-        )}
-
-        {/* Current Weather */}
-        <section style={{
-          background: getBackgroundGradient(currentWeather.condition),
-          color: `white`,
-          borderRadius: `12px`,
-          padding: `2rem`,
-          marginBottom: `3rem`,
-          boxShadow: `0 8px 32px rgba(0,0,0,0.1)`,
-        }}>
-          <div style={{
-            display: `grid`,
-            gridTemplateColumns: `1fr auto`,
-            gap: `2rem`,
-            alignItems: `center`,
-          }}>
-            <div>
-              <h2 style={{ margin: `0 0 0.5rem 0`, fontSize: `2rem` }}>
-                Current Weather
-              </h2>
-              <p style={{ margin: `0 0 1rem 0`, opacity: 0.9 }}>
-                Last updated: {new Date().toLocaleTimeString()}
-              </p>
-              <div style={{
-                display: `flex`,
-                alignItems: `center`,
-                gap: `1rem`,
-                marginBottom: `1rem`,
-              }}>
-                <span style={{ fontSize: `4rem` }}>{currentWeather.icon}</span>
-                <div>
-                  <div style={{ fontSize: `3rem`, fontWeight: `bold` }}>
-                    {currentWeather.temperature}°C
+      
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12" dir="rtl">
+        {loading && <p className="text-center text-xl">در حال بارگذاری اطلاعات آب و هوا...</p>}
+        {error && <p className="text-center text-xl text-red-500">خطا در دریافت اطلاعات: {error}</p>}
+        
+        {weatherData && (
+          <>
+            {/* Alerts Section */}
+            {weatherData.alerts && weatherData.alerts.alert.length > 0 && (
+              <section className="mb-12">
+                <h2 className="text-2xl font-bold text-gray-800 mb-4">هشدارها</h2>
+                {weatherData.alerts.alert.map((alert, index) => (
+                  <div key={index} className="bg-red-100 border-r-4 border-red-500 text-red-700 p-4 rounded-lg shadow-md" role="alert">
+                    <p className="font-bold">{alert.headline}</p>
+                    <p>{alert.desc}</p>
                   </div>
-                  <div style={{ fontSize: `1.2rem`, opacity: 0.9 }}>
-                    {currentWeather.condition}
+                ))}
+              </section>
+            )}
+
+            {/* Current Weather Section */}
+            <section className="mb-12">
+              <div className="bg-white p-6 rounded-xl shadow-lg">
+                <div className="flex justify-between items-start mb-4">
+                  <div>
+                    <h2 className="text-3xl font-bold text-gray-900">
+                      آب و هوای فعلی در دنگپیا
+                    </h2>
+                    <p className="text-gray-500">
+                      آخرین بروزرسانی: {toPersianDigits(new Date(weatherData.current.last_updated_epoch * 1000).toLocaleTimeString('fa-IR'))}
+                    </p>
+                  </div>
+                  <div className="text-left">
+                    <p className="text-gray-600">
+                      {`${new Date(weatherData.location.localtime_epoch * 1000).toLocaleDateString('fa-IR', { weekday: 'long' })}، ${new Date(weatherData.location.localtime_epoch * 1000).toLocaleDateString('fa-IR', { year: 'numeric', month: 'long', day: 'numeric' })}`}
+                    </p>
+                    <p className="text-gray-500">{toPersianDigits(weatherData.location.localtime.split(' ')[1])}</p>
                   </div>
                 </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                  <div className="flex items-center gap-4">
+                    <img src={`https:${weatherData.current.condition.icon}`} alt={weatherData.current.condition.text} className="w-24 h-24"/>
+                    <div>
+                      <p className="text-6xl font-bold text-gray-800">{toPersianDigits(weatherData.current.temp_c)}°</p>
+                      <p className="text-xl text-gray-600">{translateCondition(weatherData.current.condition.text)}</p>
+                      <div className="text-gray-500 text-sm mt-2">
+                        <p>احساس واقعی:</p>
+                        <div className="flex gap-4 justify-start">
+                            <span>{toPersianDigits(weatherData.current.feelslike_c)}° سانتی گراد</span>
+                            <span>{toPersianDigits(weatherData.current.feelslike_f)}° فارنهایت</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+                    <div className="bg-gray-50 p-3 rounded-lg">
+                      <p className="text-sm text-gray-500">رطوبت</p>
+                      <p className="text-xl font-semibold">{toPersianDigits(weatherData.current.humidity)}%</p>
+                    </div>
+                    <div className="bg-gray-50 p-3 rounded-lg">
+                      <p className="text-sm text-gray-500">باد</p>
+                      <p className="text-xl font-semibold">{toPersianDigits(weatherData.current.wind_kph)} <span className="text-sm">کیلومتر/ساعت</span></p>
+                      <p className="text-xs text-gray-400">{translateWindDirection(weatherData.current.wind_dir)}</p>
+                    </div>
+                    <div className="bg-gray-50 p-3 rounded-lg">
+                      <p className="text-sm text-gray-500">فشار</p>
+                      <p className="text-xl font-semibold">{toPersianDigits(weatherData.current.pressure_mb)} <span className="text-sm">میلی‌بار</span></p>
+                    </div>
+                    <div className="bg-gray-50 p-3 rounded-lg">
+                      <p className="text-sm text-gray-500">دید</p>
+                      <p className="text-xl font-semibold">{toPersianDigits(weatherData.current.vis_km)} <span className="text-sm">کیلومتر</span></p>
+                    </div>
+                    <div className="bg-gray-50 p-3 rounded-lg">
+                      <p className="text-sm text-gray-500">اشعه فرابنفش(UV)</p>
+                      <p className={`text-xl font-semibold ${getUVIndexColor(weatherData.current.uv)}`}>
+                        {getUVIndexLabel(weatherData.current.uv)} ({toPersianDigits(weatherData.current.uv)})
+                      </p>
+                    </div>
+                     <div className="bg-gray-50 p-3 rounded-lg">
+                      <p className="text-sm text-gray-500">بارندگی</p>
+                      <p className="text-xl font-semibold">{toPersianDigits(weatherData.current.precip_mm)} <span className="text-sm">میلی‌متر</span></p>
+                    </div>
+                    <div className="bg-gray-50 p-3 rounded-lg">
+                      <p className="text-sm text-gray-500">ابر</p>
+                      <p className="text-xl font-semibold">{toPersianDigits(weatherData.current.cloud)}%</p>
+                    </div>
+                    <div className="bg-gray-50 p-3 rounded-lg">
+                      <p className="text-sm text-gray-500">روز/شب</p>
+                      <p className="text-xl font-semibold">{weatherData.current.is_day ? '☀️' : '🌙'}</p>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
+            </section>
+
+            {/* 7-Day Forecast Section */}
+            <section className="mb-12">
+              <h2 className="text-2xl font-bold text-gray-800 mb-4">پیش‌بینی ۷ روز آینده</h2>
+              <div className="space-y-6">
+                {weatherData.forecast.forecastday.map((day, index) => (
+                  <div key={index} className="card p-4 rounded-lg shadow-md transition-all hover:shadow-lg hover:scale-[1.02]">
+                    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 items-center">
+                      <div className="lg:col-span-1 md:col-span-1 col-span-2">
+                        <p className="font-bold text-lg text-primary-600">{index === 0 ? 'امروز' : getDayName(day.date)}</p>
+                        <p className="text-sm text-gray-500">{toPersianDigits(day.date)}</p>
+                      </div>
+                      <div className="flex items-center gap-3 lg:col-span-1 md:col-span-2 col-span-3">
+                        <img src={`https:${day.day.condition.icon}`} alt={day.day.condition.text} className="w-16 h-16"/>
+                        <div>
+                          <p className="text-lg font-semibold">{toPersianDigits(day.day.maxtemp_c)}°C / {toPersianDigits(day.day.mintemp_c)}°C</p>
+                          <p className="text-sm text-gray-600" title={translateCondition(day.day.condition.text)}>{translateCondition(day.day.condition.text)}</p>
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-x-4 gap-y-2 lg:col-span-3 md:col-span-3 col-span-5 text-sm">
+                        <div className="text-center p-2 rounded-lg bg-gray-50">
+                          <p className="font-semibold">باد</p>
+                          <p>{toPersianDigits(day.day.maxwind_kph)} کیلومتر/ساعت</p>
+                        </div>
+                        <div className="text-center p-2 rounded-lg bg-gray-50">
+                          <p className="font-semibold">بارندگی</p>
+                          <p>{toPersianDigits(day.day.totalprecip_mm)} میلی‌متر</p>
+                        </div>
+                        <div className="text-center p-2 rounded-lg bg-gray-50">
+                          <p className="font-semibold">رطوبت</p>
+                          <p>{toPersianDigits(day.day.avghumidity)}%</p>
+                        </div>
+                        <div className="text-center p-2 rounded-lg bg-gray-50">
+                          <p className="font-semibold">UV</p>
+                          <p className={getUVIndexColor(day.day.uv)}>{getUVIndexLabel(day.day.uv)} ({toPersianDigits(day.day.uv)})</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-4 text-center text-xs text-gray-600">
+                        <div className="p-2 rounded-lg bg-gray-100">
+                            <p className="font-semibold">☀️ طلوع</p>
+                            <p>{toPersianDigits(day.astro.sunrise)}</p>
+                        </div>
+                        <div className="p-2 rounded-lg bg-gray-100">
+                            <p className="font-semibold">🌙 غروب</p>
+                            <p>{toPersianDigits(day.astro.sunset)}</p>
+                        </div>
+                        <div className="p-2 rounded-lg bg-gray-100">
+                            <p className="font-semibold">🌔 طلوع ماه</p>
+                            <p>{toPersianDigits(day.astro.moonrise)}</p>
+                        </div>
+                        <div className="p-2 rounded-lg bg-gray-100">
+                            <p className="font-semibold">🌘 غروب ماه</p>
+                            <p>{toPersianDigits(day.astro.moonset)}</p>
+                        </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Additional Info Section */}
+            <section>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="card p-6">
+                  <h3 className="text-xl font-bold mb-3">اطلاعات موقعیت</h3>
+                  <ul className="space-y-2 text-gray-700">
+                    <li><strong>کشور:</strong> ایران</li>
+                    <li><strong>منطقه زمانی:</strong> آسیا/تهران</li>
+                    <li><strong>مختصات:</strong> {toPersianDigits(weatherData.location.lat)}, {toPersianDigits(weatherData.location.lon)}</li>
+                    <li><strong>کد وضعیت:</strong> {toPersianDigits(weatherData.current.condition.code)}</li>
+                  </ul>
+                </div>
+                <div className="card p-6">
+                  <h3 className="text-xl font-bold mb-3">جزئیات تکمیلی</h3>
+                   <ul className="space-y-4 text-gray-700">
+                    <li>
+                      <strong>احساس سرما:</strong>
+                      <div className="flex justify-between text-sm text-gray-600 mt-1">
+                        <span>{toPersianDigits(weatherData.current.windchill_c)}° سانتی‌گراد</span>
+                        <span>{toPersianDigits(weatherData.current.windchill_f)}° فارنهایت</span>
+                      </div>
+                    </li>
+                    <li>
+                      <strong>شاخص گرما:</strong>
+                      <div className="flex justify-between text-sm text-gray-600 mt-1">
+                        <span>{toPersianDigits(weatherData.current.heatindex_c)}° سانتی‌گراد</span>
+                        <span>{toPersianDigits(weatherData.current.heatindex_f)}° فارنهایت</span>
+                      </div>
+                    </li>
+                    <li>
+                      <strong>نقطه شبنم:</strong>
+                      <div className="flex justify-between text-sm text-gray-600 mt-1">
+                        <span>{toPersianDigits(weatherData.current.dewpoint_c)}° سانتی‌گراد</span>
+                        <span>{toPersianDigits(weatherData.current.dewpoint_f)}° فارنهایت</span>
+                      </div>
+                    </li>
+                    <li>
+                      <strong>تندباد:</strong>
+                      <div className="flex justify-between text-sm text-gray-600 mt-1">
+                        <span>{toPersianDigits(weatherData.current.gust_kph)} کیلومتر/ساعت</span>
+                        <span>{toPersianDigits(weatherData.current.gust_mph)} مایل/ساعت</span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div className="card p-6">
+                  <h3 className="text-xl font-bold mb-3">مقادیر دیگر واحدها</h3>
+                   <ul className="space-y-2 text-gray-700">
+                    <li><strong>دما (فارنهایت):</strong> {toPersianDigits(weatherData.current.temp_f)}°فارنهایت</li>
+                    <li><strong>باد (مایل/ساعت):</strong> {toPersianDigits(weatherData.current.wind_mph)} مایل/ساعت</li>
+                    <li><strong>فشار (اینچ):</strong> {toPersianDigits(weatherData.current.pressure_in)} اینچ</li>
+                    <li><strong>بارندگی (اینچ):</strong> {toPersianDigits(weatherData.current.precip_in)} اینچ</li>
+                    <li><strong>دید (مایل):</strong> {toPersianDigits(weatherData.current.vis_miles)} مایل</li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+
+            {/* Yearly Summary and Weather Points */}
+            <section className="mt-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="card p-6">
+                        <h3 className="text-xl font-bold mb-3">خلاصه وضعیت آب و هوای سالانه</h3>
+                        <p className="text-gray-700">
+                            این بخش خلاصه‌ای از وضعیت آب و هوای سالانه را نمایش می‌دهد. (داده‌های آماری واقعی در حال حاضر در دسترس نیست).
+                        </p>
+                        <ul className="mt-4 space-y-2 text-sm text-gray-600">
+                            <li>میانگین دما: <span className="font-semibold">{toPersianDigits(15)}°C</span></li>
+                            <li>بیشترین بارش: <span className="font-semibold">ماه آبان</span></li>
+                            <li>خشک‌ترین ماه: <span className="font-semibold">ماه تیر</span></li>
+                        </ul>
+                    </div>
+                    <div className="card p-6">
+                        <h3 className="text-xl font-bold mb-3">امتیاز آب و هوا</h3>
+                        <p className="text-gray-700">
+                            امتیاز کلی آب و هوا برای فعالیت‌های بیرون از خانه: <span className="font-bold text-primary-600 text-lg">{toPersianDigits(7)}/{toPersianDigits(10)}</span>
+                        </p>
+                         <p className="text-sm text-gray-500 mt-2">
+                           این امتیاز بر اساس دما، سرعت باد و احتمال بارندگی برای امروز محاسبه شده است.
+                        </p>
+                    </div>
+                </div>
+            </section>
             
-            <div style={{
-              display: `grid`,
-              gridTemplateColumns: `repeat(2, 1fr)`,
-              gap: `1rem`,
-              minWidth: `300px`,
-            }}>
-              <div style={{
-                background: `rgba(255,255,255,0.2)`,
-                padding: `1rem`,
-                borderRadius: `8px`,
-                textAlign: `center`,
-              }}>
-                <div style={{ fontSize: `0.9rem`, opacity: 0.8 }}>Humidity</div>
-                <div style={{ fontSize: `1.5rem`, fontWeight: `bold` }}>
-                  {currentWeather.humidity}%
-                </div>
-              </div>
-              
-              <div style={{
-                background: `rgba(255,255,255,0.2)`,
-                padding: `1rem`,
-                borderRadius: `8px`,
-                textAlign: `center`,
-              }}>
-                <div style={{ fontSize: `0.9rem`, opacity: 0.8 }}>Wind Speed</div>
-                <div style={{ fontSize: `1.5rem`, fontWeight: `bold` }}>
-                  {currentWeather.windSpeed} km/h
-                </div>
-              </div>
-              
-              <div style={{
-                background: `rgba(255,255,255,0.2)`,
-                padding: `1rem`,
-                borderRadius: `8px`,
-                textAlign: `center`,
-              }}>
-                <div style={{ fontSize: `0.9rem`, opacity: 0.8 }}>Pressure</div>
-                <div style={{ fontSize: `1.5rem`, fontWeight: `bold` }}>
-                  {currentWeather.pressure} hPa
-                </div>
-              </div>
-              
-              <div style={{
-                background: `rgba(255,255,255,0.2)`,
-                padding: `1rem`,
-                borderRadius: `8px`,
-                textAlign: `center`,
-              }}>
-                <div style={{ fontSize: `0.9rem`, opacity: 0.8 }}>UV Index</div>
-                <div style={{ 
-                  fontSize: `1.5rem`, 
-                  fontWeight: `bold`,
-                  color: getUVIndexColor(currentWeather.uvIndex),
-                }}>
-                  {currentWeather.uvIndex} - {getUVIndexLabel(currentWeather.uvIndex)}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* 7-Day Forecast */}
-        <section style={{ marginBottom: `3rem` }}>
-          <h2 style={{ marginBottom: `1.5rem` }}>7-Day Forecast</h2>
-          <div style={{
-            display: `grid`,
-            gridTemplateColumns: `repeat(auto-fit, minmax(150px, 1fr))`,
-            gap: `1rem`,
-          }}>
-            {forecast.map((day, index) => (
-              <div key={index} style={{
-                background: `white`,
-                border: `1px solid #e2e8f0`,
-                borderRadius: `8px`,
-                padding: `1.5rem`,
-                textAlign: `center`,
-                boxShadow: `0 2px 4px rgba(0,0,0,0.1)`,
-                transition: `transform 0.2s, box-shadow 0.2s`,
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.transform = 'translateY(-5px)'
-                e.currentTarget.style.boxShadow = '0 8px 25px rgba(0,0,0,0.15)'
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)'
-                e.currentTarget.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)'
-              }}
-              >
-                <div style={{ 
-                  fontWeight: `bold`,
-                  marginBottom: `0.5rem`,
-                  color: index === 0 ? "#667eea" : "#2d3748",
-                }}>
-                  {day.day}
-                </div>
-                <div style={{ 
-                  fontSize: `2rem`,
-                  marginBottom: `0.5rem`,
-                }}>
-                  {day.icon}
-                </div>
-                <div style={{ 
-                  fontSize: `0.9rem`,
-                  marginBottom: `0.5rem`,
-                  color: `#4a5568`,
-                }}>
-                  {day.condition}
-                </div>
-                <div style={{ display: `flex`, justifyContent: `space-between` }}>
-                  <span style={{ fontWeight: `bold` }}>{day.high}°</span>
-                  <span style={{ color: `#666` }}>{day.low}°</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Weather Information */}
-        <div style={{
-          display: `grid`,
-          gridTemplateColumns: `repeat(auto-fit, minmax(300px, 1fr))`,
-          gap: `2rem`,
-        }}>
-          {/* Climate Information */}
-          <section style={{
-            background: `#f7fafc`,
-            padding: `2rem`,
-            borderRadius: `8px`,
-            border: `1px solid #e2e8f0`,
-          }}>
-            <h3>Climate Information</h3>
-            <div style={{ marginTop: `1rem` }}>
-              <h4>Seasonal Overview</h4>
-              <ul style={{ color: `#4a5568`, lineHeight: `1.6` }}>
-                <li><strong>Spring:</strong> Mild temperatures, occasional rain</li>
-                <li><strong>Summer:</strong> Warm and dry, temperatures 25-35°C</li>
-                <li><strong>Autumn:</strong> Cool and pleasant, 15-25°C</li>
-                <li><strong>Winter:</strong> Cold with occasional snow, 0-15°C</li>
-              </ul>
-            </div>
-          </section>
-
-          {/* Weather Tips */}
-          <section style={{
-            background: `#f7fafc`,
-            padding: `2rem`,
-            borderRadius: `8px`,
-            border: `1px solid #e2e8f0`,
-          }}>
-            <h3>Weather Tips</h3>
-            <div style={{ marginTop: `1rem` }}>
-              <h4>Stay Prepared</h4>
-              <ul style={{ color: `#4a5568`, lineHeight: `1.6` }}>
-                <li>Check weather forecast before outdoor activities</li>
-                <li>Carry umbrella during rainy season</li>
-                <li>Use sun protection during high UV days</li>
-                <li>Dress in layers during temperature changes</li>
-                <li>Stay hydrated, especially during summer</li>
-              </ul>
-            </div>
-          </section>
-        </div>
-
-        {/* Data Sources */}
-        <section style={{
-          background: `white`,
-          padding: `1.5rem`,
-          borderRadius: `8px`,
-          border: `1px solid #e2e8f0`,
-          marginTop: `2rem`,
-          textAlign: `center`,
-        }}>
-          <p style={{ 
-            margin: 0,
-            color: `#666`,
-            fontSize: `0.9rem`,
-          }}>
-            Weather data provided by local meteorological stations and updated every 5 minutes. 
-            For emergency weather warnings, please monitor local news and official channels.
-          </p>
-        </section>
+            {/* Data Source */}
+            <footer className="text-center mt-12 text-gray-500 text-sm">
+              <p>
+                اطلاعات آب و هوا توسط 
+                <a href="https://www.weatherapi.com/" title="Free Weather API" className="text-primary-600 hover:underline mx-1">WeatherAPI.com</a>
+                تامین می‌شود.
+              </p>
+            </footer>
+          </>
+        )}
       </div>
     </Layout>
   )
