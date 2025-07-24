@@ -71,7 +71,7 @@ const GalleryVideoCard = ({ video, index, onClick }) => {
   return (
     <div 
       ref={containerRef}
-      className="card group cursor-pointer overflow-hidden p-0 transform transition-all duration-300 hover:scale-105 flex flex-col bg-white rounded-lg shadow-md"
+      className={`card group cursor-pointer overflow-hidden p-0 transform transition-all duration-300 hover:scale-105 flex flex-col bg-white rounded-lg shadow-md ${video.featured ? 'border-2 border-primary-500' : ''}`}
       onClick={() => onClick && onClick(index)}
     >
       <div className="relative overflow-hidden">
@@ -169,14 +169,7 @@ const GalleryVideoCard = ({ video, index, onClick }) => {
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-4">
           <div className="text-white">
             <div className="font-semibold text-sm mb-1">{video.title}</div>
-            <div className="flex items-center justify-between text-xs mt-2">
-              <span className="flex items-center gap-1">
-                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                  <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
-                </svg>
-                {video.views || 0} بازدید
-              </span>
+            <div className="flex items-center justify-end text-xs mt-2">
               {video.videographer && (
                 <span className="flex items-center gap-1">
                   <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">

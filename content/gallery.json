@@ -98,13 +98,11 @@
         "title": "مراسم جشن برداشت - ویدیو",
         "description": "ویدیوی کامل از مراسم جشن برداشت محصولات",
         "url": "https://upload.wikimedia.org/wikipedia/commons/9/99/Animation_of_Rotating_Earth_at_Night.webm",
-        "thumbnail": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop",
         "videographer": "حسن علیزاده",
         "date": "2024-09-22",
         "duration": 120,
         "tags": ["جشن", "برداشت", "محصولات", "ویدیو"],
-        "featured": true,
-        "views": 245
+        "featured": true
       },
       {
         "title": "مراسم عقد سنتی",
@@ -120,7 +118,6 @@
         "title": "موسیقی محلی در مراسم عقد",
         "description": "نوازندگان محلی در حال اجرای موسیقی سنتی",
         "url": "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4",
-        "thumbnail": "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=600&fit=crop",
         "videographer": "مریم صادقی",
         "date": "2024-08-15",
         "duration": 90,
@@ -165,7 +162,6 @@
         "title": "تایم لپس غروب روستا",
         "description": "ویدیوی تایم لپس از غروب آفتاب بر فراز روستا",
         "url": "https://upload.wikimedia.org/wikipedia/commons/f/f5/VikidiaTestimonial20180109.ogv",
-        "thumbnail": "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=800&h=600&fit=crop",
         "videographer": "زهرا موسوی",
         "date": "2024-05-20",
         "duration": 45,

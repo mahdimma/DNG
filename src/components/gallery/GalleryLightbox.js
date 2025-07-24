@@ -1,14 +1,64 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 
 const GalleryLightbox = ({ media, isOpen, onClose, onNext, onPrev, currentIndex, totalImages }) => {
   const [mediaLoaded, setMediaLoaded] = useState(false);
   const [mediaError, setMediaError] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [videoCurrentTime, setVideoCurrentTime] = useState(0);
-  const [videoDuration, setVideoDuration] = useState(0);
+  const [videoDuration, setVideoDuration] = useState(10);
   const [volume, setVolume] = useState(1);
   const [isMuted, setIsMuted] = useState(false);
-  const videoRef = useRef();
+  const videoNodeRef = useRef(null);
+
+  const videoRef = useCallback(node => {
+    const handleTimeUpdate = () => {
+      if (videoNodeRef.current) {
+        setVideoCurrentTime(videoNodeRef.current.currentTime);
+      }
+    };
+    const handleDurationChange = () => {
+        if (videoNodeRef.current) {
+            const duration = videoNodeRef.current.duration;
+            if (duration && !isNaN(duration) && duration !== Infinity) {
+                setVideoDuration(duration);
+            }
+        }
+    };
+    const handleLoadedMetadata = () => {
+        handleMediaLoad();
+        handleDurationChange();
+    };
+    const handlePlay = () => setIsPlaying(true);
+    const handlePause = () => setIsPlaying(false);
+
+    if (videoNodeRef.current) {
+        // Clean up previous event listeners. Note: this is imperfect because the
+        // handler function instances are new on each render. However, the crash
+        // was due to using the handlers before they were defined.
+        videoNodeRef.current.removeEventListener("timeupdate", handleTimeUpdate);
+        videoNodeRef.current.removeEventListener("durationchange", handleDurationChange);
+        videoNodeRef.current.removeEventListener("loadedmetadata", handleLoadedMetadata);
+        videoNodeRef.current.removeEventListener("play", handlePlay);
+        videoNodeRef.current.removeEventListener("pause", handlePause);
+    }
+
+    if (node) {
+        // When the video element is mounted, add event listeners
+        node.addEventListener("timeupdate", handleTimeUpdate);
+        node.addEventListener("durationchange", handleDurationChange);
+        node.addEventListener("loadedmetadata", handleLoadedMetadata);
+        node.addEventListener("play", handlePlay);
+        node.addEventListener("pause", handlePause);
+        
+        // Initial check in case the metadata is already loaded
+        if (node.duration) {
+            handleDurationChange();
+        }
+    }
+        // Save node reference
+    videoNodeRef.current = node;
+  }, [media?.url]); // Re-run effect only if media URL changes
+
   const infoContainerRef = useRef();
 
   // Determine if current media is video
@@ -17,7 +67,8 @@ const GalleryLightbox = ({ media, isOpen, onClose, onNext, onPrev, currentIndex,
                     media.url.includes('.mp4') || 
                     media.url.includes('.webm') || 
                     media.url.includes('.mov') || 
-                    media.url.includes('.avi')
+                    media.url.includes('.avi') ||
+                    media.url.includes('.ogv')
                   )));
 
   useEffect(() => {
@@ -66,35 +117,21 @@ const GalleryLightbox = ({ media, isOpen, onClose, onNext, onPrev, currentIndex,
   };
 
   const togglePlay = () => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
+    if (videoNodeRef.current) {
+      if (videoNodeRef.current.paused) {
+        videoNodeRef.current.play();
       } else {
-        videoRef.current.play();
+        videoNodeRef.current.pause();
       }
-      setIsPlaying(!isPlaying);
     }
-  };
-
-  const handleTimeUpdate = () => {
-    if (videoRef.current) {
-      setVideoCurrentTime(videoRef.current.currentTime);
-    }
-  };
-
-  const handleLoadedMetadata = () => {
-    if (videoRef.current) {
-      setVideoDuration(videoRef.current.duration);
-    }
-    handleMediaLoad();
   };
 
   const handleSeek = (e) => {
-    if (videoRef.current && videoDuration) {
+    if (videoNodeRef.current && videoDuration) {
       const rect = e.currentTarget.getBoundingClientRect();
       const pos = (e.clientX - rect.left) / rect.width;
       const newTime = pos * videoDuration;
-      videoRef.current.currentTime = newTime;
+      videoNodeRef.current.currentTime = newTime;
       setVideoCurrentTime(newTime);
     }
   };
@@ -102,16 +139,16 @@ const GalleryLightbox = ({ media, isOpen, onClose, onNext, onPrev, currentIndex,
   const handleVolumeChange = (e) => {
     const newVolume = parseFloat(e.target.value);
     setVolume(newVolume);
-    if (videoRef.current) {
-      videoRef.current.volume = newVolume;
+    if (videoNodeRef.current) {
+      videoNodeRef.current.volume = newVolume;
     }
     setIsMuted(newVolume === 0);
   };
 
   const toggleMute = () => {
-    if (videoRef.current) {
+    if (videoNodeRef.current) {
       const newMuted = !isMuted;
-      videoRef.current.muted = newMuted;
+      videoNodeRef.current.muted = newMuted;
       setIsMuted(newMuted);
     }
   };
@@ -205,17 +242,12 @@ const GalleryLightbox = ({ media, isOpen, onClose, onNext, onPrev, currentIndex,
                     ref={videoRef}
                     className="w-full h-auto object-contain"
                     style={{ maxHeight: '80vh', display: mediaLoaded ? 'block' : 'none' }}
-                    onLoadedMetadata={handleLoadedMetadata}
                     onError={handleMediaError}
-                    onTimeUpdate={handleTimeUpdate}
-                    onPlay={() => setIsPlaying(true)}
-                    onPause={() => setIsPlaying(false)}
                     poster={media.thumbnail}
                     controls={false}
                     src={media.url}
+                    key={media.url} // Add key to force re-mount on media change
                   >
-                    <source src={media.url} type="video/mp4" />
-                    {media.webmUrl && <source src={media.webmUrl} type="video/webm" />}
                     مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.
                   </video>
 
@@ -230,7 +262,7 @@ const GalleryLightbox = ({ media, isOpen, onClose, onNext, onPrev, currentIndex,
                         <div className="h-full bg-primary-500 rounded-full relative">
                           <div 
                             className="h-full bg-primary-500 rounded-full transition-all duration-150"
-                            style={{ width: `${(videoCurrentTime / videoDuration) * 100}%` }}
+                            style={{ width: `${videoDuration > 0 ? (videoCurrentTime / videoDuration) * 100 : 0}%` }}
                           />
                         </div>
                       </div>
@@ -315,8 +347,18 @@ const GalleryLightbox = ({ media, isOpen, onClose, onNext, onPrev, currentIndex,
                 {media.title}
               </p>
               <button
+                onClick={() => {
+                  setMediaError(false);
+                  setMediaLoaded(false);
+                  // You might want to add a mechanism to try a different URL or show a more specific error
+                }}
+                className="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors duration-200 mr-2"
+              >
+                تلاش مجدد
+              </button>
+              <button
                 onClick={() => window.open(media.url, '_blank')}
-                className="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors duration-200"
+                className="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors duration-200"
               >
                 مشاهده در تب جدید
               </button>
@@ -351,6 +393,12 @@ const GalleryLightbox = ({ media, isOpen, onClose, onNext, onPrev, currentIndex,
                   {new Date(media.date).toLocaleDateString('fa-IR')}
                 </span>
               </div>
+              {media.views && (
+                <div className="flex items-center justify-between text-white/70 text-sm mb-4">
+                  <span>بازدید:</span>
+                  <span className="font-medium text-white">{media.views}</span>
+                </div>
+              )}
               {media.tags && media.tags.length > 0 && (
                 <div className="flex flex-wrap gap-2">
                   {media.tags.map((tag, index) => (
