@@ -74,12 +74,15 @@ const useGalleryData = () => {
   };
 
   const getStatistics = () => {
-    const totalImages = galleryData.categories.reduce((total, category) => total + category.images.length, 0);
-    const totalFeatured = galleryData.categories.reduce((total, category) => 
-      total + category.images.filter(img => img.featured).length, 0);
+    const allMedia = galleryData.categories.flatMap(category => category.images);
+    const totalImages = allMedia.filter(media => !media.type || media.type === 'image').length;
+    const totalVideos = allMedia.filter(media => media.type === 'video').length;
+    const totalFeatured = allMedia.filter(media => media.featured).length;
     
     return {
       totalImages,
+      totalVideos,
+      totalMedia: totalImages + totalVideos,
       totalCategories: galleryData.categories.length,
       totalFeatured,
       lastUpdated: new Date().toISOString()

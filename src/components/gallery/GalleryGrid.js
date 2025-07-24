@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import GalleryImageCard from "./GalleryImageCard";
+import GalleryMediaCard from "./GalleryMediaCard";
 import GalleryLightbox from "./GalleryLightbox";
 
 const GalleryGrid = ({ images, className = "" }) => {
@@ -28,10 +28,10 @@ const GalleryGrid = ({ images, className = "" }) => {
       <div
         className={`flex overflow-x-auto gap-4 p-4 scrollbar-thin scrollbar-thumb-primary-500 scrollbar-track-gray-200 ${className}`}
       >
-        {images.map((image, index) => (
+        {images.map((media, index) => (
           <div key={index} className="flex-shrink-0 w-80">
-            <GalleryImageCard
-              image={image}
+            <GalleryMediaCard
+              media={media}
               index={index}
               onClick={openLightbox}
             />
@@ -40,7 +40,7 @@ const GalleryGrid = ({ images, className = "" }) => {
       </div>
 
       <GalleryLightbox
-        image={images[currentImageIndex]}
+        media={images[currentImageIndex]}
         isOpen={lightboxOpen}
         onClose={closeLightbox}
         onNext={images.length > 1 ? nextImage : null}
