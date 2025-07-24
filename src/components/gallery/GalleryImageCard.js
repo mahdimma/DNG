@@ -1,12 +1,38 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 const GalleryImageCard = ({ image, index, onClick }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const imgRef = useRef();
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '50px'
+      }
+    );
+
+    if (imgRef.current) {
+      observer.observe(imgRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   const handleImageError = (e) => {
     e.target.style.display = 'none';
     e.target.nextSibling.style.display = 'flex';
   };
 
   const handleImageLoad = (e) => {
+    setImageLoaded(true);
     e.target.style.display = 'block';
     if (e.target.nextSibling) {
       e.target.nextSibling.style.display = 'none';
@@ -15,21 +41,35 @@ const GalleryImageCard = ({ image, index, onClick }) => {
 
   return (
     <div 
+      ref={imgRef}
       className="card group cursor-pointer overflow-hidden p-0 transform transition-all duration-300 hover:scale-105"
       onClick={() => onClick && onClick(index)}
     >
       <div className="relative overflow-hidden">
-        {/* Main Image */}
-        <img
-          src={image.url}
-          alt={image.title}
-          className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-          onError={handleImageError}
-          onLoad={handleImageLoad}
-          loading="lazy"
-        />
+        {/* Main Image - only load when visible */}
+        {isVisible ? (
+          <img
+            src={image.url}
+            alt={image.title}
+            className={`w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500 ${
+              imageLoaded ? 'opacity-100' : 'opacity-0'
+            }`}
+            onError={handleImageError}
+            onLoad={handleImageLoad}
+            loading="lazy"
+          />
+        ) : (
+          // Placeholder while not visible
+          <div className="w-full h-64 bg-gradient-to-br from-gray-100 to-gray-200 flex flex-col items-center justify-center text-gray-500 animate-pulse">
+            <div className="text-4xl mb-2">📷</div>
+            <div className="text-center px-4">
+              <div className="font-medium">{image.title}</div>
+              <div className="text-sm mt-1 opacity-75">در حال بارگذاری...</div>
+            </div>
+          </div>
+        )}
         
-        {/* Fallback placeholder */}
+        {/* Fallback placeholder for error */}
         <div 
           className="w-full h-64 bg-gradient-to-br from-gray-100 to-gray-200 flex-col items-center justify-center text-gray-500"
           style={{ display: 'none' }}
