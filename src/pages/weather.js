@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from "react"
 import Layout from "../components/Layout"
 import HeroSection from "../components/HeroSection"
+import AirQuality from "../components/AirQuality"
+import HourlyForecast from "../components/HourlyForecast"
 
 const WeatherPage = () => {
   const [weatherData, setWeatherData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [activeDay, setActiveDay] = useState(0);
+
 
   useEffect(() => {
     const fetchWeatherData = async () => {
       try {
         setLoading(true)
-        const response = await fetch('https://api.weatherapi.com/v1/forecast.json?key=979ae4a2dd0e48b9a0b72713242608&q=36.5145,52.4795&days=7&aqi=no&alerts=yes')
+        const response = await fetch('https://api.weatherapi.com/v1/forecast.json?key=979ae4a2dd0e48b9a0b72713242608&q=36.5145,52.4795&days=14&aqi=yes&alerts=yes')
         if (!response.ok) {
           throw new Error(`خطای شبکه: ${response.status}`)
         }
@@ -61,9 +65,10 @@ const WeatherPage = () => {
     "Overcast": "تمام ابری",
     "Mist": "مه آلود",
     "Patchy rain possible": "احتمال بارش پراکنده",
+    "Patchy rain nearby": "احتمال بارش پراکنده",
     "Patchy snow possible": "احتمال برف پراکنده",
     "Patchy sleet possible": "احتمال باران و برف پراکنده",
-    "Patchy freezing drizzle possible": "احتمال نم نم باران یخ زده پراکنده",
+    "Patchy freezing drizzle possible": "احتمال نم نم باران یخ زده پراکende",
     "Thundery outbreaks possible": "احتمال رگبار و رعد و برق",
     "Blowing snow": "بوران برف",
     "Blizzard": "کولاک",
@@ -106,10 +111,13 @@ const WeatherPage = () => {
   };
 
   const translateCondition = (conditionText) => {
-    return weatherConditions[conditionText] || conditionText;
+    // Trim whitespace which might be present in API response
+    const trimmedText = conditionText.trim();
+    return weatherConditions[trimmedText] || trimmedText;
   }
 
   const toPersianDigits = (str) => {
+    if (str === null || str === undefined) return '';
     const persianDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
     return String(str).replace(/[0-9]/g, (w) => persianDigits[+w]);
   };
@@ -136,6 +144,21 @@ const WeatherPage = () => {
   const translateWindDirection = (direction) => {
     return windDirections[direction] || direction;
   };
+
+  const moonPhases = {
+    "New Moon": "ماه نو",
+    "Waxing Crescent": "هلال فزاینده",
+    "First Quarter": "تربیع اول",
+    "Waxing Gibbous": "کوژماه فزاینده",
+    "Full Moon": "ماه کامل",
+    "Waning Gibbous": "کوژماه کاهنده",
+    "Last Quarter": "تربیع آخر",
+    "Waning Crescent": "هلال کاهنده",
+  };
+
+  const translateMoonPhase = (phase) => {
+    return moonPhases[phase] || phase;
+  }
 
   return (
     <Layout title="آب و هوا" description="اطلاعات لحظه‌ای آب و هوا و پیش‌بینی برای روستای دانگپیا">
@@ -171,7 +194,7 @@ const WeatherPage = () => {
                 <div className="flex justify-between items-start mb-4">
                   <div>
                     <h2 className="text-3xl font-bold text-gray-900">
-                      آب و هوای فعلی در دنگپیا
+                      آب و هوای فعلی در {weatherData.location.name}
                     </h2>
                     <p className="text-gray-500">
                       آخرین بروزرسانی: {toPersianDigits(new Date(weatherData.current.last_updated_epoch * 1000).toLocaleTimeString('fa-IR'))}
@@ -195,7 +218,6 @@ const WeatherPage = () => {
                         <p>احساس واقعی:</p>
                         <div className="flex gap-4 justify-start">
                             <span>{toPersianDigits(weatherData.current.feelslike_c)}° سانتی گراد</span>
-                            <span>{toPersianDigits(weatherData.current.feelslike_f)}° فارنهایت</span>
                         </div>
                       </div>
                     </div>
@@ -233,44 +255,47 @@ const WeatherPage = () => {
                       <p className="text-xl font-semibold">{toPersianDigits(weatherData.current.cloud)}%</p>
                     </div>
                     <div className="bg-gray-50 p-3 rounded-lg">
-                      <p className="text-sm text-gray-500">روز/شب</p>
-                      <p className="text-xl font-semibold">{weatherData.current.is_day ? '☀️' : '🌙'}</p>
+                      <p className="text-sm text-gray-500">تندباد</p>
+                      <p className="text-xl font-semibold">{toPersianDigits(weatherData.current.gust_kph)} <span className="text-sm">کیلومتر/ساعت</span></p>
                     </div>
                   </div>
                 </div>
               </div>
             </section>
 
-            {/* 7-Day Forecast Section */}
+            {/* Forecast Section */}
             <section className="mb-12">
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">پیش‌بینی ۷ روز آینده</h2>
-              <div className="space-y-6">
+              <h2 className="text-2xl font-bold text-gray-800 mb-4">پیش‌بینی {toPersianDigits(weatherData.forecast.forecastday.length)} روز آینده</h2>
+              <div className="space-y-4">
                 {weatherData.forecast.forecastday.map((day, index) => (
-                  <div key={index} className="card p-4 rounded-lg shadow-md transition-all hover:shadow-lg hover:scale-[1.02]">
-                    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 items-center">
+                  <div key={index} className="card p-4 rounded-lg shadow-md transition-all hover:shadow-lg">
+                    <div 
+                      className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 items-center cursor-pointer"
+                      onClick={() => setActiveDay(activeDay === index ? null : index)}
+                    >
                       <div className="lg:col-span-1 md:col-span-1 col-span-2">
                         <p className="font-bold text-lg text-primary-600">{index === 0 ? 'امروز' : getDayName(day.date)}</p>
-                        <p className="text-sm text-gray-500">{toPersianDigits(day.date)}</p>
+                        <p className="text-sm text-gray-500">{new Date(day.date_epoch * 1000).toLocaleDateString('fa-IR', { month: 'long', day: 'numeric' })}</p>
                       </div>
                       <div className="flex items-center gap-3 lg:col-span-1 md:col-span-2 col-span-3">
                         <img src={`https:${day.day.condition.icon}`} alt={day.day.condition.text} className="w-16 h-16"/>
                         <div>
-                          <p className="text-lg font-semibold">{toPersianDigits(day.day.maxtemp_c)}°C / {toPersianDigits(day.day.mintemp_c)}°C</p>
+                          <p className="text-lg font-semibold">{toPersianDigits(day.day.maxtemp_c)}° / {toPersianDigits(day.day.mintemp_c)}°</p>
                           <p className="text-sm text-gray-600" title={translateCondition(day.day.condition.text)}>{translateCondition(day.day.condition.text)}</p>
                         </div>
                       </div>
                       <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-x-4 gap-y-2 lg:col-span-3 md:col-span-3 col-span-5 text-sm">
                         <div className="text-center p-2 rounded-lg bg-gray-50">
                           <p className="font-semibold">باد</p>
-                          <p>{toPersianDigits(day.day.maxwind_kph)} کیلومتر/ساعت</p>
+                          <p>{toPersianDigits(day.day.maxwind_kph)} <span className="text-xs">کیلومتر/ساعت</span></p>
                         </div>
                         <div className="text-center p-2 rounded-lg bg-gray-50">
-                          <p className="font-semibold">بارندگی</p>
-                          <p>{toPersianDigits(day.day.totalprecip_mm)} میلی‌متر</p>
+                          <p className="font-semibold">بارش</p>
+                          <p>{toPersianDigits(day.day.totalprecip_mm)} <span className="text-xs">میلی‌متر</span></p>
                         </div>
                         <div className="text-center p-2 rounded-lg bg-gray-50">
-                          <p className="font-semibold">رطوبت</p>
-                          <p>{toPersianDigits(day.day.avghumidity)}%</p>
+                          <p className="font-semibold">احتمال بارش</p>
+                          <p>{toPersianDigits(day.day.daily_chance_of_rain)}%</p>
                         </div>
                         <div className="text-center p-2 rounded-lg bg-gray-50">
                           <p className="font-semibold">UV</p>
@@ -296,6 +321,21 @@ const WeatherPage = () => {
                             <p>{toPersianDigits(day.astro.moonset)}</p>
                         </div>
                     </div>
+                     <div className="mt-2 text-center text-xs text-gray-500">
+                        <p>{translateMoonPhase(day.astro.moon_phase)} - {toPersianDigits(day.astro.moon_illumination)}% روشنایی</p>
+                    </div>
+                    {activeDay === index && (
+                      <div className="mt-4">
+                        <h4 className="text-md font-semibold mb-2 text-gray-700">پیش‌بینی ساعتی</h4>
+                        <HourlyForecast 
+                          hourlyData={day.hour}
+                          toPersianDigits={toPersianDigits}
+                          translateCondition={translateCondition}
+                          getUVIndexColor={getUVIndexColor}
+                          getUVIndexLabel={getUVIndexLabel}
+                        />
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
@@ -304,15 +344,11 @@ const WeatherPage = () => {
             {/* Additional Info Section */}
             <section>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div className="card p-6">
-                  <h3 className="text-xl font-bold mb-3">اطلاعات موقعیت</h3>
-                  <ul className="space-y-2 text-gray-700">
-                    <li><strong>کشور:</strong> ایران</li>
-                    <li><strong>منطقه زمانی:</strong> آسیا/تهران</li>
-                    <li><strong>مختصات:</strong> {toPersianDigits(weatherData.location.lat)}, {toPersianDigits(weatherData.location.lon)}</li>
-                    <li><strong>کد وضعیت:</strong> {toPersianDigits(weatherData.current.condition.code)}</li>
-                  </ul>
-                </div>
+                
+                {weatherData.current.air_quality && (
+                  <AirQuality data={weatherData.current.air_quality} toPersianDigits={toPersianDigits} />
+                )}
+
                 <div className="card p-6">
                   <h3 className="text-xl font-bold mb-3">جزئیات تکمیلی</h3>
                    <ul className="space-y-4 text-gray-700">
@@ -320,69 +356,32 @@ const WeatherPage = () => {
                       <strong>احساس سرما:</strong>
                       <div className="flex justify-between text-sm text-gray-600 mt-1">
                         <span>{toPersianDigits(weatherData.current.windchill_c)}° سانتی‌گراد</span>
-                        <span>{toPersianDigits(weatherData.current.windchill_f)}° فارنهایت</span>
                       </div>
                     </li>
                     <li>
                       <strong>شاخص گرما:</strong>
                       <div className="flex justify-between text-sm text-gray-600 mt-1">
                         <span>{toPersianDigits(weatherData.current.heatindex_c)}° سانتی‌گراد</span>
-                        <span>{toPersianDigits(weatherData.current.heatindex_f)}° فارنهایت</span>
                       </div>
                     </li>
                     <li>
                       <strong>نقطه شبنم:</strong>
                       <div className="flex justify-between text-sm text-gray-600 mt-1">
                         <span>{toPersianDigits(weatherData.current.dewpoint_c)}° سانتی‌گراد</span>
-                        <span>{toPersianDigits(weatherData.current.dewpoint_f)}° فارنهایت</span>
-                      </div>
-                    </li>
-                    <li>
-                      <strong>تندباد:</strong>
-                      <div className="flex justify-between text-sm text-gray-600 mt-1">
-                        <span>{toPersianDigits(weatherData.current.gust_kph)} کیلومتر/ساعت</span>
-                        <span>{toPersianDigits(weatherData.current.gust_mph)} مایل/ساعت</span>
                       </div>
                     </li>
                   </ul>
                 </div>
                 <div className="card p-6">
-                  <h3 className="text-xl font-bold mb-3">مقادیر دیگر واحدها</h3>
-                   <ul className="space-y-2 text-gray-700">
-                    <li><strong>دما (فارنهایت):</strong> {toPersianDigits(weatherData.current.temp_f)}°فارنهایت</li>
-                    <li><strong>باد (مایل/ساعت):</strong> {toPersianDigits(weatherData.current.wind_mph)} مایل/ساعت</li>
-                    <li><strong>فشار (اینچ):</strong> {toPersianDigits(weatherData.current.pressure_in)} اینچ</li>
-                    <li><strong>بارندگی (اینچ):</strong> {toPersianDigits(weatherData.current.precip_in)} اینچ</li>
-                    <li><strong>دید (مایل):</strong> {toPersianDigits(weatherData.current.vis_miles)} مایل</li>
+                  <h3 className="text-xl font-bold mb-3">اطلاعات موقعیت</h3>
+                  <ul className="space-y-2 text-gray-700">
+                    <li><strong>کشور:</strong> {weatherData.location.country}</li>
+                    <li><strong>منطقه:</strong> {weatherData.location.region}</li>
+                    <li><strong>منطقه زمانی:</strong> {weatherData.location.tz_id}</li>
+                    <li><strong>مختصات:</strong> {toPersianDigits(weatherData.location.lat)}, {toPersianDigits(weatherData.location.lon)}</li>
                   </ul>
                 </div>
               </div>
-            </section>
-
-            {/* Yearly Summary and Weather Points */}
-            <section className="mt-12">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="card p-6">
-                        <h3 className="text-xl font-bold mb-3">خلاصه وضعیت آب و هوای سالانه</h3>
-                        <p className="text-gray-700">
-                            این بخش خلاصه‌ای از وضعیت آب و هوای سالانه را نمایش می‌دهد. (داده‌های آماری واقعی در حال حاضر در دسترس نیست).
-                        </p>
-                        <ul className="mt-4 space-y-2 text-sm text-gray-600">
-                            <li>میانگین دما: <span className="font-semibold">{toPersianDigits(15)}°C</span></li>
-                            <li>بیشترین بارش: <span className="font-semibold">ماه آبان</span></li>
-                            <li>خشک‌ترین ماه: <span className="font-semibold">ماه تیر</span></li>
-                        </ul>
-                    </div>
-                    <div className="card p-6">
-                        <h3 className="text-xl font-bold mb-3">امتیاز آب و هوا</h3>
-                        <p className="text-gray-700">
-                            امتیاز کلی آب و هوا برای فعالیت‌های بیرون از خانه: <span className="font-bold text-primary-600 text-lg">{toPersianDigits(7)}/{toPersianDigits(10)}</span>
-                        </p>
-                         <p className="text-sm text-gray-500 mt-2">
-                           این امتیاز بر اساس دما، سرعت باد و احتمال بارندگی برای امروز محاسبه شده است.
-                        </p>
-                    </div>
-                </div>
             </section>
             
             {/* Data Source */}
