@@ -71,7 +71,7 @@ const TransportationCard = ({ method }) => (
 
 const Directions = () => {
   return (
-    <section className="mt-12 bg-gray-50 border-2 border-gray-200 p-8 rounded-2xl shadow-lg h-[80vh] overflow-y-auto">
+    <section className="mt-12 bg-gray-50 border-2 border-gray-200 p-8 rounded-2xl shadow-lg">
       <div className="text-center mb-8">
         <div className="text-4xl mb-2">🗺️</div>
         <h3 className="text-3xl font-bold text-gray-900 mb-2">چگونه به روستای دانگپیا برسیم</h3>
