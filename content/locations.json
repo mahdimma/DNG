@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "دفتر روستا",
+    "type": "Government",
+    "description": "ساختمان اصلی اداری",
+    "coordinates": { "lat": 36.5245, "lng": 52.4895 },
+    "address": "خیابان اصلی، روستای دانگپیا",
+    "hours": "دوشنبه-جمعه: ۸:۰۰ صبح - ۴:۰۰ عصر",
+    "phone": "XXX-XXXX-XXX-98+"
+  },
+  {
+    "id": 2,
+    "name": "مسجد روستا",
+    "type": "Religious",
+    "description": "مسجد اصلی روستا",
+    "coordinates": { "lat": 36.6895, "lng": 52.3885 },
+    "address": "میدان مرکزی، روستای دانگپیا",
+    "hours": "برای نماز باز است",
+    "phone": "XXX-XXXX-XXX-98+"
+  },
+  {
+    "id": 3,
+    "name": "مدرسه ابتدایی",
+    "type": "Education",
+    "description": "مدرسه ابتدایی و متوسطه روستا",
+    "coordinates": { "lat": 36.6888, "lng": 52.3895 },
+    "address": "خیابان مدرسه، روستای دانگپیا",
+    "hours": "دوشنبه-جمعه: ۷:۳۰ صبح - ۳:۳۰ عصر",
+    "phone": "XXX-XXXX-XXX-98+"
+  },
+  {
+    "id": 4,
+    "name": "درمانگاه",
+    "type": "Healthcare",
+    "description": "درمانگاه پزشکی روستا",
+    "coordinates": { "lat": 36.6890, "lng": 52.3888 },
+    "address": "خیابان بهداشت، روستای دانگپیا",
+    "hours": "روزانه: ۸:۰۰ صبح - ۶:۰۰ عصر",
+    "phone": "XXX-XXXX-XXX-98+"
+  },
+  {
+    "id": 5,
+    "name": "مرکز فرهنگی",
+    "type": "Cultural",
+    "description": "مرکز اجتماعی و کتابخانه",
+    "coordinates": { "lat": 35.6893, "lng": 52.3892 },
+    "address": "خیابان فرهنگ، روستای دانگپیا",
+    "hours": "سه‌شنبه-یکشنبه: ۹:۰۰ صبح - ۸:۰۰ شب",
+    "phone": "XXX-XXXX-XXX-98+"
+  },
+  {
+    "id": 6,
+    "name": "بازار سنتی",
+    "type": "Commercial",
+    "description": "بازار محلی و مغازه‌ها",
+    "coordinates": { "lat": 36.6891, "lng": 52.3887 },
+    "address": "خیابان بازار، روستای دانگپیا",
+    "hours": "روزانه: ۶:۰۰ صبح - ۱۰:۰۰ شب",
+    "phone": "XXX-XXXX-XXX-98+"
+  }
+]
