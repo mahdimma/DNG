@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 
-const Map = React.lazy(() => import('../Map'));
+const Map = React.lazy(() => import('./Map'));
 
 const MapContainer = ({ locations, locationTypes, selectedLocation, onMarkerClick, isClient }) => (
   <div className="bg-gray-50 p-4 rounded-lg shadow-inner h-full flex flex-col">

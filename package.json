@@ -4,11 +4,13 @@
   "description": "Official website for Dangepia Village with news, events, and village information",
   "main": "index.js",
   "scripts": {
-    "develop": "npx gatsby develop",
-    "start": "npx gatsby develop",
-    "build": "npx gatsby build",
+    "develop": "npm run process-gallery && npx gatsby develop",
+    "start": "npm run process-gallery && npx gatsby develop",
+    "build": "npm run process-gallery && npx gatsby build",
     "serve": "npx gatsby serve",
     "clean": "npx gatsby clean",
+    "process-gallery": "node scripts/processGallery.js",
+    "watch-gallery": "node scripts/processGallery.js --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

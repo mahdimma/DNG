@@ -8,7 +8,7 @@ import MapContainer from '../components/maps/MapContainer';
 import Directions from '../components/maps/Directions';
 import EmergencyInfo from '../components/maps/EmergencyInfo';
 
-const Map = React.lazy(() => import('../components/Map'));
+const Map = React.lazy(() => import('../components/maps/Map'));
 
 const MapsPage = ({ data }) => {
   const [selectedLocation, setSelectedLocation] = useState(null)

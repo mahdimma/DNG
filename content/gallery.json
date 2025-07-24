@@ -1,0 +1,162 @@
+{
+  "village-life": {
+    "title": "زندگی روستایی",
+    "images": [
+      {
+        "title": "بازار محلی روستا",
+        "description": "نمایی از بازار محلی روستا در روز جمعه",
+        "url": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop",
+        "photographer": "محمد احمدی",
+        "date": "2024-12-15",
+        "tags": ["بازار", "تجارت", "روستایی"],
+        "featured": true
+      },
+      {
+        "title": "کشاورز در حال کار",
+        "description": "کشاورز محلی در حال کار در مزرعه",
+        "url": "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=800&h=600&fit=crop",
+        "photographer": "علی محمدی",
+        "date": "2024-11-20",
+        "tags": ["کشاورزی", "مزرعه", "کار"],
+        "featured": false
+      },
+      {
+        "title": "معماری سنتی روستا",
+        "description": "نمای زیبای خانه‌های سنتی روستای دانگپیا",
+        "url": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&h=600&fit=crop",
+        "photographer": "فاطمه رضایی",
+        "date": "2024-10-10",
+        "tags": ["معماری", "سنتی", "خانه"],
+        "featured": true
+      },
+      {
+        "title": "معماری سنتی روستا",
+        "description": "نمای زیبای خانه‌های سنتی روستای دانگپیا",
+        "url": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&h=600&fit=crop",
+        "photographer": "فاطمه رضایی",
+        "date": "2024-10-10",
+        "tags": ["معماری", "سنتی", "خانه"],
+        "featured": true
+      }
+    ]
+  },
+  "village-sum": {
+    "title": "زندگی سامانه در روستا",
+    "images": [
+      {
+        "title": "بازار محلی روستا",
+        "description": "نمایی از بازار محلی روستا در روز جمعه",
+        "url": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop",
+        "photographer": "محمد احمدی",
+        "date": "2024-12-15",
+        "tags": ["بازار", "تجارت", "روستایی"],
+        "featured": true
+      },
+      {
+        "title": "کشاورز در حال کار",
+        "description": "کشاورز محلی در حال کار در مزرعه",
+        "url": "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=800&h=600&fit=crop",
+        "photographer": "علی محمدی",
+        "date": "2024-11-20",
+        "tags": ["کشاورزی", "مزرعه", "کار"],
+        "featured": false
+      },
+      {
+        "title": "معماری سنتی روستا",
+        "description": "نمای زیبای خانه‌های سنتی روستای دانگپیا",
+        "url": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&h=600&fit=crop",
+        "photographer": "فاطمه رضایی",
+        "date": "2024-10-10",
+        "tags": ["معماری", "سنتی", "خانه"],
+        "featured": true
+      },
+      {
+        "title": "معماری سنتی روستا",
+        "description": "نمای زیبای خانه‌های سنتی روستای دانگپیا",
+        "url": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&h=600&fit=crop",
+        "photographer": "فاطمه رضایی",
+        "date": "2024-10-10",
+        "tags": ["معماری", "سنتی", "خانه"],
+        "featured": true
+      }
+    ]
+  },
+  "events-festivals": {
+    "title": "رویدادها و جشن‌ها",
+    "images": [
+      {
+        "title": "جشن برداشت محصولات",
+        "description": "مراسم جشن برداشت سالانه روستا",
+        "url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop",
+        "photographer": "حسن علیزاده",
+        "date": "2024-09-22",
+        "tags": ["جشن", "برداشت", "محصولات"],
+        "featured": true
+      },
+      {
+        "title": "مراسم عقد سنتی",
+        "description": "مراسم عقد به سبک سنتی در روستا",
+        "url": "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=600&fit=crop",
+        "photographer": "مریم صادقی",
+        "date": "2024-08-15",
+        "tags": ["عروسی", "سنتی", "مراسم"],
+        "featured": false
+      }
+    ]
+  },
+  "nature-landscape": {
+    "title": "طبیعت و مناظر",
+    "images": [
+      {
+        "title": "نمای کوه‌های اطراف روستا",
+        "description": "منظره زیبای کوه‌های اطراف روستای دانگپیا",
+        "url": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop",
+        "photographer": "رضا کریمی",
+        "date": "2024-07-10",
+        "tags": ["کوه", "طبیعت", "منظره"],
+        "featured": true
+      },
+      {
+        "title": "رودخانه روستا",
+        "description": "رودخانه زیبای عبوری از کنار روستا",
+        "url": "https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=800&h=600&fit=crop",
+        "photographer": "امیر حسینی",
+        "date": "2024-06-05",
+        "tags": ["رودخانه", "آب", "طبیعت"],
+        "featured": false
+      },
+      {
+        "title": "غروب زیبای روستا",
+        "description": "غروب آفتاب از بالای تپه‌های روستا",
+        "url": "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=800&h=600&fit=crop",
+        "photographer": "زهرا موسوی",
+        "date": "2024-05-20",
+        "tags": ["غروب", "آفتاب", "منظره"],
+        "featured": true
+      }
+    ]
+  },
+  "historical-sites": {
+    "title": "مکان‌های تاریخی", 
+    "images": [
+      {
+        "title": "مسجد تاریخی روستا",
+        "description": "مسجد قدیمی روستا با معماری سنتی",
+        "url": "https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=800&h=600&fit=crop",
+        "photographer": "احمد نوری",
+        "date": "2024-04-12",
+        "tags": ["مسجد", "تاریخی", "معماری"],
+        "featured": true
+      },
+      {
+        "title": "ویرانه‌های قلعه باستانی",
+        "description": "بقایای قلعه باستانی در بالای تپه",
+        "url": "https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?w=800&h=600&fit=crop",
+        "photographer": "سعید رحیمی",
+        "date": "2024-03-08",
+        "tags": ["قلعه", "باستانی", "ویرانه"],
+        "featured": false
+      }
+    ]
+  }
+}
