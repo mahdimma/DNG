@@ -6,6 +6,7 @@ const GalleryLightbox = ({ media, isOpen, onClose, onNext, onPrev, currentIndex,
   const [isPlaying, setIsPlaying] = useState(false);
   const [videoCurrentTime, setVideoCurrentTime] = useState(0);
   const [videoDuration, setVideoDuration] = useState(10);
+  const [videoBuffered, setVideoBuffered] = useState(0);
   const [volume, setVolume] = useState(1);
   const [isMuted, setIsMuted] = useState(false);
   const videoNodeRef = useRef(null);
@@ -14,6 +15,15 @@ const GalleryLightbox = ({ media, isOpen, onClose, onNext, onPrev, currentIndex,
     const handleTimeUpdate = () => {
       if (videoNodeRef.current) {
         setVideoCurrentTime(videoNodeRef.current.currentTime);
+        // Update buffered progress
+        const buffered = videoNodeRef.current.buffered;
+        if (buffered.length > 0) {
+          const bufferedEnd = buffered.end(buffered.length - 1);
+          const duration = videoNodeRef.current.duration;
+          if (duration > 0) {
+            setVideoBuffered((bufferedEnd / duration) * 100);
+          }
+        }
       }
     };
     const handleDurationChange = () => {
@@ -83,6 +93,21 @@ const GalleryLightbox = ({ media, isOpen, onClose, onNext, onPrev, currentIndex,
         e.preventDefault();
         togglePlay();
       }
+      // Add fine-grained video control with arrow keys
+      if (isVideo && videoNodeRef.current) {
+        if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          const newTime = Math.min(videoDuration, videoCurrentTime + 10);
+          videoNodeRef.current.currentTime = newTime;
+          setVideoCurrentTime(newTime);
+        }
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          const newTime = Math.max(0, videoCurrentTime - 10);
+          videoNodeRef.current.currentTime = newTime;
+          setVideoCurrentTime(newTime);
+        }
+      }
     };
 
     if (isOpen) {
@@ -129,11 +154,23 @@ const GalleryLightbox = ({ media, isOpen, onClose, onNext, onPrev, currentIndex,
   const handleSeek = (e) => {
     if (videoNodeRef.current && videoDuration) {
       const rect = e.currentTarget.getBoundingClientRect();
-      const pos = (e.clientX - rect.left) / rect.width;
+      const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
       const newTime = pos * videoDuration;
       videoNodeRef.current.currentTime = newTime;
       setVideoCurrentTime(newTime);
     }
+  };
+
+  // Add mouse move handler for hover preview (optional enhancement)
+  const handleProgressHover = (e) => {
+    if (videoDuration) {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+      const hoverTime = pos * videoDuration;
+      // You could show a preview tooltip here
+      return hoverTime;
+    }
+    return 0;
   };
 
   const handleVolumeChange = (e) => {
@@ -254,16 +291,53 @@ const GalleryLightbox = ({ media, isOpen, onClose, onNext, onPrev, currentIndex,
                   {/* Video Controls */}
                   {mediaLoaded && (
                     <div className="w-full bg-black/60 backdrop-blur-sm rounded-b-lg p-3">
-                      {/* Progress Bar */}
+                      {/* Modern Progress Bar */}
                       <div 
-                        className="w-full h-2 bg-gray-600 rounded-full mb-3 cursor-pointer group"
+                        className="modern-progress-bar w-full h-1.5 bg-white/20 rounded-full mb-3 cursor-pointer group relative overflow-hidden"
                         onClick={handleSeek}
                       >
-                        <div className="h-full bg-primary-500 rounded-full relative">
-                          <div 
-                            className="h-full bg-primary-500 rounded-full transition-all duration-150"
-                            style={{ width: `${videoDuration > 0 ? (videoCurrentTime / videoDuration) * 100 : 0}%` }}
-                          />
+                        {/* Background Track */}
+                        <div className="modern-progress-track absolute inset-0 bg-white/10 rounded-full"></div>
+                        
+                        {/* Buffer/Loading Track */}
+                        <div 
+                          className="absolute inset-0 bg-white/20 rounded-full opacity-30 transition-all duration-300"
+                          style={{ width: `${videoBuffered}%` }}
+                        ></div>
+                        
+                        {/* Progress Track */}
+                        <div 
+                          className="modern-progress-fill absolute top-0 left-0 h-full bg-gradient-to-r from-primary-400 to-primary-500 rounded-full transition-all duration-200 ease-out shadow-sm"
+                          style={{ width: `${videoDuration > 0 ? (videoCurrentTime / videoDuration) * 100 : 0}%` }}
+                        >
+                          {/* Glow effect */}
+                          <div className="absolute inset-0 bg-gradient-to-r from-primary-300 to-primary-400 rounded-full opacity-60 blur-sm"></div>
+                        </div>
+                        
+                        {/* Interactive Thumb */}
+                        <div 
+                          className="modern-progress-thumb absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-200 border-2 border-primary-500 cursor-grab active:cursor-grabbing hover:scale-110"
+                          style={{ 
+                            left: `calc(${videoDuration > 0 ? (videoCurrentTime / videoDuration) * 100 : 0}% - 6px)`,
+                            transform: 'translateY(-50%)'
+                          }}
+                        >
+                          {/* Inner dot for better visibility */}
+                          <div className="absolute inset-1 bg-primary-500 rounded-full"></div>
+                        </div>
+                        
+                        {/* Hover Effect Track */}
+                        <div className="absolute inset-0 bg-white/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+                        
+                        {/* Time tooltip on hover */}
+                        <div 
+                          className="modern-progress-tooltip absolute -top-8 bg-black/80 text-white text-xs px-2 py-1 rounded pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200 font-mono"
+                          style={{ 
+                            left: `calc(${videoDuration > 0 ? (videoCurrentTime / videoDuration) * 100 : 0}% - 20px)`,
+                            transform: 'translateX(-50%)'
+                          }}
+                        >
+                          {formatTime(videoCurrentTime)}
                         </div>
                       </div>
 
@@ -310,15 +384,32 @@ const GalleryLightbox = ({ media, isOpen, onClose, onNext, onPrev, currentIndex,
                                 </svg>
                               )}
                             </button>
-                            <input
-                              type="range"
-                              min="0"
-                              max="1"
-                              step="0.1"
-                              value={isMuted ? 0 : volume}
-                              onChange={handleVolumeChange}
-                              className="w-20 h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer slider"
-                            />
+                            {/* Modern Volume Slider */}
+                            <div className="relative w-20 h-1 bg-white/20 rounded-full cursor-pointer group">
+                              <input
+                                type="range"
+                                min="0"
+                                max="1"
+                                step="0.01"
+                                value={isMuted ? 0 : volume}
+                                onChange={handleVolumeChange}
+                                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                              />
+                              {/* Volume Track */}
+                              <div className="absolute inset-0 bg-white/10 rounded-full"></div>
+                              <div 
+                                className="absolute top-0 left-0 h-full bg-gradient-to-r from-white/60 to-white/80 rounded-full transition-all duration-200"
+                                style={{ width: `${(isMuted ? 0 : volume) * 100}%` }}
+                              ></div>
+                              {/* Volume Thumb */}
+                              <div 
+                                className="absolute top-1/2 -translate-y-1/2 w-2 h-2 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-all duration-200 shadow-sm"
+                                style={{ 
+                                  left: `calc(${(isMuted ? 0 : volume) * 100}% - 4px)`,
+                                  transform: 'translateY(-50%)'
+                                }}
+                              ></div>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -417,8 +508,8 @@ const GalleryLightbox = ({ media, isOpen, onClose, onNext, onPrev, currentIndex,
       </div>
 
       {/* Keyboard Instructions */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/50 text-white px-4 py-2 rounded-full text-sm">
-        ESC برای بستن • ← → برای حرکت {isVideo && '• Space برای پخش/توقف'}
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/50 text-white px-4 py-2 rounded-full text-sm backdrop-blur-sm">
+        ESC برای بستن • ← → برای حرکت {isVideo && '• Space برای پخش/توقف • ↑ ↓ برای جستجو'}
       </div>
     </div>
   );
