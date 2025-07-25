@@ -1,0 +1,179 @@
+/* Enhanced Video Controls Styles */
+
+.videoControls {
+  direction: ltr;
+  font-feature-settings: 'tnum' on, 'lnum' on; /* Tabular numbers */
+  backdrop-filter: blur(16px);
+  background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.7), transparent);
+}
+
+.videoControls.rtl {
+  direction: rtl;
+}
+
+/* Enhanced progress bar */
+.progressContainer {
+  touch-action: manipulation; /* Better touch support */
+  backdrop-filter: blur(4px);
+}
+
+.progressContainer:active .progressThumb {
+  transform: translateY(-50%) scale(1.5);
+  opacity: 1;
+  box-shadow: 0 0 0 4px rgba(52, 211, 153, 0.4), 0 6px 16px rgba(0, 0, 0, 0.5);
+}
+
+.progressThumb {
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Enhanced volume slider animation */
+.volumeSlider {
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(8px);
+}
+
+.volumeSlider:hover {
+  width: 7rem !important; /* 28 * 0.25rem = 7rem */
+}
+
+/* Enhanced button hover effects */
+.controlButton {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(8px);
+}
+
+.controlButton:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.controlButton:active {
+  transform: scale(0.95);
+}
+
+/* Enhanced focus styles for accessibility */
+.controlButton:focus-visible {
+  outline: 2px solid #34d399;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(52, 211, 153, 0.3);
+}
+
+/* Enhanced time display */
+.timeDisplay {
+  backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+}
+
+.timeDisplay:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(52, 211, 153, 0.3);
+}
+
+/* Smooth animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.videoControls > * {
+  animation: fadeInUp 0.3s ease;
+}
+
+/* Enhanced mobile responsiveness */
+@media (max-width: 640px) {
+  .videoControls {
+    padding: 1rem;
+  }
+  
+  .controlButton {
+    padding: 0.75rem;
+  }
+  
+  .volumeSlider:hover {
+    width: 5rem !important;
+  }
+  
+  .timeDisplay {
+    font-size: 0.875rem;
+    padding: 0.5rem 0.75rem;
+  }
+}
+.timeDisplay {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.025em;
+}
+
+/* Tooltip arrow */
+.tooltipArrow {
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.1));
+}
+
+/* RTL-specific styles */
+.rtl .progressFill {
+  transform-origin: right center;
+}
+
+.rtl .volumeFill {
+  transform-origin: right center;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .progressContainer {
+    height: 10px !important; /* Larger touch target on mobile */
+  }
+  
+  .progressThumb {
+    width: 18px !important;
+    height: 18px !important;
+    opacity: 1 !important; /* Always visible on mobile */
+  }
+  
+  .controlButton {
+    padding: 12px !important; /* Larger touch targets */
+  }
+  
+  .volumeSlider {
+    width: 4rem !important; /* Always visible on mobile */
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .progressContainer {
+    background-color: rgba(255, 255, 255, 0.3) !important;
+  }
+  
+  .progressFill {
+    background: #22c55e !important;
+  }
+  
+  .progressThumb {
+    border-width: 3px !important;
+    background-color: white !important;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .progressContainer,
+  .progressThumb,
+  .controlButton,
+  .volumeSlider {
+    transition: none !important;
+  }
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .videoControls {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+}
