@@ -15,9 +15,18 @@ const ProgressBar = ({
   const [tooltipTime, setTooltipTime] = useState(0);
   const [tooltipX, setTooltipX] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [dragProgress, setDragProgress] = useState(0);
   const progressRef = useRef(null);
 
   const progress = videoDuration ? (videoCurrentTime / videoDuration) * 100 : 0;
+  const displayProgress = isDragging ? dragProgress : progress;
+
+  // Sync drag progress with actual progress when not dragging
+  useEffect(() => {
+    if (!isDragging) {
+      setDragProgress(progress);
+    }
+  }, [progress, isDragging]);
 
   const handleMouseMove = (e) => {
     if (!progressRef.current || !videoDuration) return;
@@ -29,6 +38,11 @@ const ProgressBar = ({
     setTooltipTime(time);
     setTooltipX(e.clientX - rect.left);
     setShowTooltip(true);
+    
+    // Update drag progress for visual feedback
+    if (isDragging) {
+      setDragProgress(pos * 100);
+    }
   };
 
   const handleMouseLeave = () => {
@@ -39,24 +53,74 @@ const ProgressBar = ({
   const handleMouseDown = (e) => {
     e.preventDefault();
     setIsDragging(true);
+    
+    // Set initial drag progress
+    if (progressRef.current && videoDuration) {
+      const rect = progressRef.current.getBoundingClientRect();
+      const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+      setDragProgress(pos * 100);
+    }
+    
     handleSeek(e);
   };
 
   const handleTouchStart = (e) => {
     e.preventDefault();
     setIsDragging(true);
+    
+    // Set initial drag progress for touch
+    if (progressRef.current && videoDuration) {
+      const touch = e.touches[0];
+      const rect = progressRef.current.getBoundingClientRect();
+      const pos = Math.max(0, Math.min(1, (touch.clientX - rect.left) / rect.width));
+      setDragProgress(pos * 100);
+    }
+    
     const touch = e.touches[0];
     const mouseEvent = { clientX: touch.clientX, currentTarget: e.currentTarget };
     handleSeek(mouseEvent);
   };
 
   useEffect(() => {
-    const handleMouseUp = () => setIsDragging(false);
-    const handleTouchEnd = () => setIsDragging(false);
+    const handleMouseUp = () => {
+      if (isDragging && progressRef.current && videoDuration) {
+        // Ensure final seek position is set on mouse up
+        const finalProgress = dragProgress / 100;
+        const finalTime = finalProgress * videoDuration;
+        
+        // Create a final seek event
+        const finalSeekEvent = {
+          clientX: (dragProgress / 100) * progressRef.current.getBoundingClientRect().width + progressRef.current.getBoundingClientRect().left,
+          currentTarget: progressRef.current
+        };
+        handleSeek(finalSeekEvent);
+      }
+      setIsDragging(false);
+    };
+    
+    const handleTouchEnd = () => {
+      if (isDragging && progressRef.current && videoDuration) {
+        // Ensure final seek position is set on touch end
+        const finalProgress = dragProgress / 100;
+        const finalTime = finalProgress * videoDuration;
+        
+        // Create a final seek event
+        const finalSeekEvent = {
+          clientX: (dragProgress / 100) * progressRef.current.getBoundingClientRect().width + progressRef.current.getBoundingClientRect().left,
+          currentTarget: progressRef.current
+        };
+        handleSeek(finalSeekEvent);
+      }
+      setIsDragging(false);
+    };
     
     const handleGlobalMouseMove = (e) => {
       if (isDragging && progressRef.current) {
-        // Create a synthetic event with currentTarget for global moves
+        // Update drag progress for immediate visual feedback
+        const rect = progressRef.current.getBoundingClientRect();
+        const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+        setDragProgress(pos * 100);
+        
         const syntheticEvent = {
           ...e,
           currentTarget: progressRef.current
@@ -68,23 +132,33 @@ const ProgressBar = ({
     const handleGlobalTouchMove = (e) => {
       if (isDragging && progressRef.current) {
         const touch = e.touches[0];
-        const mouseEvent = { clientX: touch.clientX, currentTarget: progressRef.current };
+        
+        // Update drag progress for immediate visual feedback during touch
+        const rect = progressRef.current.getBoundingClientRect();
+        const pos = Math.max(0, Math.min(1, (touch.clientX - rect.left) / rect.width));
+        setDragProgress(pos * 100);
+        
+        const mouseEvent = { 
+          clientX: touch.clientX, 
+          currentTarget: progressRef.current,
+          preventDefault: () => e.preventDefault()
+        };
         handleSeek(mouseEvent);
       }
     };
 
     if (isDragging) {
-      document.addEventListener('mouseup', handleMouseUp);
-      document.addEventListener('touchend', handleTouchEnd);
       document.addEventListener('mousemove', handleGlobalMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
       document.addEventListener('touchmove', handleGlobalTouchMove, { passive: false });
+      document.addEventListener('touchend', handleTouchEnd);
     }
 
     return () => {
-      document.removeEventListener('mouseup', handleMouseUp);
-      document.removeEventListener('touchend', handleTouchEnd);
       document.removeEventListener('mousemove', handleGlobalMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
       document.removeEventListener('touchmove', handleGlobalTouchMove);
+      document.removeEventListener('touchend', handleTouchEnd);
     };
   }, [isDragging, handleSeek]);
 
@@ -110,7 +184,7 @@ const ProgressBar = ({
         {/* Current progress with enhanced green gradient */}
         <div 
           className="absolute inset-0 bg-gradient-to-r from-green-400 via-green-500 to-emerald-500 rounded-full transition-all duration-300 shadow-lg shadow-green-500/30"
-          style={{ width: `${progress}%` }}
+          style={{ width: `${displayProgress}%` }}
         />
         
         {/* Volume thumb with glow effect - responsive */}
@@ -121,7 +195,7 @@ const ProgressBar = ({
             hover:scale-110 hover:shadow-green-400/40 hover:ring-2 hover:ring-green-300/40
           `}
           style={{ 
-            left: `${progress}%`,
+            left: `${displayProgress}%`,
             top: '50%',
             // Always use the same translate for all states
             transform: 'translate(-50%, -50%)',
