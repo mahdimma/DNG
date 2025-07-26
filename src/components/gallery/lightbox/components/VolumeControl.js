@@ -57,7 +57,7 @@ const VolumeSlider = ({
     >
       <div 
         ref={volumeRef}
-        className="relative h-6 md:h-8 bg-gray-800/40 backdrop-blur-sm rounded-lg md:rounded-xl cursor-pointer group/slider border border-green-500/20 hover:border-green-400/40 transition-all duration-300"
+        className="relative h-1 md:h-2 bg-gray-800/40 backdrop-blur-sm rounded-lg md:rounded-xl cursor-pointer group/slider border border-green-500/20 hover:border-green-400/40 transition-all duration-300"
         onMouseDown={onMouseDown}
         onTouchStart={onTouchStart}
       >
@@ -69,15 +69,20 @@ const VolumeSlider = ({
         
         {/* Volume thumb with glow effect - responsive */}
         <div 
-          className={`absolute w-6 h-6 md:w-8 md:h-8 bg-white rounded-full shadow-xl transition-all duration-300 border-2 border-green-400 ${
-            isDragging ? 'scale-110 shadow-green-500/50' : 'group-hover/slider:scale-105'
-          }`}
+          className={`absolute w-2 h-2 md:w-3 md:h-3 bg-white rounded-full shadow-xl transition-all duration-300 border-2 border-green-400 
+            ${isDragging ? 'scale-110 shadow-green-500/50 ring-4 ring-green-400/30 translate-x-[-50%] translate-y-[-50%]' : ''}
+            group-hover/slider:scale-105 translate-x-[-50%] translate-y-[-50%]
+            hover:scale-110 hover:shadow-green-400/40 hover:ring-2 hover:ring-green-300/40
+          `}
           style={{ 
             left: `${volumePercentage}%`,
             top: '50%',
+            // Always use the same translate for all states
             transform: 'translate(-50%, -50%)',
+            // Dragged state: extra glow
             ...(isDragging && {
-              boxShadow: '0 0 15px rgba(34, 197, 94, 0.6)'
+              boxShadow: '0 0 15px 4px rgba(34, 197, 94, 0.6)',
+              borderColor: '#22c55e', // green-500
             })
           }}
         />
@@ -189,33 +194,32 @@ const VolumeControl = ({
 
   const handleSliderChange = (e) => {
     // Ensure we have a valid target element
-    const targetElement = e.currentTarget || volumeRef.current;
+    const targetElement = volumeRef.current;
     if (!targetElement || typeof targetElement.getBoundingClientRect !== 'function') {
       return;
     }
-    
+
     const rect = targetElement.getBoundingClientRect();
     let clientX;
-    
+
     // Handle both mouse and touch events
     if (e.touches && e.touches[0]) {
       clientX = e.touches[0].clientX;
-    } else if (e.changedTouches && e.changedTouches[0]) {
-      clientX = e.changedTouches[0].clientX;  
     } else if (e.clientX !== undefined) {
       clientX = e.clientX;
     } else {
       return; // No valid clientX found
     }
-    
+
     const pos = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
     const validVolume = Math.max(0, Math.min(1, pos));
-    
+
     handleVolumeChange({ target: { value: validVolume } });
     setShowVolumeTooltip(true);
-    
+
     // Hide tooltip after a delay
-    setTimeout(() => setShowVolumeTooltip(false), 1000);
+    clearTimeout(helpTimeout);
+    setHelpTimeout(setTimeout(() => setShowVolumeTooltip(false), 1000));
   };
 
   const handleMouseDown = (e) => {
@@ -232,42 +236,20 @@ const VolumeControl = ({
 
   useEffect(() => {
     const handleMouseUp = () => setIsDragging(false);
-    const handleTouchEnd = () => setIsDragging(false);
-    
-    const handleGlobalMouseMove = (e) => {
-      if (isDragging && volumeRef.current) {
-        // Create a synthetic event with currentTarget for global moves
-        const syntheticEvent = {
-          ...e,
-          currentTarget: volumeRef.current
-        };
-        handleSliderChange(syntheticEvent);
-      }
-    };
-    
-    const handleGlobalTouchMove = (e) => {
-      if (isDragging && volumeRef.current) {
-        // Create a synthetic event with currentTarget for global moves
-        const syntheticEvent = {
-          ...e,
-          currentTarget: volumeRef.current
-        };
-        handleSliderChange(syntheticEvent);
+    const handleMouseMove = (e) => {
+      if (isDragging) {
+        handleSliderChange(e);
       }
     };
 
     if (isDragging) {
+      document.addEventListener('mousemove', handleMouseMove);
       document.addEventListener('mouseup', handleMouseUp);
-      document.addEventListener('touchend', handleTouchEnd);
-      document.addEventListener('mousemove', handleGlobalMouseMove);
-      document.addEventListener('touchmove', handleGlobalTouchMove);
     }
 
     return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
-      document.removeEventListener('touchend', handleTouchEnd);
-      document.removeEventListener('mousemove', handleGlobalMouseMove);
-      document.removeEventListener('touchmove', handleGlobalTouchMove);
     };
   }, [isDragging]);
 

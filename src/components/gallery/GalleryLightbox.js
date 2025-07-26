@@ -80,12 +80,16 @@ const VideoPlayer = forwardRef(({ media, onLoad, onError, mediaLoaded }, ref) =>
   };
 
   const handleSeek = (e) => {
-    if (videoNodeRef.current && videoDuration) {
+    if (videoNodeRef.current && videoDuration && isFinite(videoDuration)) {
       const rect = e.currentTarget.getBoundingClientRect();
       const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
       const newTime = pos * videoDuration;
-      videoNodeRef.current.currentTime = newTime;
-      setVideoCurrentTime(newTime);
+      
+      // Ensure newTime is a finite number before assigning
+      if (isFinite(newTime) && newTime >= 0) {
+        videoNodeRef.current.currentTime = newTime;
+        setVideoCurrentTime(newTime);
+      }
     }
   };
 
