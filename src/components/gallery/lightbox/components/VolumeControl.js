@@ -74,7 +74,7 @@ const VolumeSlider = ({
         {/* Volume thumb with glow effect - responsive */}
         <div 
           className={`absolute top-1/2 w-4 h-4 md:w-5 md:h-5 bg-white rounded-full shadow-xl transform -translate-y-1/2 transition-all duration-300 border-2 border-green-400 ${
-            isDragging ? 'scale-110 md:scale-125 shadow-green-500/50' : 'group-hover/slider:scale-105 md:group-hover/slider:scale-110'
+            isDragging ? 'scale-130 md:scale-145 shadow-green-500/50' : 'group-hover/slider:scale-105 md:group-hover/slider:scale-110'
           }`}
           style={{ 
             left: `${volumePercentage}%`,

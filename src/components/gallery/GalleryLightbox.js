@@ -80,12 +80,16 @@ const VideoPlayer = forwardRef(({ media, onLoad, onError, mediaLoaded }, ref) =>
   };
 
   const handleSeek = (e) => {
-    if (videoNodeRef.current && videoDuration) {
+    if (videoNodeRef.current && videoDuration && isFinite(videoDuration) && videoDuration > 0) {
       const rect = e.currentTarget.getBoundingClientRect();
       const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
       const newTime = pos * videoDuration;
-      videoNodeRef.current.currentTime = newTime;
-      setVideoCurrentTime(newTime);
+      
+      // Additional safety check for the calculated time
+      if (isFinite(newTime) && newTime >= 0) {
+        videoNodeRef.current.currentTime = newTime;
+        setVideoCurrentTime(newTime);
+      }
     }
   };
 
@@ -110,17 +114,21 @@ const VideoPlayer = forwardRef(({ media, onLoad, onError, mediaLoaded }, ref) =>
   useImperativeHandle(ref, () => ({
     togglePlay,
     seekForward: (seconds) => {
-      if (videoNodeRef.current && videoDuration) {
+      if (videoNodeRef.current && videoDuration && isFinite(videoDuration) && videoDuration > 0) {
         const newTime = Math.min(videoDuration, videoCurrentTime + seconds);
-        videoNodeRef.current.currentTime = newTime;
-        setVideoCurrentTime(newTime);
+        if (isFinite(newTime) && newTime >= 0) {
+          videoNodeRef.current.currentTime = newTime;
+          setVideoCurrentTime(newTime);
+        }
       }
     },
     seekBackward: (seconds) => {
-      if (videoNodeRef.current) {
+      if (videoNodeRef.current && isFinite(videoCurrentTime)) {
         const newTime = Math.max(0, videoCurrentTime - seconds);
-        videoNodeRef.current.currentTime = newTime;
-        setVideoCurrentTime(newTime);
+        if (isFinite(newTime) && newTime >= 0) {
+          videoNodeRef.current.currentTime = newTime;
+          setVideoCurrentTime(newTime);
+        }
       }
     }
   }));
