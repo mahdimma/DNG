@@ -90,7 +90,8 @@ const VideoPlayer = forwardRef(({ media, onLoad, onError, mediaLoaded }, ref) =>
   };
 
   const handleVolumeChange = (e) => {
-    const newVolume = parseFloat(e.target.value);
+    const rawValue = parseFloat(e.target.value);
+    const newVolume = isNaN(rawValue) ? 0 : Math.max(0, Math.min(1, rawValue));
     setVolume(newVolume);
     if (videoNodeRef.current) {
       videoNodeRef.current.volume = newVolume;
@@ -125,11 +126,15 @@ const VideoPlayer = forwardRef(({ media, onLoad, onError, mediaLoaded }, ref) =>
   }));
 
   return (
-    <div className="relative w-full" style={{ maxWidth: '1200px' }}>
+    <div className="relative w-full h-full flex items-center justify-center">
       <video
         ref={videoRef}
-        className="w-full h-auto object-contain"
-        style={{ maxHeight: '80vh', display: mediaLoaded ? 'block' : 'none' }}
+        className="w-full h-full max-w-full max-h-full object-contain"
+        style={{ 
+          minHeight: '300px',
+          maxHeight: '85vh',
+          display: mediaLoaded ? 'block' : 'none' 
+        }}
         onError={onError}
         poster={media.thumbnail}
         controls={false}
@@ -235,12 +240,12 @@ const GalleryLightbox = ({ media, isOpen, onClose, onNext, onPrev, currentIndex,
         isVideo={isVideo}
       />
 
-      <div className="w-full h-full flex flex-col md:flex-row items-center justify-center gap-4 pt-16 md:pt-0">
-        <div className="relative w-full md:w-3/4 h-auto md:h-full flex items-center justify-center">
+      <div className="w-full h-full flex flex-col lg:flex-row items-center justify-center gap-2 lg:gap-4 pt-12 md:pt-0">
+        <div className="relative w-full lg:w-3/4 h-full flex items-center justify-center min-h-0">
           {!mediaLoaded && !mediaError && <LoadingSpinner />}
 
           {!mediaError ? (
-            <div className="relative w-full h-full flex flex-col items-center justify-center">
+            <div className="relative w-full h-full flex flex-col items-center justify-center min-h-0">
               {isVideo ? (
                 <VideoPlayer
                   ref={videoPlayerRef}
@@ -271,11 +276,13 @@ const GalleryLightbox = ({ media, isOpen, onClose, onNext, onPrev, currentIndex,
         </div>
 
         {mediaLoaded && (
-          <InfoPanel
-            media={media}
-            isVideo={isVideo}
-            containerRef={infoContainerRef}
-          />
+          <div className="w-full lg:w-1/4 h-auto lg:h-full lg:max-h-full overflow-hidden">
+            <InfoPanel
+              media={media}
+              isVideo={isVideo}
+              containerRef={infoContainerRef}
+            />
+          </div>
         )}
       </div>
 
