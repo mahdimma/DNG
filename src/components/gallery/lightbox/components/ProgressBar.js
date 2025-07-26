@@ -21,13 +21,6 @@ const ProgressBar = ({
   const progress = videoDuration ? (videoCurrentTime / videoDuration) * 100 : 0;
   const displayProgress = isDragging ? dragProgress : progress;
 
-  // Sync drag progress with actual progress when not dragging
-  useEffect(() => {
-    if (!isDragging) {
-      setDragProgress(progress);
-    }
-  }, [progress, isDragging]);
-
   const handleMouseMove = (e) => {
     if (!progressRef.current || !videoDuration) return;
     
