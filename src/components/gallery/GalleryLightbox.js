@@ -4,7 +4,7 @@ import ErrorDisplay from "./lightbox/ErrorDisplay";
 import NavigationControls from "./lightbox/NavigationControls";
 import InfoPanel from "./lightbox/InfoPanel";
 import ImageDisplay from "./lightbox/ImageDisplay";
-import KeyboardInstructions from "./lightbox/KeyboardInstructions";
+import KeyboardShortcuts from "./lightbox/KeyboardShortcuts";
 import VideoControls from "./lightbox/VideoControls";
 import { isMediaVideo } from "./lightbox/utils";
 
@@ -279,7 +279,7 @@ const GalleryLightbox = ({ media, isOpen, onClose, onNext, onPrev, currentIndex,
         )}
       </div>
 
-      <KeyboardInstructions isVideo={isVideo} />
+      <KeyboardShortcuts isVideo={isVideo} />
     </div>
   );
 };

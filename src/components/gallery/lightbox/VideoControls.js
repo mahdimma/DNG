@@ -25,6 +25,7 @@ const ProgressBar = ({
   const [showTooltip, setShowTooltip] = useState(false);
   const [tooltipTime, setTooltipTime] = useState(0);
   const [tooltipX, setTooltipX] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
   const progressRef = useRef(null);
 
   const progress = videoDuration ? (videoCurrentTime / videoDuration) * 100 : 0;
@@ -70,40 +71,48 @@ const ProgressBar = ({
   }, [isDragging, handleSeek]);
 
   return (
-    <div className="mb-4 relative">
+    <div className="mb-6 relative group">
       <div 
         ref={progressRef}
-        className="relative h-2 bg-white/20 rounded-full cursor-pointer group transition-all duration-200 hover:h-3"
+        className={`relative h-1.5 bg-white/15 rounded-full cursor-pointer transition-all duration-300 ${
+          isHovered || isDragging ? 'h-2 shadow-lg shadow-green-500/20' : ''
+        }`}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         onMouseDown={handleMouseDown}
+        onMouseEnter={() => setIsHovered(true)}
       >
         {/* Buffered progress */}
         <div 
-          className="absolute inset-0 bg-white/30 rounded-full transition-all duration-300"
+          className="absolute inset-0 bg-white/25 rounded-full transition-all duration-300"
           style={{ width: `${videoBuffered}%` }}
         />
         
-        {/* Current progress */}
+        {/* Current progress with enhanced green gradient */}
         <div 
-          className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-emerald-500 rounded-full transition-all duration-200"
+          className="absolute inset-0 bg-gradient-to-r from-green-400 via-green-500 to-emerald-500 rounded-full transition-all duration-300 shadow-lg shadow-green-500/30"
           style={{ width: `${progress}%` }}
         />
         
-        {/* Progress thumb */}
+        {/* Enhanced progress thumb */}
         <div 
-          className="absolute top-1/2 w-4 h-4 bg-white rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none"
+          className={`absolute top-1/2 w-4 h-4 bg-white rounded-full shadow-xl transition-all duration-300 pointer-events-none border-2 border-green-400 ${
+            isHovered || isDragging ? 'opacity-100 scale-110 shadow-green-500/50' : 'opacity-0'
+          }`}
           style={{ 
             left: `${progress}%`, 
             transform: 'translateY(-50%) translateX(-50%)',
-            ...(isDragging && { opacity: 1, transform: 'translateY(-50%) translateX(-50%) scale(1.2)' })
+            ...(isDragging && { 
+              transform: 'translateY(-50%) translateX(-50%) scale(1.3)',
+              boxShadow: '0 0 20px rgba(34, 197, 94, 0.6)'
+            })
           }}
         />
 
-        {/* Time tooltip */}
+        {/* Enhanced time tooltip */}
         {showTooltip && (
           <div 
-            className="absolute -top-10 bg-black/80 text-white px-2 py-1 rounded text-xs whitespace-nowrap pointer-events-none transition-opacity duration-200"
+            className="absolute -top-12 bg-gray-900/95 backdrop-blur-sm text-white px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap pointer-events-none transition-all duration-200 border border-green-500/30"
             style={{ 
               left: `${tooltipX}px`, 
               transform: 'translateX(-50%)',
@@ -111,7 +120,7 @@ const ProgressBar = ({
             }}
           >
             {formatTime(tooltipTime)}
-            <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black/80" />
+            <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900/95" />
           </div>
         )}
       </div>
@@ -120,43 +129,61 @@ const ProgressBar = ({
 };
 
 /**
- * Modern Play Button Component
+ * Enhanced Play Button Component
  */
 const PlayButton = ({ isPlaying, togglePlay }) => {
+  const [isPressed, setIsPressed] = useState(false);
+
   return (
     <button
       onClick={togglePlay}
-      className="flex items-center justify-center w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full transition-all duration-200 group"
+      onMouseDown={() => setIsPressed(true)}
+      onMouseUp={() => setIsPressed(false)}
+      onMouseLeave={() => setIsPressed(false)}
+      className={`relative flex items-center justify-center w-14 h-14 bg-gradient-to-br from-green-500 to-green-600 hover:from-green-400 hover:to-green-500 rounded-full transition-all duration-300 group shadow-lg hover:shadow-xl hover:shadow-green-500/25 ${
+        isPressed ? 'scale-95' : 'hover:scale-105'
+      } border border-green-400/30`}
       aria-label={isPlaying ? 'توقف' : 'پخش'}
     >
+      {/* Ripple effect */}
+      <div className="absolute inset-0 rounded-full bg-white/20 scale-0 group-active:scale-100 transition-transform duration-200" />
+      
       {isPlaying ? (
-        <svg className="w-5 h-5 text-white group-hover:scale-110 transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20">
+        <svg className="w-6 h-6 text-white group-hover:scale-110 transition-transform duration-200 relative z-10" fill="currentColor" viewBox="0 0 20 20">
           <path d="M5.5 3.5A1.5 1.5 0 0 1 7 2h6a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 13 18H7a1.5 1.5 0 0 1-1.5-1.5v-13Z"/>
         </svg>
       ) : (
-        <svg className="w-5 h-5 text-white ml-0.5 group-hover:scale-110 transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20">
+        <svg className="w-6 h-6 text-white ml-0.5 group-hover:scale-110 transition-transform duration-200 relative z-10" fill="currentColor" viewBox="0 0 20 20">
           <path d="M6.3 2.841A1.5 1.5 0 0 0 4 4.11v11.78a1.5 1.5 0 0 0 2.3 1.269l9.344-5.89a1.5 1.5 0 0 0 0-2.538L6.3 2.84Z"/>
         </svg>
       )}
+      
+      {/* Glow effect */}
+      <div className="absolute inset-0 rounded-full bg-green-400/30 blur-lg scale-150 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
     </button>
   );
 };
 
 /**
- * Modern Time Display Component
+ * Enhanced Time Display Component
  */
 const TimeDisplay = ({ videoCurrentTime, videoDuration, rtl, formatTime }) => {
   return (
-    <div className="flex items-center gap-1 text-white text-sm font-mono bg-black/20 px-3 py-1.5 rounded-full border border-white/10 backdrop-blur-sm">
-      <span className="tabular-nums">{formatTime(videoCurrentTime)}</span>
-      <span className="text-white/60">/</span>
-      <span className="tabular-nums text-white/80">{formatTime(videoDuration)}</span>
+    <div className="flex items-center gap-2 text-white text-sm font-mono bg-gray-900/60 backdrop-blur-md px-4 py-2.5 rounded-xl border border-green-500/20 shadow-lg">
+      <div className="flex items-center gap-1">
+        <span className="tabular-nums font-semibold text-green-400">{formatTime(videoCurrentTime)}</span>
+        <span className="text-white/40 text-xs">/</span>
+        <span className="tabular-nums text-white/80">{formatTime(videoDuration)}</span>
+      </div>
+      
+      {/* Progress indicator */}
+      <div className="w-2 h-2 rounded-full bg-green-500 opacity-60 animate-pulse" />
     </div>
   );
 };
 
 /**
- * Modern Volume Control Component with enhanced UI
+ * Enhanced Volume Control Component with modern UI/UX
  */
 const VolumeControl = ({ 
   volume, 
@@ -167,80 +194,116 @@ const VolumeControl = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [showVolumeTooltip, setShowVolumeTooltip] = useState(false);
+  const [showHelp, setShowHelp] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
+  const [helpTimeout, setHelpTimeout] = useState(null);
   const volumeRef = useRef(null);
   const buttonRef = useRef(null);
 
-  // Keyboard controls for volume
+  // Enhanced keyboard controls with better UX feedback
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (document.activeElement === buttonRef.current) {
+        let newVolume;
         switch (e.key) {
           case 'ArrowUp':
           case 'ArrowRight':
             e.preventDefault();
-            const newVolumeUp = Math.min(1, volume + 0.1);
-            handleVolumeChange({ target: { value: newVolumeUp } });
+            newVolume = Math.min(1, volume + 0.05);
+            handleVolumeChange({ target: { value: newVolume } });
             setShowVolumeTooltip(true);
-            setTimeout(() => setShowVolumeTooltip(false), 1000);
+            setShowHelp(true);
+            clearTimeout(helpTimeout);
+            setHelpTimeout(setTimeout(() => {
+              setShowVolumeTooltip(false);
+              setShowHelp(false);
+            }, 2000));
             break;
           case 'ArrowDown':
           case 'ArrowLeft':
             e.preventDefault();
-            const newVolumeDown = Math.max(0, volume - 0.1);
-            handleVolumeChange({ target: { value: newVolumeDown } });
+            newVolume = Math.max(0, volume - 0.05);
+            handleVolumeChange({ target: { value: newVolume } });
             setShowVolumeTooltip(true);
-            setTimeout(() => setShowVolumeTooltip(false), 1000);
+            setShowHelp(true);
+            clearTimeout(helpTimeout);
+            setHelpTimeout(setTimeout(() => {
+              setShowVolumeTooltip(false);
+              setShowHelp(false);
+            }, 2000));
             break;
           case 'Home':
             e.preventDefault();
             handleVolumeChange({ target: { value: 1 } });
             setShowVolumeTooltip(true);
-            setTimeout(() => setShowVolumeTooltip(false), 1000);
+            setShowHelp(true);
+            clearTimeout(helpTimeout);
+            setHelpTimeout(setTimeout(() => {
+              setShowVolumeTooltip(false);
+              setShowHelp(false);
+            }, 1500));
             break;
           case 'End':
             e.preventDefault();
             handleVolumeChange({ target: { value: 0 } });
             setShowVolumeTooltip(true);
-            setTimeout(() => setShowVolumeTooltip(false), 1000);
+            setShowHelp(true);
+            clearTimeout(helpTimeout);
+            setHelpTimeout(setTimeout(() => {
+              setShowVolumeTooltip(false);
+              setShowHelp(false);
+            }, 1500));
             break;
           case ' ':
           case 'Enter':
             e.preventDefault();
             toggleMute();
+            setShowVolumeTooltip(true);
+            clearTimeout(helpTimeout);
+            setHelpTimeout(setTimeout(() => setShowVolumeTooltip(false), 1000));
+            break;
+          case '?':
+          case '/':
+            e.preventDefault();
+            setShowHelp(!showHelp);
+            clearTimeout(helpTimeout);
+            setHelpTimeout(setTimeout(() => setShowHelp(false), 5000));
             break;
         }
       }
     };
 
     document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [volume, handleVolumeChange, toggleMute]);
+    return () => {
+      clearTimeout(helpTimeout);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [volume, handleVolumeChange, toggleMute, showHelp, helpTimeout]);
 
-  // Get appropriate volume icon
+  // Enhanced volume icon with modern design
   const getVolumeIcon = () => {
     if (isMuted || volume === 0) {
       return (
         <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M3.63 3.63a.996.996 0 0 0-1.41 1.41L7.29 10.1 7 10.17v4.66c0 .45.54.67.85.35l2.79-2.79 2.79 2.79c.31.32.85.1.85-.35V11.5l6.29 6.29a.996.996 0 1 0 1.41-1.41L3.63 3.63zM16 7.83c1.38 1.38 2.27 3.24 2.27 5.17 0 1.93-.89 3.79-2.27 5.17l1.42 1.42C19.55 17.46 20.5 14.85 20.5 13s-.95-4.46-3.08-6.59L16 7.83zm-2.5 2.5c.48.48.77 1.1.77 1.67s-.29 1.19-.77 1.67l1.42 1.42C15.9 13.9 16.5 12.5 16.5 11s-.6-2.9-1.58-4.09l-1.42 1.42z"/>
+          <path d="M16.5 12A4.5 4.5 0 0 0 14.3 8.7l-1.4 1.4A2.5 2.5 0 0 1 14.5 12a2.5 2.5 0 0 1-1.6 2.3l1.4 1.4A4.5 4.5 0 0 0 16.5 12zM19 12a7 7 0 0 0-2.17-5.07l-1.42 1.42A5 5 0 0 1 17 12a5 5 0 0 1-1.59 3.65l1.42 1.42A7 7 0 0 0 19 12zM4.27 3L3 4.27L7.73 9H3v6h4l5 5v-6.73l4.25 4.25A7.17 7.17 0 0 1 14.3 19l1.42 1.42A9.12 9.12 0 0 0 18.7 17.27L21 19.54 22.27 18.27 4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
         </svg>
       );
     } else if (volume < 0.33) {
       return (
         <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M7 10.17v4.66c0 .45.54.67.85.35l2.79-2.79 2.79 2.79c.31.32.85.1.85-.35V6.17c0-.45-.54-.67-.85-.35L9.65 8.61 6.85 5.82c-.31-.32-.85-.1-.85.35v4zm5.5-.67c.48.48.77 1.1.77 1.67s-.29 1.19-.77 1.67l1.42 1.42C14.9 13.9 15.5 12.5 15.5 11s-.6-2.9-1.58-4.09l-1.42 1.42z"/>
+          <path d="M7 9v6h4l5 5V4l-5 5H7z"/>
         </svg>
       );
     } else if (volume < 0.66) {
       return (
         <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M5 10.17v4.66c0 .45.54.67.85.35l2.79-2.79 2.79 2.79c.31.32.85.1.85-.35V6.17c0-.45-.54-.67-.85-.35L7.65 8.61 4.85 5.82c-.31-.32-.85-.1-.85.35v4zm7.5-.67c.48.48.77 1.1.77 1.67s-.29 1.19-.77 1.67l1.42 1.42C14.9 13.9 15.5 12.5 15.5 11s-.6-2.9-1.58-4.09l-1.42 1.42z"/>
+          <path d="M18.5 12A4.5 4.5 0 0 0 16.3 8.7l-1.4 1.4A2.5 2.5 0 0 1 16.5 12a2.5 2.5 0 0 1-1.6 2.3l1.4 1.4A4.5 4.5 0 0 0 18.5 12zM5 9v6h4l5 5V4L9 9H5z"/>
         </svg>
       );
     } else {
       return (
         <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M3 10.17v4.66c0 .45.54.67.85.35l2.79-2.79 2.79 2.79c.31.32.85.1.85-.35V6.17c0-.45-.54-.67-.85-.35L5.65 8.61 2.85 5.82c-.31-.32-.85-.1-.85.35v4zm5.5-.67c.48.48.77 1.1.77 1.67s-.29 1.19-.77 1.67l1.42 1.42C11.9 13.9 12.5 12.5 12.5 11s-.6-2.9-1.58-4.09L9.5 8.33zm3-3c1.38 1.38 2.27 3.24 2.27 5.17 0 1.93-.89 3.79-2.27 5.17l1.42 1.42C15.05 17.46 16 14.85 16 13s-.95-4.46-3.08-6.59L11.5 7.83z"/>
+          <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14.3 8.7l-1.4 1.4A2.5 2.5 0 0 1 14.5 12a2.5 2.5 0 0 1-1.6 2.3l1.4 1.4A4.5 4.5 0 0 0 16.5 12zM19 12a7 7 0 0 0-2.17-5.07l-1.42 1.42A5 5 0 0 1 17 12a5 5 0 0 1-1.59 3.65l1.42 1.42A7 7 0 0 0 19 12z"/>
         </svg>
       );
     }
@@ -286,15 +349,17 @@ const VolumeControl = ({
 
   return (
     <div 
-      className="flex items-center gap-3 group"
+      className="flex items-center gap-4 group relative"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Mute/Unmute Button */}
+      {/* Enhanced Volume Button */}
       <button
         ref={buttonRef}
         onClick={toggleMute}
-        className="flex items-center justify-center w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full transition-all duration-200 relative"
+        className={`relative flex items-center justify-center w-12 h-12 bg-gray-800/60 backdrop-blur-md hover:bg-gray-700/70 rounded-xl transition-all duration-300 border ${
+          isMuted ? 'border-red-500/50 shadow-lg shadow-red-500/20' : 'border-green-500/30 hover:border-green-400/50'
+        } hover:scale-105 active:scale-95`}
         aria-label={isMuted ? 'صدا روشن' : 'صدا خاموش'}
         aria-pressed={isMuted}
         tabIndex={0}
@@ -302,14 +367,19 @@ const VolumeControl = ({
       >
         {getVolumeIcon()}
         
-        {/* Ripple effect on click */}
-        <div className="absolute inset-0 rounded-full bg-white/20 scale-0 group-active:scale-100 transition-transform duration-150" />
+        {/* Status indicator */}
+        <div className={`absolute -top-1 -right-1 w-3 h-3 rounded-full transition-all duration-300 ${
+          isMuted ? 'bg-red-500 animate-pulse' : volume > 0.7 ? 'bg-green-500' : volume > 0.3 ? 'bg-yellow-500' : 'bg-gray-500'
+        }`} />
+        
+        {/* Ripple effect */}
+        <div className="absolute inset-0 rounded-xl bg-white/10 scale-0 group-active:scale-100 transition-transform duration-200" />
       </button>
 
-      {/* Modern Volume Slider */}
+      {/* Enhanced Volume Slider */}
       <div 
-        className={`relative transition-all duration-300 ease-out ${
-          isHovered || isDragging ? 'w-24' : 'w-0 opacity-0'
+        className={`relative transition-all duration-500 ease-out ${
+          isHovered || isDragging ? 'w-32 opacity-100' : 'w-0 opacity-0'
         } overflow-hidden`}
         role="slider"
         aria-valuemin="0"
@@ -319,46 +389,65 @@ const VolumeControl = ({
       >
         <div 
           ref={volumeRef}
-          className="relative h-6 bg-white/20 rounded-full cursor-pointer group/slider"
+          className="relative h-8 bg-gray-800/40 backdrop-blur-sm rounded-xl cursor-pointer group/slider border border-green-500/20 hover:border-green-400/40 transition-all duration-300"
           onMouseDown={handleMouseDown}
         >
-          {/* Volume fill */}
+          {/* Volume fill with enhanced gradient */}
           <div 
-            className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-emerald-500 rounded-full transition-all duration-200"
+            className="absolute inset-0 bg-gradient-to-r from-green-400 to-green-500 rounded-xl transition-all duration-300 shadow-lg shadow-green-500/30"
             style={{ width: `${volumePercentage}%` }}
           />
           
-          {/* Volume thumb */}
+          {/* Volume thumb with glow effect */}
           <div 
-            className="absolute top-1/2 w-4 h-4 bg-white rounded-full shadow-lg transform -translate-y-1/2 transition-all duration-200 group-hover/slider:scale-110"
+            className={`absolute top-1/2 w-5 h-5 bg-white rounded-full shadow-xl transform -translate-y-1/2 transition-all duration-300 border-2 border-green-400 ${
+              isDragging ? 'scale-125 shadow-green-500/50' : 'group-hover/slider:scale-110'
+            }`}
             style={{ 
               left: rtl ? `${100 - volumePercentage}%` : `${volumePercentage}%`,
-              transform: `translateY(-50%) ${rtl ? 'translateX(50%)' : 'translateX(-50%)'} ${isDragging ? 'scale(1.3)' : ''}`
+              transform: `translateY(-50%) ${rtl ? 'translateX(50%)' : 'translateX(-50%)'} ${isDragging ? 'scale(1.25)' : ''}`,
+              boxShadow: isDragging ? '0 0 20px rgba(34, 197, 94, 0.6)' : ''
             }}
           />
           
           {/* Volume percentage tooltip */}
           {(showVolumeTooltip || isDragging) && (
             <div 
-              className="absolute -top-8 bg-black/80 text-white px-2 py-1 rounded text-xs whitespace-nowrap pointer-events-none transition-opacity duration-200"
+              className="absolute -top-12 bg-gray-900/95 backdrop-blur-sm text-white px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap pointer-events-none transition-all duration-200 border border-green-500/30 shadow-lg"
               style={{ 
                 left: rtl ? `${100 - volumePercentage}%` : `${volumePercentage}%`,
                 transform: 'translateX(-50%)'
               }}
               role="tooltip"
             >
-              {volumePercentage}%
-              <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-2 border-r-2 border-t-2 border-transparent border-t-black/80" />
+              {isMuted ? 'خاموش' : `${volumePercentage}%`}
+              <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900/95" />
             </div>
           )}
         </div>
       </div>
 
-      {/* Keyboard shortcuts hint */}
-      {isHovered && (
-        <div className="absolute -top-12 right-0 bg-black/80 text-white px-2 py-1 rounded text-xs whitespace-nowrap pointer-events-none transition-opacity duration-200 hidden md:block" role="tooltip">
-          ↑↓ برای تغییر صدا
-          <div className="absolute top-full right-4 w-0 h-0 border-l-2 border-r-2 border-t-2 border-transparent border-t-black/80" />
+      {/* Enhanced Help Panel */}
+      {(showHelp || (isHovered && !isDragging)) && (
+        <div 
+          className="absolute -top-20 right-0 bg-gray-900/95 backdrop-blur-md text-white px-4 py-3 rounded-xl text-xs whitespace-nowrap pointer-events-none transition-all duration-300 border border-green-500/30 shadow-xl max-w-xs"
+          role="tooltip"
+        >
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <kbd className="px-2 py-1 bg-green-500/20 rounded text-green-400">↑/↓</kbd>
+              <span>تغییر صدا</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <kbd className="px-2 py-1 bg-green-500/20 rounded text-green-400">Space</kbd>
+              <span>خاموش/روشن</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <kbd className="px-2 py-1 bg-green-500/20 rounded text-green-400">?</kbd>
+              <span>راهنما</span>
+            </div>
+          </div>
+          <div className="absolute top-full right-6 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900/95" />
         </div>
       )}
     </div>
@@ -378,44 +467,85 @@ const VideoControls = ({
   toggleMute 
 }) => {
   const rtl = isRTL();
+  const [showControls, setShowControls] = useState(true);
+  const [controlsTimeout, setControlsTimeout] = useState(null);
+
+  // Auto-hide controls after inactivity
+  useEffect(() => {
+    const resetTimeout = () => {
+      clearTimeout(controlsTimeout);
+      setShowControls(true);
+      setControlsTimeout(setTimeout(() => {
+        if (isPlaying) {
+          setShowControls(false);
+        }
+      }, 3000));
+    };
+
+    resetTimeout();
+    
+    return () => clearTimeout(controlsTimeout);
+  }, [isPlaying, controlsTimeout]);
 
   return (
-    <div className="w-full bg-gradient-to-t from-black/90 via-black/70 to-transparent backdrop-blur-md rounded-b-xl p-6 font-persian">
-      {/* Progress Bar */}
-      <ProgressBar
-        videoCurrentTime={videoCurrentTime}
-        videoDuration={videoDuration}
-        videoBuffered={videoBuffered}
-        handleSeek={handleSeek}
-        rtl={rtl}
-        formatTime={formatTime}
-      />
-
-      {/* Enhanced Controls */}
-      <div className={`flex items-center ${rtl ? 'justify-between flex-row-reverse' : 'justify-between'}`}>
-        {/* Left controls (Play + Time) */}
-        <div className={`flex items-center gap-5 ${rtl ? 'flex-row-reverse' : ''}`}>
-          <PlayButton 
-            isPlaying={isPlaying} 
-            togglePlay={togglePlay} 
-          />
-          
-          <TimeDisplay
-            videoCurrentTime={videoCurrentTime}
-            videoDuration={videoDuration}
-            rtl={rtl}
-            formatTime={formatTime}
-          />
-        </div>
-
-        {/* Enhanced Right controls (Volume) */}
-        <VolumeControl
-          volume={volume}
-          isMuted={isMuted}
-          handleVolumeChange={handleVolumeChange}
-          toggleMute={toggleMute}
+    <div 
+      className={`absolute bottom-0 left-0 right-0 transition-all duration-500 ${
+        showControls ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+      }`}
+      onMouseEnter={() => {
+        clearTimeout(controlsTimeout);
+        setShowControls(true);
+      }}
+      onMouseMove={() => {
+        clearTimeout(controlsTimeout);
+        setShowControls(true);
+      }}
+    >
+      <div className="bg-gradient-to-t from-black/95 via-black/80 to-transparent backdrop-blur-lg border-t border-green-500/20 p-6 font-persian">
+        {/* Progress Bar */}
+        <ProgressBar
+          videoCurrentTime={videoCurrentTime}
+          videoDuration={videoDuration}
+          videoBuffered={videoBuffered}
+          handleSeek={handleSeek}
           rtl={rtl}
+          formatTime={formatTime}
         />
+
+        {/* Enhanced Controls Layout */}
+        <div className={`flex items-center ${rtl ? 'justify-between flex-row-reverse' : 'justify-between'}`}>
+          {/* Left controls (Play + Time) */}
+          <div className={`flex items-center gap-6 ${rtl ? 'flex-row-reverse' : ''}`}>
+            <PlayButton 
+              isPlaying={isPlaying} 
+              togglePlay={togglePlay} 
+            />
+            
+            <TimeDisplay
+              videoCurrentTime={videoCurrentTime}
+              videoDuration={videoDuration}
+              rtl={rtl}
+              formatTime={formatTime}
+            />
+          </div>
+
+          {/* Right controls (Volume + Additional Controls) */}
+          <div className={`flex items-center gap-4 ${rtl ? 'flex-row-reverse' : ''}`}>
+            <VolumeControl
+              volume={volume}
+              isMuted={isMuted}
+              handleVolumeChange={handleVolumeChange}
+              toggleMute={toggleMute}
+              rtl={rtl}
+            />
+            
+            {/* Quality indicator */}
+            <div className="hidden md:flex items-center gap-2 px-3 py-2 bg-gray-800/60 backdrop-blur-sm rounded-lg border border-green-500/20">
+              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+              <span className="text-white text-xs font-medium">HD</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
