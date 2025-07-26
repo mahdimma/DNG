@@ -116,13 +116,13 @@ const ProgressBar = ({
         {/* Enhanced progress thumb - smaller on mobile */}
         <div 
           className={`absolute top-1/2 w-3 h-3 md:w-4 md:h-4 bg-white rounded-full shadow-xl transition-all duration-300 pointer-events-none border-2 border-green-400 ${
-            isHovered || isDragging ? 'opacity-100 scale-80 shadow-green-500/50' : 'opacity-0'
+            isHovered || isDragging ? 'opacity-100 scale-110 shadow-green-500/50' : 'opacity-0'
           }`}
           style={{ 
-            left: `${progress}%`,
-            transform: 'translate(-50%, -50%)',
+            left: `${progress}%`, 
+            transform: 'translateY(-50%) translateX(-50%)',
             ...(isDragging && { 
-              transform: 'translate(-50%, -50%) scale(1.2)',
+              transform: 'translateY(-50%) translateX(-50%) scale(1.2)',
               boxShadow: '0 0 15px rgba(34, 197, 94, 0.6)'
             })
           }}

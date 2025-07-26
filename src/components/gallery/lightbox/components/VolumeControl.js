@@ -48,11 +48,7 @@ const VolumeSlider = ({
 }) => {
   return (
     <div 
-      className={`relative transition-all duration-500 ease-out ${
-        (!isMobile && (isHovered || isDragging)) || (isMobile && isDragging) 
-          ? 'w-20 md:w-32 opacity-100' 
-          : 'w-0 opacity-0'
-      } overflow-hidden`}
+      className="relative transition-all duration-500 ease-out w-20 md:w-32 opacity-100"
       role="slider"
       aria-valuemin="0"
       aria-valuemax="100"
@@ -73,28 +69,32 @@ const VolumeSlider = ({
         
         {/* Volume thumb with glow effect - responsive */}
         <div 
-          className={`absolute top-1/2 w-4 h-4 md:w-5 md:h-5 bg-white rounded-full shadow-xl transform -translate-y-1/2 transition-all duration-300 border-2 border-green-400 ${
-            isDragging ? 'scale-130 md:scale-145 shadow-green-500/50' : 'group-hover/slider:scale-105 md:group-hover/slider:scale-110'
+          className={`absolute w-6 h-6 md:w-8 md:h-8 bg-white rounded-full shadow-xl transition-all duration-300 border-2 border-green-400 ${
+            isDragging ? 'scale-110 shadow-green-500/50' : 'group-hover/slider:scale-105'
           }`}
           style={{ 
             left: `${volumePercentage}%`,
-            transform: `translateY(-50%) translateX(-50%) ${isDragging ? 'scale(1.1)' : ''}`,
-            boxShadow: isDragging ? '0 0 15px rgba(34, 197, 94, 0.6)' : ''
+            top: '50%',
+            transform: 'translate(-50%, -50%)',
+            ...(isDragging && {
+              boxShadow: '0 0 15px rgba(34, 197, 94, 0.6)'
+            })
           }}
         />
         
         {/* Volume percentage tooltip - responsive positioning */}
         {(showVolumeTooltip || isDragging) && (
           <div 
-            className="absolute -top-8 md:-top-12 bg-gray-900/95 backdrop-blur-sm text-white px-2 md:px-3 py-1 md:py-2 rounded-lg text-xs md:text-sm font-medium whitespace-nowrap pointer-events-none transition-all duration-200 border border-green-500/30 shadow-lg"
+            className="absolute -top-12 md:-top-16 bg-gray-900/95 backdrop-blur-sm text-white px-2 md:px-3 py-1 md:py-2 rounded-lg text-xs md:text-sm font-medium whitespace-nowrap pointer-events-none transition-all duration-200 border border-green-500/30 shadow-lg z-50"
             style={{ 
               left: `${volumePercentage}%`,
-              transform: 'translateX(-50%)'
+              transform: 'translate(-50%,-50%)',
+              minWidth: 'max-content'
             }}
             role="tooltip"
           >
             {isMuted ? 'Muted' : `${volumePercentage}%`}
-            <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-3 border-r-3 border-t-3 md:border-l-4 md:border-r-4 md:border-t-4 border-transparent border-t-gray-900/95" />
+            <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px] md:border-l-[8px] md:border-r-[8px] md:border-t-[8px] border-transparent border-t-gray-900/95" />
           </div>
         )}
       </div>
@@ -315,21 +315,6 @@ const VolumeControl = ({
         onMouseDown={handleMouseDown}
         onTouchStart={handleTouchStart}
       />
-
-      {/* Simple help indicator - only on desktop and when needed */}
-      {!isMobile && isHovered && !isDragging && (
-        <div 
-          className="absolute -top-16 right-0 bg-gray-900/95 backdrop-blur-md text-white px-3 py-2 rounded-lg text-xs whitespace-nowrap pointer-events-none transition-all duration-300 border border-green-500/30 shadow-lg"
-          role="tooltip"
-        >
-          <div className="flex items-center gap-2">
-            <span>Click to mute/unmute</span>
-            {!isMuted && <span className="text-green-400">|</span>}
-            {!isMuted && <span>Drag to adjust</span>}
-          </div>
-          <div className="absolute top-full right-4 w-0 h-0 border-l-3 border-r-3 border-t-3 border-transparent border-t-gray-900/95" />
-        </div>
-      )}
     </div>
   );
 };
