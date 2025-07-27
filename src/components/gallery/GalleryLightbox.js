@@ -158,7 +158,7 @@ const VideoPlayer = forwardRef(({ media, onLoad, onError, mediaLoaded }, ref) =>
 
   return (
     <div 
-      className="relative w-full h-full flex items-center justify-center bg-black max-h-[50vh]"
+      className="relative w-full h-full flex items-center justify-center bg-black"
       onMouseMove={resetControlsTimeout}
       onMouseLeave={() => clearTimeout(controlsTimeoutRef.current)}
       onClick={togglePlay}
@@ -284,11 +284,11 @@ const GalleryLightbox = ({ media, isOpen, onClose, onNext, onPrev, currentIndex,
       />
 
       <div className="w-full h-full flex flex-col lg:flex-row items-center justify-center gap-2 lg:gap-4 pt-12 md:pt-0">
-        <div className="relative w-full lg:w-3/4 h-full flex items-center justify-center min-h-0">
+        <div className="relative w-full lg:w-3/4 h-full flex items-center justify-center min-h-[30vh]">
           {!mediaLoaded && !mediaError && <LoadingSpinner />}
 
           {!mediaError ? (
-            <div className="relative w-full max-h-[70vh] h-full flex flex-col items-center justify-center min-h-0">
+            <div className="relative w-full h-full flex flex-col items-center justify-center min-h-0">
               {isVideo ? (
                 <VideoPlayer
                   ref={videoPlayerRef}
