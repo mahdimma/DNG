@@ -4,6 +4,7 @@ const GalleryVideoCard = ({ video, index, onClick }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [videoDuration, setVideoDuration] = useState(null);
   const videoRef = useRef();
   const containerRef = useRef();
 
@@ -47,6 +48,10 @@ const GalleryVideoCard = ({ video, index, onClick }) => {
 
   const handleVideoLoad = () => {
     setVideoLoaded(true);
+    // Get duration from the video element
+    if (videoRef.current) {
+      setVideoDuration(videoRef.current.duration);
+    }
   };
 
   const togglePlay = (e) => {
@@ -84,9 +89,9 @@ const GalleryVideoCard = ({ video, index, onClick }) => {
         </div>
 
         {/* Duration badge */}
-        {video.duration && (
+        {videoDuration && (
           <div className="absolute top-2 right-2 z-10 bg-black/70 text-white px-2 py-1 rounded-md text-xs">
-            {getDurationText(video.duration)}
+            {getDurationText(videoDuration)}
           </div>
         )}
 

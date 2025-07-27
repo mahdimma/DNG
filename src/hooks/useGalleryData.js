@@ -59,12 +59,24 @@ const useGalleryData = () => {
     return galleryData.categories
       .flatMap(category => 
         category.images
-          .filter(image => 
-            image.title.toLowerCase().includes(term) ||
-            image.description.toLowerCase().includes(term) ||
-            image.tags.some(tag => tag.toLowerCase().includes(term)) ||
-            image.photographer.toLowerCase().includes(term)
-          )
+          .filter(image => {
+            // Check title
+            const titleMatch = image.title && image.title.toLowerCase().includes(term);
+            
+            // Check description
+            const descriptionMatch = image.description && image.description.toLowerCase().includes(term);
+            
+            // Check tags
+            const tagsMatch = image.tags && Array.isArray(image.tags) && 
+              image.tags.some(tag => tag && tag.toLowerCase().includes(term));
+            
+            // Check photographer/videographer based on media type
+            const creatorMatch = image.type === 'video' 
+              ? (image.videographer && image.videographer.toLowerCase().includes(term))
+              : (image.photographer && image.photographer.toLowerCase().includes(term));
+            
+            return titleMatch || descriptionMatch || tagsMatch || creatorMatch;
+          })
           .map(image => ({
             ...image,
             categoryId: category.id,
