@@ -16,7 +16,34 @@ const VideoPlayer = forwardRef(({ media, onLoad, onError, mediaLoaded }, ref) =>
   const [videoBuffered, setVideoBuffered] = useState(0);
   const [volume, setVolume] = useState(1);
   const [isMuted, setIsMuted] = useState(false);
+  const [showControls, setShowControls] = useState(true);
+  const controlsTimeoutRef = useRef(null);
   const videoNodeRef = useRef(null);
+
+  const hideControls = () => {
+    if (isPlaying) {
+      setShowControls(false);
+    }
+  };
+
+  const resetControlsTimeout = useCallback(() => {
+    clearTimeout(controlsTimeoutRef.current);
+    setShowControls(true);
+    controlsTimeoutRef.current = setTimeout(hideControls, 3000);
+  }, [isPlaying]);
+
+  useEffect(() => {
+    if (isPlaying) {
+      resetControlsTimeout();
+    } else {
+      clearTimeout(controlsTimeoutRef.current);
+      setShowControls(true);
+    }
+
+    return () => {
+      clearTimeout(controlsTimeoutRef.current);
+    };
+  }, [isPlaying, resetControlsTimeout]);
 
   const videoRef = useCallback(node => {
     const handleTimeUpdate = () => {
@@ -130,13 +157,18 @@ const VideoPlayer = forwardRef(({ media, onLoad, onError, mediaLoaded }, ref) =>
   }));
 
   return (
-    <div className="relative w-full h-full flex items-center justify-center">
+    <div 
+      className="relative w-full h-full flex items-center justify-center bg-black max-h-[50vh]"
+      onMouseMove={resetControlsTimeout}
+      onMouseLeave={() => clearTimeout(controlsTimeoutRef.current)}
+      onClick={togglePlay}
+    >
       <video
         ref={videoRef}
         className="w-full h-full max-w-full max-h-full object-contain"
         style={{ 
           minHeight: '300px',
-          maxHeight: '85vh',
+          maxHeight: '50vh',
           display: mediaLoaded ? 'block' : 'none' 
         }}
         onError={onError}
@@ -144,23 +176,30 @@ const VideoPlayer = forwardRef(({ media, onLoad, onError, mediaLoaded }, ref) =>
         controls={false}
         src={media.url}
         key={media.url}
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
       >
         مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.
       </video>
 
       {mediaLoaded && (
-        <VideoControls
-          isPlaying={isPlaying}
-          videoCurrentTime={videoCurrentTime}
-          videoDuration={videoDuration}
-          videoBuffered={videoBuffered}
-          volume={volume}
-          isMuted={isMuted}
-          togglePlay={togglePlay}
-          handleSeek={handleSeek}
-          handleVolumeChange={handleVolumeChange}
-          toggleMute={toggleMute}
-        />
+        <div 
+          className={`absolute bottom-0 left-0 right-0 transition-opacity duration-300 ${showControls ? 'opacity-100' : 'opacity-0'}`}
+          onClick={(e) => e.stopPropagation()} // Prevents click from bubbling to the parent div
+        >
+          <VideoControls
+            isPlaying={isPlaying}
+            videoCurrentTime={videoCurrentTime}
+            videoDuration={videoDuration}
+            videoBuffered={videoBuffered}
+            volume={volume}
+            isMuted={isMuted}
+            togglePlay={togglePlay}
+            handleSeek={handleSeek}
+            handleVolumeChange={handleVolumeChange}
+            toggleMute={toggleMute}
+          />
+        </div>
       )}
     </div>
   );
@@ -249,7 +288,7 @@ const GalleryLightbox = ({ media, isOpen, onClose, onNext, onPrev, currentIndex,
           {!mediaLoaded && !mediaError && <LoadingSpinner />}
 
           {!mediaError ? (
-            <div className="relative w-full h-full flex flex-col items-center justify-center min-h-0">
+            <div className="relative w-full max-h-[70vh] h-full flex flex-col items-center justify-center min-h-0">
               {isVideo ? (
                 <VideoPlayer
                   ref={videoPlayerRef}
@@ -280,7 +319,7 @@ const GalleryLightbox = ({ media, isOpen, onClose, onNext, onPrev, currentIndex,
         </div>
 
         {mediaLoaded && (
-          <div className="w-full lg:w-1/4 h-auto lg:h-full lg:max-h-full overflow-hidden">
+          <div className="w-full h-auto lg:h-full lg:max-h-full overflow-hidden">
             <InfoPanel
               media={media}
               isVideo={isVideo}
