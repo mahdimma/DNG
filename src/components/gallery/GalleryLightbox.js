@@ -284,7 +284,7 @@ const GalleryLightbox = ({ media, isOpen, onClose, onNext, onPrev, currentIndex,
       />
 
       <div className="w-full h-full flex flex-col lg:flex-row items-center justify-center gap-2 lg:gap-4 pt-12 md:pt-0">
-        <div className="relative w-full lg:w-3/4 h-full flex items-center justify-center min-h-[30vh]">
+        <div className="relative w-full lg:w-3/4 h-full flex items-center justify-center">
           {!mediaLoaded && !mediaError && <LoadingSpinner />}
 
           {!mediaError ? (
@@ -319,7 +319,7 @@ const GalleryLightbox = ({ media, isOpen, onClose, onNext, onPrev, currentIndex,
         </div>
 
         {mediaLoaded && (
-          <div className="w-full h-auto lg:h-full lg:max-h-full overflow-hidden">
+          <div className="w-full lg:w-1/4 h-auto lg:h-full lg:max-h-full overflow-hidden">
             <InfoPanel
               media={media}
               isVideo={isVideo}

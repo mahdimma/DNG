@@ -122,11 +122,11 @@ const VideoPlayer = forwardRef(({ media, onLoad, onError, mediaLoaded }, ref) =>
   };
 
   return (
-    <div className="relative w-full" style={{ maxWidth: '1200px' }}>
+    <div className="relative w-full">
       <video
         ref={videoRef}
         className="w-full h-auto object-contain"
-        style={{ maxHeight: '80vh', display: mediaLoaded ? 'block' : 'none' }}
+        style={{display: mediaLoaded ? 'block' : 'none' }}
         onError={onError}
         poster={media.thumbnail}
         controls={false}

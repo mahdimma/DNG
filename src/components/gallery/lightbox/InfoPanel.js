@@ -3,7 +3,7 @@ import React from "react";
 const InfoPanel = ({ media, isVideo, containerRef }) => (
   <div 
     ref={containerRef}
-    className="w-full md:w-1/4 h-full max-h-48 md:max-h-full bg-gray-900/50 backdrop-blur-sm rounded-lg p-4 overflow-y-auto"
+    className="w-full h-48 lg:h-full bg-gray-900/50 backdrop-blur-sm rounded-lg p-4 overflow-y-auto"
   >
     <h3 className="text-white text-xl font-semibold mb-2">{media.title}</h3>
     <p className="text-white/80 text-sm mb-4">{media.description}</p>
