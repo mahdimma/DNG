@@ -4,195 +4,326 @@ import HeroSection from "../components/HeroSection"
 
 const TermsOfServicePage = () => {
   return (
-    <Layout title="Terms of Service" description="Terms of service for Dangepia Village website">
+    <Layout title="شرایط استفاده از خدمات" description="شرایط استفاده از خدمات وبسایت روستای دانگپیا">
       <HeroSection 
         title="شرایط استفاده از خدمات"
         subtitle="قوانین و مقررات استفاده از وبسایت"
         showButtons={false}
         showScrollIndicator={true}
       />
-      <div style={{ maxWidth: 800, margin: `0 auto`, padding: `2rem 1rem` }}>
-        <h1>Terms of Service</h1>
-        <p style={{ fontSize: `0.9rem`, color: `#666`, marginBottom: `2rem` }}>
-          Last updated: {new Date().toLocaleDateString()}
-        </p>
+      
+      {/* Terms Content Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              شرایط استفاده از خدمات
+            </h2>
+            <p className="text-xl text-gray-600">
+              آخرین به‌روزرسانی: {new Date().toLocaleDateString('fa-IR')}
+            </p>
+          </div>
 
-        <section style={{ marginBottom: `2rem` }}>
-          <h2>Acceptance of Terms</h2>
-          <p>
-            By accessing and using the Dangepia Village website ("Service"), you accept and agree 
-            to be bound by the terms and provision of this agreement. If you do not agree to 
-            abide by the above, please do not use this service.
-          </p>
-        </section>
+          <div className="grid grid-cols-1 gap-8">
+            <div className="card">
+              <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+                پذیرش شرایط
+              </h3>
+              <p className="text-gray-700 leading-relaxed">
+                با دسترسی و استفاده از وبسایت روستای دانگپیا («خدمات»)، شما شرایط و مقررات این توافق‌نامه را پذیرفته و موافق هستید. اگر با موارد فوق موافق نیستید، لطفاً از این خدمات استفاده نکنید.
+              </p>
+            </div>
 
-        <section style={{ marginBottom: `2rem` }}>
-          <h2>Description of Service</h2>
-          <p>
-            Dangepia Village provides an online platform for village residents and visitors to:
-          </p>
-          <ul>
-            <li>Access information about village services</li>
-            <li>Stay updated with news and events</li>
-            <li>Contact village officials</li>
-            <li>View village maps and locations</li>
-            <li>Check weather information</li>
-            <li>Browse village gallery</li>
-          </ul>
-        </section>
+            <div className="card">
+              <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+                توضیح خدمات
+              </h3>
+              <p className="text-gray-700 mb-4">
+                روستای دانگپیا یک پلتفرم آنلاین برای ساکنان و بازدیدکنندگان روستا فراهم می‌کند:
+              </p>
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-gray-700">
+                <li className="flex items-start">
+                  <span className="text-primary-500 ml-2">✓</span>
+                  دسترسی به اطلاعات خدمات روستایی
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 ml-2">✓</span>
+                  اطلاع از اخبار و رویدادهای روستا
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 ml-2">✓</span>
+                  تماس با مسئولین روستا
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 ml-2">✓</span>
+                  مشاهده نقشه و مکان‌های روستا
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 ml-2">✓</span>
+                  بررسی اطلاعات آب و هوایی
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 ml-2">✓</span>
+                  مرور گالری تصاویر روستا
+                </li>
+              </ul>
+            </div>
 
-        <section style={{ marginBottom: `2rem` }}>
-          <h2>User Responsibilities</h2>
-          <p>As a user of our service, you agree to:</p>
-          <ul>
-            <li>Provide accurate and complete information when required</li>
-            <li>Use the service only for lawful purposes</li>
-            <li>Respect the privacy and rights of other users</li>
-            <li>Not attempt to gain unauthorized access to our systems</li>
-            <li>Not distribute malware or harmful code</li>
-            <li>Not use the service for commercial purposes without permission</li>
-            <li>Report any security vulnerabilities you discover</li>
-          </ul>
-        </section>
+            <div className="card">
+              <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+                مسئولیت‌های کاربر
+              </h3>
+              <p className="text-gray-700 mb-4">به عنوان کاربر خدمات ما، شما موافق هستید:</p>
+              <ul className="space-y-2 text-gray-700">
+                <li className="flex items-start">
+                  <span className="text-primary-500 ml-2 mt-1">•</span>
+                  ارائه اطلاعات دقیق و کامل در صورت نیاز
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 ml-2 mt-1">•</span>
+                  استفاده از خدمات فقط برای اهداف قانونی
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 ml-2 mt-1">•</span>
+                  احترام به حریم خصوصی و حقوق سایر کاربران
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 ml-2 mt-1">•</span>
+                  تلاش برای دسترسی غیرمجاز به سیستم‌های ما نکنید
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 ml-2 mt-1">•</span>
+                  پخش بدافزار یا کدهای مخرب نکنید
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 ml-2 mt-1">•</span>
+                  استفاده تجاری از خدمات بدون مجوز
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 ml-2 mt-1">•</span>
+                  گزارش هرگونه آسیب‌پذیری امنیتی کشف شده
+                </li>
+              </ul>
+            </div>
 
-        <section style={{ marginBottom: `2rem` }}>
-          <h2>Content and Intellectual Property</h2>
-          <h3>Our Content</h3>
-          <p>
-            All content on this website, including text, graphics, logos, images, and software, 
-            is the property of Dangepia Village or its content suppliers and is protected by 
-            copyright and other intellectual property laws.
-          </p>
-          
-          <h3>User-Generated Content</h3>
-          <p>
-            When you submit content to our website (such as comments, photos, or feedback), 
-            you grant us a non-exclusive, royalty-free, perpetual license to use, modify, 
-            and display such content for the purpose of operating our service.
-          </p>
-        </section>
+            <div className="card">
+              <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+                محتوا و مالکیت فکری
+              </h3>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="text-lg font-semibold text-gray-800 mb-2">محتوای ما</h4>
+                  <p className="text-gray-700">
+                    تمام محتوای این وبسایت، شامل متن، گرافیک، لوگوها، تصاویر و نرم‌افزار، متعلق به روستای دانگپیا یا تأمین‌کنندگان محتوای آن است و توسط قوانین کپی‌رایت و سایر قوانین مالکیت فکری محافظت می‌شود.
+                  </p>
+                </div>
+                
+                <div>
+                  <h4 className="text-lg font-semibold text-gray-800 mb-2">محتوای تولیدشده توسط کاربر</h4>
+                  <p className="text-gray-700">
+                    هنگامی که محتوایی را در وبسایت ما ارسال می‌کنید (مانند نظرات، عکس‌ها یا بازخوردها)، به ما مجوز غیرانحصاری، بدون حق امتیاز و دائمی برای استفاده، اصلاح و نمایش چنین محتوایی برای هدف بهره‌برداری از خدماتمان اعطا می‌کنید.
+                  </p>
+                </div>
+              </div>
+            </div>
 
-        <section style={{ marginBottom: `2rem` }}>
-          <h2>Prohibited Uses</h2>
-          <p>You may not use our service:</p>
-          <ul>
-            <li>For any unlawful purpose or to solicit others to perform illegal acts</li>
-            <li>To violate any international, federal, provincial, or state regulations, rules, laws, or local ordinances</li>
-            <li>To infringe upon or violate our intellectual property rights or the intellectual property rights of others</li>
-            <li>To harass, abuse, insult, harm, defame, slander, disparage, intimidate, or discriminate</li>
-            <li>To submit false or misleading information</li>
-            <li>To upload or transmit viruses or any other type of malicious code</li>
-            <li>To spam, phish, pharm, pretext, spider, crawl, or scrape</li>
-            <li>For any obscene or immoral purpose</li>
-          </ul>
-        </section>
+            <div className="card">
+              <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+                استفاده‌های ممنوع
+              </h3>
+              <p className="text-gray-700 mb-4">شما نمی‌توانید از خدمات ما استفاده کنید:</p>
+              <ul className="space-y-2 text-gray-700">
+                <li className="flex items-start">
+                  <span className="text-primary-500 ml-2 mt-1">•</span>
+                  برای هر هدف غیرقانونی یا ترغیب دیگران به انجام اعمال غیرقانونی
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 ml-2 mt-1">•</span>
+                  برای نقض قوانین، مقررات، قوانین بین‌المللی، فدرال، استانی یا محلی
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 ml-2 mt-1">•</span>
+                  برای نقض حقوق مالکیت فکری ما یا دیگران
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 ml-2 mt-1">•</span>
+                  برای آزار، سوءاستفاده، توهین، آسیب، کم‌رنگ کردن، ترساندن یا تبعیض
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 ml-2 mt-1">•</span>
+                  ارائه اطلاعات نادرست یا گمراه‌کننده
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 ml-2 mt-1">•</span>
+                  بارگذاری یا انتقال ویروس‌ها یا هر نوع کد مخرب
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 ml-2 mt-1">•</span>
+                  اسپم، فیشینگ، فارم، پیش‌زمینه، اسپایدر، کراول یا اسکریپ
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 ml-2 mt-1">•</span>
+                  برای هر هدف بی‌شرف یا غیراخلاقی
+                </li>
+              </ul>
+            </div>
 
-        <section style={{ marginBottom: `2rem` }}>
-          <h2>Service Availability</h2>
-          <p>
-            We strive to maintain continuous service availability, but we do not guarantee 
-            that our service will be uninterrupted or error-free. We reserve the right to:
-          </p>
-          <ul>
-            <li>Modify or discontinue the service with or without notice</li>
-            <li>Perform maintenance that may temporarily affect service availability</li>
-            <li>Update or change features and functionality</li>
-            <li>Restrict access to certain features or content</li>
-          </ul>
-        </section>
-
-        <section style={{ marginBottom: `2rem` }}>
-          <h2>Privacy</h2>
-          <p>
-            Your privacy is important to us. Please review our Privacy Policy, which also 
-            governs your use of the service, to understand our practices.
-          </p>
-        </section>
-
-        <section style={{ marginBottom: `2rem` }}>
-          <h2>Disclaimers</h2>
-          <p>
-            The information on this website is provided on an "as is" basis. To the fullest 
-            extent permitted by law, this Company:
-          </p>
-          <ul>
-            <li>Excludes all representations and warranties relating to this website and its contents</li>
-            <li>Excludes all liability for damages arising out of or in connection with your use of this website</li>
-            <li>Does not guarantee the accuracy or completeness of weather information</li>
-            <li>Is not responsible for external links or third-party content</li>
-          </ul>
-        </section>
-
-        <section style={{ marginBottom: `2rem` }}>
-          <h2>Limitation of Liability</h2>
-          <p>
-            In no event shall Dangepia Village, its directors, employees, or agents be liable 
-            for any indirect, incidental, special, consequential, or punitive damages, including 
-            without limitation, loss of profits, data, use, goodwill, or other intangible losses, 
-            resulting from your use of the service.
-          </p>
-        </section>
-
-        <section style={{ marginBottom: `2rem` }}>
-          <h2>Indemnification</h2>
-          <p>
-            You agree to defend, indemnify, and hold harmless Dangepia Village and its licensee 
-            and licensors, and their employees, contractors, agents, officers and directors, 
-            from and against any and all claims, damages, obligations, losses, liabilities, 
-            costs or debt, and expenses (including but not limited to attorney's fees).
-          </p>
-        </section>
-
-        <section style={{ marginBottom: `2rem` }}>
-          <h2>Termination</h2>
-          <p>
-            We may terminate or suspend your access immediately, without prior notice or liability, 
-            for any reason whatsoever, including without limitation if you breach the Terms.
-          </p>
-        </section>
-
-        <section style={{ marginBottom: `2rem` }}>
-          <h2>Governing Law</h2>
-          <p>
-            These Terms shall be interpreted and governed by the laws of the Islamic Republic 
-            of Iran, without regard to its conflict of law provisions. Our failure to enforce 
-            any right or provision of these Terms will not be considered a waiver of those rights.
-          </p>
-        </section>
-
-        <section style={{ marginBottom: `2rem` }}>
-          <h2>Changes to Terms</h2>
-          <p>
-            We reserve the right, at our sole discretion, to modify or replace these Terms 
-            at any time. If a revision is material, we will try to provide at least 30 days 
-            notice prior to any new terms taking effect.
-          </p>
-        </section>
-
-        <section style={{ marginBottom: `2rem` }}>
-          <h2>Contact Information</h2>
-          <p>If you have any questions about these Terms of Service, please contact us:</p>
-          <ul style={{ listStyle: `none`, padding: 0 }}>
-            <li><strong>Email:</strong> legal@dangepia.ir</li>
-            <li><strong>Phone:</strong> +98-XXX-XXXX</li>
-            <li><strong>Address:</strong> Village Office, Main Street, Dangepia Village</li>
-          </ul>
-        </section>
-
-        <div style={{
-          background: `#f7fafc`,
-          padding: `1.5rem`,
-          borderRadius: `8px`,
-          border: `1px solid #e2e8f0`,
-          marginTop: `2rem`,
-        }}>
-          <p style={{ margin: 0, fontSize: `0.9rem`, color: `#4a5568` }}>
-            These terms of service are governed by Iranian law and are designed to protect 
-            both the village and our users. For specific legal questions, please consult 
-            with a qualified legal professional.
-          </p>
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* Additional Terms Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="card">
+              <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+                در دسترس بودن خدمات
+              </h3>
+              <p className="text-gray-700 mb-4">
+                ما تلاش می‌کنیم خدمات را به‌صورت مداوم در دسترس نگه داریم، اما تضمین نمی‌کنیم که خدمات ما بدون وقفه یا بدون خطا باشد. ما حق را محفوظ می‌داریم:
+              </p>
+              <ul className="space-y-2 text-gray-700">
+                <li className="flex items-start">
+                  <span className="text-primary-500 ml-2 mt-1">•</span>
+                  اصلاح یا توقف خدمات با یا بدون اطلاع قبلی
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 ml-2 mt-1">•</span>
+                  انجام تعمیرات که ممکن است به‌صورت موقت بر در دسترس بودن خدمات تأثیر بگذارد
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 ml-2 mt-1">•</span>
+                  به‌روزرسانی یا تغییر ویژگی‌ها و عملکردها
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 ml-2 mt-1">•</span>
+                  محدود کردن دسترسی به ویژگی‌ها یا محتوای خاص
+                </li>
+              </ul>
+            </div>
+
+            <div className="card">
+              <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+                حریم خصوصی
+              </h3>
+              <p className="text-gray-700">
+                حریم خصوصی شما برای ما مهم است. لطفاً سیاست حفظ حریم خصوصی ما را که همچنین استفاده شما از خدمات را تنظیم می‌کند، برای درک شیوه‌های ما مرور کنید.
+              </p>
+            </div>
+
+            <div className="card">
+              <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+                سلب مسئولیت
+              </h3>
+              <p className="text-gray-700 mb-4">
+                اطلاعات این وبسایت بر اساس «همان‌طور که هست» ارائه می‌شود. تا حدی که قانون اجازه می‌دهد، این شرکت:
+              </p>
+              <ul className="space-y-2 text-gray-700">
+                <li className="flex items-start">
+                  <span className="text-primary-500 ml-2 mt-1">•</span>
+                  تمام نمایندگی‌ها و ضمانت‌های مربوط به این وبسایت و محتوای آن را رد می‌کند
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 ml-2 mt-1">•</span>
+                  تمام مسئولیت‌ها برای خسارات ناشی از یا در ارتباط با استفاده شما از این وبسایت را رد می‌کند
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 ml-2 mt-1">•</span>
+                  دقت یا کامل بودن اطلاعات آب و هوا را تضمین نمی‌کند
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 ml-2 mt-1">•</span>
+                  مسئولیت لینک‌های خارجی یا محتوای شخص ثالث را نمی‌پذیرد
+                </li>
+              </ul>
+            </div>
+
+            <div className="card">
+              <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+                محدودیت مسئولیت
+              </h3>
+              <p className="text-gray-700">
+                در هیچ شرایطی روستای دانگپیا، مدیران، کارمندان یا نمایندگان آن مسئول خسارات غیرمستقیم، تصادفی، خاص، پیامدی یا تنبیهی، از جمله بدون محدودیت، از دست دادن سود، داده، استفاده، اعتبار یا سایر ضررهای ناملموس، ناشی از استفاده شما از خدمات نخواهند بود.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Legal and Contact Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="card">
+              <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+                جبران خسارت
+              </h3>
+              <p className="text-gray-700">
+                شما موافق هستید که روستای دانگپیا و مجوزدهندگان و مجوزگیرندگان آن، و کارمندان، پیمانکاران، نمایندگان، مسئولین و مدیران آن‌ها را از هرگونه ادعاهای خسارت، تعهدات، ضررهای مسئولیت‌ها، هزینه‌ها یا بدهی‌ها، و هزینه‌ها (از جمله اما نه محدود به هزینه‌های وکالت) دفاع، جبران خسارت و بی‌ضرر نگه دارید.
+              </p>
+            </div>
+
+            <div className="card">
+              <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+                خاتمه
+              </h3>
+              <p className="text-gray-700">
+                ما ممکن است دسترسی شما را بلافاصله، بدون اطلاع قبلی یا مسئولیت، به هر دلیلی از جمله نقض شرایط، خاتمه دهیم یا تعلیق کنیم.
+              </p>
+            </div>
+
+            <div className="card">
+              <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+                قانون حاکم
+              </h3>
+              <p className="text-gray-700">
+                این شرایط توسط قوانین جمهوری اسلامی ایران تفسیر و اجرا می‌شوند، بدون در نظر گرفتن مقررات تضاد قوانین. عدم اجرای ما از هر حق یا مقرراتی از این شرایط به عنوان تملیک آن حقوق در نظر گرفته نخواهد شد.
+              </p>
+            </div>
+
+            <div className="card">
+              <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+                تغییرات در شرایط
+              </h3>
+              <p className="text-gray-700">
+                ما حق را محفوظ می‌داریم، به تشخیص خود، برای اصلاح یا جایگزینی این شرایط در هر زمان. اگر اصلاح مواد قابل توجهی باشد، ما سعی خواهیم کرد حداقل ۳۰ روز قبل از اجرای هر شرایط جدید اطلاع‌رسانی کنیم.
+              </p>
+            </div>
+          </div>
+
+          {/* Contact Information Card */}
+          <div className="mt-12">
+            <div className="card">
+              <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
+                اطلاعات تماس
+              </h3>
+              <p className="text-gray-700 mb-4">اگر سوالی درباره این شرایط خدمات دارید، با ما تماس بگیرید:</p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-gray-700">
+                <div className="flex items-center">
+                  <span className="font-semibold ml-2">ایمیل:</span>
+                  <span className="text-primary-600">legal@dangepia.ir</span>
+                </div>
+                <div className="flex items-center">
+                  <span className="font-semibold ml-2">تلفن:</span>
+                  <span>+98-XXX-XXXX</span>
+                </div>
+                <div className="flex items-start">
+                  <span className="font-semibold ml-2">آدرس:</span>
+                  <span>دفتر روستا، خیابان اصلی، روستای دانگپیا</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Footer Notice */}
+          <div className="mt-12 p-6 bg-primary-50 rounded-xl border border-primary-200 text-center">
+            <p className="text-gray-800 text-sm leading-relaxed">
+              این شرایط خدمات توسط قانون ایران اجرا می‌شوند و برای حفاظت از هر دو روستا و کاربران ما طراحی شده‌اند. برای سوالات حقوقی خاص، لطفاً با یک متخصص حقوقی واجد شرایط مشورت کنید.
+            </p>
+          </div>
+        </div>
+      </section>
     </Layout>
   )
 }

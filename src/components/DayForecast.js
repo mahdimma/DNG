@@ -14,6 +14,11 @@ const DayForecast = ({
   getUVIndexLabel,
   translateMoonPhase,
 }) => {
+  // Calculate max UV from hourly data
+  const maxHourlyUV = day.hour && day.hour.length > 0 
+    ? Math.max(...day.hour.map(hour => hour.uv || 0))
+    : day.day.uv;
+
   return (
     <div className="card p-4 rounded-lg shadow-md transition-all hover:shadow-lg">
       <div
@@ -45,8 +50,8 @@ const DayForecast = ({
             <p>{toPersianDigits(day.day.daily_chance_of_rain)}%</p>
           </div>
           <div className="text-center p-2 rounded-lg bg-gray-50">
-            <p className="font-semibold">UV</p>
-            <p className={`font-bold ${getUVIndexColor(day.day.uv)}`}>{getUVIndexLabel(day.day.uv)}</p>
+            <p className="font-semibold">اشعه فرابنفش</p>
+            <p className={`font-bold ${getUVIndexColor(maxHourlyUV)}`}>{getUVIndexLabel(maxHourlyUV)} ({toPersianDigits(maxHourlyUV)})</p>
           </div>
         </div>
       </div>

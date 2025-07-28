@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "title": "خدمات شهرداری",
+    "titleEn": "Municipal Services",
+    "description": "تامین آب، مدیریت زباله و خدمات نگهداری شهری برای تمام ساکنان روستا.",
+    "contact": "+98-XXX-XXXX",
+    "hours": "دوشنبه - جمعه: 8:00 - 16:00",
+    "category": "municipal",
+    "icon": "building",
+    "color": "primary"
+  },
+  {
+    "id": 2,
+    "title": "خدمات بهداشتی",
+    "titleEn": "Healthcare Services",
+    "description": "کلینیک محلی ارائه‌دهنده خدمات بهداشتی پایه و مراقبت‌های اورژانسی.",
+    "contact": "اورژانس: 115 | کلینیک: +98-XXX-XXXX",
+    "hours": "اورژانس: 24 ساعته | کلینیک: 8:00 - 18:00",
+    "category": "healthcare",
+    "icon": "heart",
+    "color": "red"
+  },
+  {
+    "id": 3,
+    "title": "خدمات آموزشی",
+    "titleEn": "Educational Services",
+    "description": "مراکز آموزش ابتدایی و متوسطه در روستای ما برای آموزش کودکان و نوجوانان.",
+    "contact": "دفتر مدرسه: +98-XXX-XXXX",
+    "hours": "دوشنبه - جمعه: 7:30 - 15:30",
+    "category": "education",
+    "icon": "book",
+    "color": "blue"
+  },
+  {
+    "id": 4,
+    "title": "حمل و نقل",
+    "titleEn": "Transportation",
+    "description": "برنامه زمانی حمل و نقل عمومی و مسیرهای دسترسی به شهرهای مجاور.",
+    "contact": "دفتر حمل و نقل: +98-XXX-XXXX",
+    "hours": "روزانه: 6:00 - 22:00",
+    "category": "transportation",
+    "icon": "truck",
+    "color": "indigo"
+  },
+  {
+    "id": 5,
+    "title": "مرکز فرهنگی",
+    "titleEn": "Cultural Center",
+    "description": "رویدادهای اجتماعی، خدمات کتابخانه و فعالیت‌های فرهنگی برای جامعه.",
+    "contact": "مرکز فرهنگی: +98-XXX-XXXX",
+    "hours": "سه‌شنبه - یکشنبه: 9:00 - 20:00",
+    "category": "cultural",
+    "icon": "library",
+    "color": "purple"
+  },
+  {
+    "id": 6,
+    "title": "پشتیبانی کشاورزی",
+    "titleEn": "Agricultural Support",
+    "description": "خدمات ترویج کشاورزی و پشتیبانی از کشاورزان محلی برای بهبود تولید.",
+    "contact": "دفتر کشاورزی: +98-XXX-XXXX",
+    "hours": "دوشنبه - جمعه: 7:00 - 15:00",
+    "category": "agriculture",
+    "icon": "leaf",
+    "color": "green"
+  }
+]

@@ -194,7 +194,7 @@ const WeatherPage = () => {
                 <div className="flex justify-between items-start mb-4">
                   <div>
                     <h2 className="text-3xl font-bold text-gray-900">
-                      آب و هوای فعلی در {weatherData.location.name}
+                      آب و هوای فعلی در دنگپیا
                     </h2>
                     <p className="text-gray-500">
                       آخرین بروزرسانی: {toPersianDigits(new Date(weatherData.current.last_updated_epoch * 1000).toLocaleTimeString('fa-IR'))}
