@@ -38,7 +38,8 @@
     "react-dom": "^18.3.1",
     "react-helmet": "^6.1.0",
     "react-leaflet": "^4.2.1",
-    "styled-components": "^6.1.19"
+    "styled-components": "^6.1.19",
+    "use-debounce": "^10.0.5"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.21",

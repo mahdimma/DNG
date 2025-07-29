@@ -1,8 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 import GalleryImageCard from "./GalleryImageCard";
 import GalleryVideoCard from "./GalleryVideoCard";
 
-const GalleryMediaCard = ({ media, index, onClick }) => {
+const GalleryMediaCard = memo(({ media, index, onClick }) => {
   // Determine if this is a video or image based on the media type or file extension
   const isVideo = media.type === 'video' || 
                   (media.url && (
@@ -29,6 +29,8 @@ const GalleryMediaCard = ({ media, index, onClick }) => {
       onClick={onClick}
     />
   );
-};
+});
+
+GalleryMediaCard.displayName = 'GalleryMediaCard';
 
 export default GalleryMediaCard;

@@ -1,6 +1,9 @@
 import { useMemo } from "react";
 import galleryJsonData from "../../content/gallery.json";
 
+// Search cache for performance optimization
+const searchCache = new Map();
+
 const useGalleryData = () => {
   // Transform the imported JSON data into a dynamic format
   const galleryData = useMemo(() => {
@@ -53,29 +56,32 @@ const useGalleryData = () => {
   };
 
   const searchImages = (searchTerm) => {
+    // Cache search results for performance
+    if (searchCache.has(searchTerm)) {
+      return searchCache.get(searchTerm);
+    }
+    
     if (!searchTerm) return [];
     const term = searchTerm.toLowerCase();
     
-    return galleryData.categories
+    // Pre-filter categories to only process necessary ones
+    const results = galleryData.categories
       .flatMap(category => 
         category.images
+          // Use faster conditionals - check title first as most likely match
           .filter(image => {
-            // Check title
-            const titleMatch = image.title && image.title.toLowerCase().includes(term);
-            
-            // Check description
-            const descriptionMatch = image.description && image.description.toLowerCase().includes(term);
-            
-            // Check tags
-            const tagsMatch = image.tags && Array.isArray(image.tags) && 
-              image.tags.some(tag => tag && tag.toLowerCase().includes(term));
-            
-            // Check photographer/videographer based on media type
-            const creatorMatch = image.type === 'video' 
+            if (image.title && image.title.toLowerCase().includes(term)) return true;
+            if (image.description && image.description.toLowerCase().includes(term)) return true;
+            // Only check tags if the above failed
+            if (image.tags && Array.isArray(image.tags)) {
+              for (const tag of image.tags) {
+                if (tag && tag.toLowerCase().includes(term)) return true;
+              }
+            }
+            // Only check creator as last resort
+            return image.type === 'video' 
               ? (image.videographer && image.videographer.toLowerCase().includes(term))
               : (image.photographer && image.photographer.toLowerCase().includes(term));
-            
-            return titleMatch || descriptionMatch || tagsMatch || creatorMatch;
           })
           .map(image => ({
             ...image,
@@ -83,6 +89,14 @@ const useGalleryData = () => {
             categoryTitle: category.titlePersian
           }))
       );
+    
+    // Cache the results with a size limit to prevent memory issues
+    if (searchCache.size > 50) {
+      const firstKey = searchCache.keys().next().value;
+      searchCache.delete(firstKey);
+    }
+    searchCache.set(searchTerm, results);
+    return results;
   };
 
   const getStatistics = () => {
@@ -101,6 +115,10 @@ const useGalleryData = () => {
     };
   };
 
+  const clearSearchCache = () => {
+    searchCache.clear();
+  };
+
   return {
     galleryData,
     loading: false,
@@ -109,7 +127,8 @@ const useGalleryData = () => {
     getFeaturedImages,
     getAllImages,
     searchImages,
-    getStatistics
+    getStatistics,
+    clearSearchCache
   };
 };
 

@@ -1,42 +1,21 @@
-import React, { useState, useCallback, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { useDebounce } from 'use-debounce';
 
 const GallerySearchBar = ({ onSearch, placeholder = "جستجو در تصاویر..." }) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const debounceRef = useRef(null);
+  const [debouncedSearchTerm] = useDebounce(searchTerm, 500);
 
-  // Debounced search function to reduce lag
-  const debouncedSearch = useCallback((value) => {
-    if (debounceRef.current) {
-      clearTimeout(debounceRef.current);
-    }
-    
-    debounceRef.current = setTimeout(() => {
-      onSearch(value);
-    }, 300); // 300ms delay
-  }, [onSearch]);
-
-  const handleSearch = useCallback((e) => {
-    const value = e.target.value;
-    setSearchTerm(value);
-    debouncedSearch(value);
-  }, [debouncedSearch]);
-
-  const clearSearch = useCallback(() => {
-    setSearchTerm("");
-    if (debounceRef.current) {
-      clearTimeout(debounceRef.current);
-    }
-    onSearch("");
-  }, [onSearch]);
-
-  // Cleanup timeout on unmount
   useEffect(() => {
-    return () => {
-      if (debounceRef.current) {
-        clearTimeout(debounceRef.current);
-      }
-    };
-  }, []);
+    onSearch(debouncedSearchTerm);
+  }, [debouncedSearchTerm, onSearch]);
+
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const clearSearch = () => {
+    setSearchTerm("");
+  };
 
   return (
     <div className="mb-8 max-w-md mx-auto">
