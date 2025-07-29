@@ -1,18 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useRef, useEffect } from "react";
 
 const GallerySearchBar = ({ onSearch, placeholder = "جستجو در تصاویر..." }) => {
   const [searchTerm, setSearchTerm] = useState("");
+  const debounceRef = useRef(null);
 
-  const handleSearch = (e) => {
+  // Debounced search function to reduce lag
+  const debouncedSearch = useCallback((value) => {
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
+    }
+    
+    debounceRef.current = setTimeout(() => {
+      onSearch(value);
+    }, 300); // 300ms delay
+  }, [onSearch]);
+
+  const handleSearch = useCallback((e) => {
     const value = e.target.value;
     setSearchTerm(value);
-    onSearch(value);
-  };
+    debouncedSearch(value);
+  }, [debouncedSearch]);
 
-  const clearSearch = () => {
+  const clearSearch = useCallback(() => {
     setSearchTerm("");
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
+    }
     onSearch("");
-  };
+  }, [onSearch]);
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (debounceRef.current) {
+        clearTimeout(debounceRef.current);
+      }
+    };
+  }, []);
 
   return (
     <div className="mb-8 max-w-md mx-auto">
@@ -29,6 +53,8 @@ const GallerySearchBar = ({ onSearch, placeholder = "جستجو در تصاوی�
           onChange={handleSearch}
           placeholder={placeholder}
           className="form-input pr-10 pl-10 text-center focus:ring-primary-500 focus:border-primary-500"
+          autoComplete="off"
+          spellCheck={false}
         />
         
         {searchTerm && (

@@ -16,13 +16,17 @@ const DemographicsSection = () => {
     statisticalCode: "0201030001055015168"
   }
 
+  const formatNumber = (num) => {
+    return num.toLocaleString('fa-IR');
+  };
+
   const stats = [
     {
       label: "جمعیت کل",
-      value: demographicData.totalPopulation.toLocaleString('fa-IR'),
+      value: formatNumber(demographicData.totalPopulation),
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 515.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
         </svg>
       ),
       color: "bg-blue-500",
@@ -31,7 +35,7 @@ const DemographicsSection = () => {
     },
     {
       label: "مردان",
-      value: demographicData.male.toLocaleString('fa-IR'),
+      value: formatNumber(demographicData.male),
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -43,7 +47,7 @@ const DemographicsSection = () => {
     },
     {
       label: "زنان",
-      value: demographicData.female.toLocaleString('fa-IR'),
+      value: formatNumber(demographicData.female),
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -55,7 +59,7 @@ const DemographicsSection = () => {
     },
     {
       label: "تعداد خانوار",
-      value: demographicData.households.toLocaleString('fa-IR'),
+      value: formatNumber(demographicData.households),
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -109,10 +113,10 @@ const DemographicsSection = () => {
               <div className="flex items-center">
                 <div className="w-3 h-3 bg-indigo-500 rounded-full ml-2"></div>
                 <span className="text-gray-600">مردان</span>
-                <span className="font-bold text-indigo-600 mr-2">{demographicData.male.toLocaleString('fa-IR')}</span>
+                <span className="font-bold text-indigo-600 mr-2">{formatNumber(demographicData.male)}</span>
               </div>
               <div className="flex items-center">
-                <span className="font-bold text-pink-600 ml-2">{demographicData.female.toLocaleString('fa-IR')}</span>
+                <span className="font-bold text-pink-600 ml-2">{formatNumber(demographicData.female)}</span>
                 <span className="text-gray-600">زنان</span>
                 <div className="w-3 h-3 bg-pink-500 rounded-full mr-2"></div>
               </div>
@@ -137,10 +141,10 @@ const DemographicsSection = () => {
             {/* Percentages */}
             <div className="flex items-center justify-between mt-3">
               <span className="text-sm text-indigo-600 font-medium">
-                {((demographicData.male / demographicData.totalPopulation) * 100).toFixed(1).toLocaleString('fa-IR')}%
+                {formatNumber(parseFloat(((demographicData.male / demographicData.totalPopulation) * 100).toFixed(1)))}%
               </span>
               <span className="text-sm text-pink-600 font-medium">
-                {((demographicData.female / demographicData.totalPopulation) * 100).toFixed(1).toLocaleString('fa-IR')}%
+                {formatNumber(parseFloat(((demographicData.female / demographicData.totalPopulation) * 100).toFixed(1)))}%
               </span>
             </div>
           </div>
@@ -193,13 +197,13 @@ const DemographicsSection = () => {
             <div className="bg-blue-50 rounded-lg p-4">
               <div className="text-sm text-gray-600 mb-2">میانگین اعضای خانوار:</div>
               <div className="text-2xl font-bold text-blue-600">
-                {(demographicData.totalPopulation / demographicData.households).toFixed(1).toLocaleString('fa-IR')} نفر
+                {formatNumber(parseFloat((demographicData.totalPopulation / demographicData.households).toFixed(1)))} نفر
               </div>
             </div>
             <div className="bg-green-50 rounded-lg p-4">
               <div className="text-sm text-gray-600 mb-2">نسبت جنسی:</div>
               <div className="text-lg font-semibold text-green-600">
-                {((demographicData.male / demographicData.female) * 100).toFixed(0).toLocaleString('fa-IR')} مرد به ازای هر ۱۰۰ زن
+                {formatNumber(parseFloat(((demographicData.male / demographicData.female) * 100).toFixed(1)))} مرد به ازای هر ۱۰۰ زن
               </div>
             </div>
           </div>
