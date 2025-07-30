@@ -2,6 +2,7 @@
  * @type {import('gatsby').GatsbyConfig}
  */
 module.exports = {
+  pathPrefix: "/DANG",
   siteMetadata: {
     title: `روستای دانگپیا`,
     description: `وبسایت رسمی روستای دانگپیا`,
