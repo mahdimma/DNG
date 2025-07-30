@@ -3,6 +3,52 @@ import { graphql, Link } from "gatsby"
 import Layout from "../components/Layout"
 import HeroSection from "../components/HeroSection"
 
+// Utility function to convert Gregorian date to Persian date
+const toPersianDate = (date) => {
+  try {
+    return new Intl.DateTimeFormat('fa-IR', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    }).format(new Date(date))
+  } catch (error) {
+    return date
+  }
+}
+
+// Utility function to convert Gregorian date to Persian short date
+const toPersianShortDate = (date) => {
+  try {
+    return new Intl.DateTimeFormat('fa-IR', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+    }).format(new Date(date))
+  } catch (error) {
+    return date
+  }
+}
+
+// Function to get Persian date from event - either from persianDate field or convert from eventDate
+const getEventPersianDate = (event) => {
+  // If persianDate is available in frontmatter, use it directly
+  if (event.frontmatter.persianDate) {
+    return event.frontmatter.persianDate
+  }
+  // Otherwise, convert from Gregorian eventDate
+  return toPersianDate(event.frontmatter.eventDate)
+}
+
+// Function to get Persian short date from event - either from persianDate field or convert from eventDate
+const getEventPersianShortDate = (event) => {
+  // If persianDate is available in frontmatter, use it directly
+  if (event.frontmatter.persianDate) {
+    return event.frontmatter.persianDate
+  }
+  // Otherwise, convert from Gregorian eventDate
+  return toPersianShortDate(event.frontmatter.eventDate)
+}
+
 const EventsPage = ({ data }) => {
   const events = data?.allMarkdownRemark?.nodes || []
   const [selectedCategory, setSelectedCategory] = useState("همه")
@@ -19,18 +65,27 @@ const EventsPage = ({ data }) => {
   const currentEvents = events.filter(event => {
     const eventDate = new Date(event.frontmatter.eventDate)
     eventDate.setHours(0, 0, 0, 0)
-    return eventDate.getTime() === today.getTime()
+    const todayTime = today.getTime()
+    const eventTime = eventDate.getTime()
+    console.log('Checking event:', event.frontmatter.title, 'Event date:', eventTime, 'Today:', todayTime, 'Match:', eventTime === todayTime)
+    return eventTime === todayTime
   })
   
-  const upcomingEvents = events.filter(
-    event => new Date(event.frontmatter.eventDate) >= tomorrow
-  )
+  const upcomingEvents = events.filter(event => {
+    const eventDate = new Date(event.frontmatter.eventDate)
+    eventDate.setHours(0, 0, 0, 0)
+    return eventDate.getTime() >= tomorrow.getTime()
+  })
   
   const pastEvents = events.filter(event => {
     const eventDate = new Date(event.frontmatter.eventDate)
     eventDate.setHours(0, 0, 0, 0)
     return eventDate.getTime() < today.getTime()
   })
+
+  console.log('Today events:', currentEvents.length, currentEvents.map(e => e.frontmatter.title))
+  console.log('Upcoming events:', upcomingEvents.length)
+  console.log('Past events:', pastEvents.length)
 
   // Get unique categories from events
   const categories = useMemo(() => {
@@ -147,11 +202,19 @@ const EventsPage = ({ data }) => {
                 {event.frontmatter.category}
               </span>
             )}
-            <div className="flex items-center text-sm text-green-600 font-medium">
-              <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              {currentTime.toLocaleTimeString('fa-IR', { hour: '2-digit', minute: '2-digit' })}
+            <div className="flex flex-col items-end gap-1">
+              <div className="flex items-center text-sm text-green-600 font-medium">
+                <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                {getEventPersianShortDate(event)}
+              </div>
+              <div className="flex items-center text-xs text-gray-500">
+                <svg className="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                {currentTime.toLocaleTimeString('fa-IR', { hour: '2-digit', minute: '2-digit' })}
+              </div>
             </div>
           </div>
 
@@ -286,7 +349,7 @@ const EventsPage = ({ data }) => {
               <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
-              {event.frontmatter.eventDate}
+              {getEventPersianShortDate(event)}
             </div>
           </div>
 
@@ -729,8 +792,9 @@ export const query = graphql`
         }
         frontmatter {
           title
-          date(formatString: "MMMM DD, YYYY")
-          eventDate(formatString: "MMMM DD, YYYY")
+          date
+          eventDate
+          persianDate
           eventTime
           location
           organizer

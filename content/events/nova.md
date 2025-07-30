@@ -2,12 +2,13 @@
 title: "جلسه ماهانه شورای روستا"
 date: "2025-07-15"
 type: "event"
-eventDate: "2025-08-01"
-persianDate: "۱۱ مرداد ۱۴۰۴"
-eventTime: "۱۹:۰۰ - ۲۱:۰۰"
+eventDate: "2025-07-31"
+persianDate: "۱۰ مرداد ۱۴۰۴"
+eventTime: "۰۰:۰۰ - ۰۴:۰۰"
 location: "سالن روستا"
 organizer: "شورای روستا"
 featured: false
+category: "شورای روستا"
 ---
 
 # جلسه ماهانه شورای روستا

@@ -3,11 +3,11 @@ title: "جشنواره سالانه برداشت ۱۴۰۴"
 date: "2025-01-15"
 type: "event"
 eventDate: "2025-09-20"
+persianDate: "۲۹ شهریور ۱۴۰۴"
 eventTime: "۱۰:۰۰ - ۲۰:۰۰"
 location: "میدان مرکزی روستا"
 organizer: "کمیته فرهنگی"
 featured: true
-category: "جشنواره‌ها"
 ---
 
 # جشنواره سالانه برداشت ۱۴۰۴
