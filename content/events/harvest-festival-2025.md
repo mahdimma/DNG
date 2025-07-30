@@ -7,6 +7,7 @@ eventTime: "۱۰:۰۰ - ۲۰:۰۰"
 location: "میدان مرکزی روستا"
 organizer: "کمیته فرهنگی"
 featured: true
+category: "جشنواره‌ها"
 ---
 
 # جشنواره سالانه برداشت ۱۴۰۴

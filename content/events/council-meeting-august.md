@@ -7,6 +7,7 @@ eventTime: "۱۹:۰۰ - ۲۱:۰۰"
 location: "سالن روستا"
 organizer: "شورای روستا"
 featured: false
+category: "شورای روستا"
 ---
 
 # جلسه ماهانه شورای روستا
