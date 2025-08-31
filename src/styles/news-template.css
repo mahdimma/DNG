@@ -1,0 +1,232 @@
+/* Article Template Specific Styles */
+
+.article-content {
+  /* Typography improvements */
+  color: #374151;
+  line-height: 1.75;
+  font-family: 'IRANSans', 'Tahoma', sans-serif;
+}
+
+.article-content h1,
+.article-content h2,
+.article-content h3,
+.article-content h4,
+.article-content h5,
+.article-content h6 {
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+  line-height: 1.3;
+}
+
+.article-content h1 { font-size: 1.875rem; }
+.article-content h2 { font-size: 1.5rem; }
+.article-content h3 { font-size: 1.25rem; }
+.article-content h4 { font-size: 1.125rem; }
+
+.article-content p {
+  margin-bottom: 1.5rem;
+  line-height: 1.75;
+  text-align: justify;
+}
+
+.article-content ul,
+.article-content ol {
+  margin-bottom: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+.article-content ul {
+  list-style-type: disc;
+}
+
+.article-content ol {
+  list-style-type: decimal;
+}
+
+.article-content li {
+  margin-bottom: 0.5rem;
+  line-height: 1.75;
+}
+
+.article-content blockquote {
+  border-right: 4px solid #667eea;
+  background-color: #f9fafb;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.article-content blockquote p {
+  margin-bottom: 0;
+}
+
+.article-content a {
+  color: #667eea;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.article-content a:hover {
+  color: #4338ca;
+}
+
+.article-content img {
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+  max-width: 100%;
+  height: auto;
+}
+
+.article-content table {
+  width: 100%;
+  margin-bottom: 1.5rem;
+  border-collapse: collapse;
+}
+
+.article-content th,
+.article-content td {
+  border: 1px solid #d1d5db;
+  padding: 0.75rem 1rem;
+  text-align: right;
+}
+
+.article-content th {
+  background-color: #f3f4f6;
+  font-weight: 600;
+}
+
+.article-content code {
+  background-color: #f3f4f6;
+  color: #374151;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Monaco, Consolas, monospace;
+}
+
+.article-content pre {
+  background-color: #f3f4f6;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+}
+
+.article-content pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+/* Reading progress indicator */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  z-index: 1000;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Focus styles for accessibility */
+.article-content a:focus,
+button:focus,
+input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #667eea, 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+/* Print styles */
+@media print {
+  .article-content {
+    color: black;
+  }
+  
+  .article-content a {
+    color: black;
+    text-decoration: none;
+  }
+  
+  .article-content a:after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
+  }
+}
+
+/* Mobile improvements */
+@media (max-width: 640px) {
+  .article-content {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+  
+  .article-content h1 { font-size: 1.5rem; }
+  .article-content h2 { font-size: 1.25rem; }
+  .article-content h3 { font-size: 1.125rem; }
+  
+  .article-content blockquote {
+    border-right-width: 2px;
+    padding: 0.75rem;
+  }
+}
+
+/* Animation for loading states */
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 1.5s ease-in-out infinite;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200px 100%;
+}
+
+/* Additional enhancements */
+.news-card-hover {
+  transition: all 0.3s ease;
+}
+
+.news-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.search-focus-animation {
+  transition: all 0.2s ease;
+}
+
+.search-focus-animation:focus {
+  transform: scale(1.02);
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

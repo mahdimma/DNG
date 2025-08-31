@@ -26,7 +26,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const result = await graphql(`
     query {
-      allMarkdownRemark {
+      allMarkdownRemark(sort: { frontmatter: { date: DESC } }) {
         edges {
           node {
             fields {
@@ -34,6 +34,8 @@ exports.createPages = async ({ graphql, actions }) => {
             }
             frontmatter {
               type
+              title
+              date
             }
           }
         }
@@ -44,18 +46,40 @@ exports.createPages = async ({ graphql, actions }) => {
   if (result.errors) {
     throw result.errors;
   }
-  result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+
+  const allNodes = result.data.allMarkdownRemark.edges;
+  const newsNodes = allNodes.filter(({ node }) => node.frontmatter.type === "news");
+  const eventNodes = allNodes.filter(({ node }) => node.frontmatter.type === "event");
+
+  // Create news article pages with navigation context
+  newsNodes.forEach(({ node }, index) => {
     if (!node.fields || !node.fields.slug) {
-      // Skip nodes without a slug
       return;
     }
-    const templatePath = node.frontmatter.type === "news"
-      ? path.resolve("src/templates/news-article.js")
-      : path.resolve("src/templates/event.js");
+
+    const previous = index === newsNodes.length - 1 ? null : newsNodes[index + 1].node;
+    const next = index === 0 ? null : newsNodes[index - 1].node;
 
     createPage({
       path: node.fields.slug,
-      component: templatePath,
+      component: path.resolve("src/templates/news-article.js"),
+      context: {
+        slug: node.fields.slug,
+        previous,
+        next,
+      },
+    });
+  });
+
+  // Create event pages
+  eventNodes.forEach(({ node }) => {
+    if (!node.fields || !node.fields.slug) {
+      return;
+    }
+
+    createPage({
+      path: node.fields.slug,
+      component: path.resolve("src/templates/event.js"),
       context: {
         slug: node.fields.slug,
       },
