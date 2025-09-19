@@ -5,12 +5,12 @@ const GalleryIntroSection = () => {
     <section className="text-center mb-16 max-w-4xl mx-auto">
       <div className="mb-8">
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 animate-slide-in">
-          گالری روستای دانگپیا
+          گالری روستای دنگپیا
         </h1>
         <div className="w-24 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 mx-auto rounded-full mb-8"></div>
         
         <p className="text-lg md:text-xl text-gray-600 leading-relaxed mb-8 animate-fade-in">
-          زیبایی‌های روستای دانگپیا را در این گالری تصاویر مشاهده کنید. از زندگی روزمره تا رویدادهای ویژه، 
+          زیبایی‌های روستای دنگپیا را در این گالری تصاویر مشاهده کنید. از زندگی روزمره تا رویدادهای ویژه، 
           این تصاویر نمایانگر روح جامعه ما هستند.
         </p>
       </div>

@@ -38,7 +38,7 @@ const MapsPage = ({ data }) => {
     : locations.filter(location => location.type === filter)
 
   return (
-    <Layout title="نقشه روستا" description="نقشه تعاملی و راهنمای موقعیت مکانی روستای دانگپیا">
+    <Layout title="نقشه روستا" description="نقشه تعاملی و راهنمای موقعیت مکانی روستای دنگپیا">
       <HeroSection 
         title="نقشه روستا"
         subtitle="نقشه ای کامل از کل روستا"
@@ -49,7 +49,7 @@ const MapsPage = ({ data }) => {
         <div className="text-center mb-12">
             <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">نقشه و موقعیت‌های روستا</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              روستای دانگپیا را با نقشه‌های تعاملی و راهنمای موقعیت مکانی ما کاوش کنید.
+              روستای دنگپیا را با نقشه‌های تعاملی و راهنمای موقعیت مکانی ما کاوش کنید.
               ساختمان‌های مهم، خدمات و نقاط مورد علاقه را پیدا کنید.
             </p>
         </div>

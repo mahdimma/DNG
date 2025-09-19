@@ -7,7 +7,7 @@ const Footer = () => (
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* About Section */}
         <div className="space-y-4">
-          <h3 className="text-xl font-bold text-primary-400">روستای دانگپیا</h3>
+          <h3 className="text-xl font-bold text-primary-400">روستای دنگپیا</h3>
           <p className="text-gray-300 leading-relaxed">
             به روستای زیبای ما خوش آمدید. با آخرین اخبار، رویدادها و خدمات در ارتباط باشید.
           </p>
@@ -117,10 +117,10 @@ const Footer = () => (
       {/* Copyright */}
       <div className="border-t border-gray-700 mt-8 pt-8 text-center">
         <p className="text-gray-400">
-          © {new Date().getFullYear()} روستای دانگپیا. تمامی حقوق محفوظ است.
+          © {new Date().getFullYear()} روستای دنگپیا. تمامی حقوق محفوظ است.
         </p>
         <p className="text-sm text-gray-500 mt-2">
-          طراحی شده با ❤️ برای جامعه دانگپیا
+          طراحی شده با ❤️ برای جامعه دنگپیا
         </p>
       </div>
     </div>

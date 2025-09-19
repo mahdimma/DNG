@@ -36,7 +36,7 @@ const NewsPage = ({ data }) => {
   ]
 
   return (
-    <Layout title="آخرین اخبار" description="از جدیدترین رویدادها و اخبار روستای دانگپیا مطلع باشید">
+    <Layout title="آخرین اخبار" description="از جدیدترین رویدادها و اخبار روستای دنگپیا مطلع باشید">
       {/* Hero Section */}
       <HeroSection 
         title="آخرین اخبار"
@@ -50,7 +50,7 @@ const NewsPage = ({ data }) => {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <PageHeader 
             title="مرکز اخبار روستا"
-            subtitle={`آخرین اطلاعات، رویدادها و اعلامیه‌های مهم روستای دانگپیا را اینجا دنبال کنید${totalArticles > 0 ? ` (${totalArticles} خبر)` : ''}`}
+            subtitle={`آخرین اطلاعات، رویدادها و اعلامیه‌های مهم روستای دنگپیا را اینجا دنبال کنید${totalArticles > 0 ? ` (${totalArticles} خبر)` : ''}`}
           />
           
           <EnhancedNewsSection 
@@ -171,7 +171,7 @@ const NewsPage = ({ data }) => {
               از آخرین اخبار مطلع باشید
             </h2>
             <p className="text-xl text-green-100 mb-8 max-w-2xl mx-auto leading-relaxed">
-              با مراجعه منظم به این صفحه، از آخرین اخبار، رویدادها و اطلاعیه‌های مهم روستای دانگپیا مطلع شوید
+              با مراجعه منظم به این صفحه، از آخرین اخبار، رویدادها و اطلاعیه‌های مهم روستای دنگپیا مطلع شوید
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">

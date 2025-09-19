@@ -90,11 +90,11 @@ const ServicesPage = () => {
   }
 
   return (
-    <Layout title="خدمات" description="خدمات مختلف موجود برای ساکنان روستای دانگپیا را کشف کنید">
+    <Layout title="خدمات" description="خدمات مختلف موجود برای ساکنان روستای دنگپیا را کشف کنید">
       {/* Hero Section */}
       <HeroSection 
         title="خدمات روستا"
-        subtitle="روستای دانگپیا مجموعه‌ای جامع از خدمات را برای برآوردن نیازهای جامعه ارائه می‌دهد"
+        subtitle="روستای دنگپیا مجموعه‌ای جامع از خدمات را برای برآوردن نیازهای جامعه ارائه می‌دهد"
         showButtons={false}
         showScrollIndicator={true}
       />

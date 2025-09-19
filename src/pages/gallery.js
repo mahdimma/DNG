@@ -128,7 +128,7 @@ const GalleryPage = () => {
     >
       <HeroSection 
         title="گالری تصاویر"
-        subtitle="تصاویری از زیبایی های روستای دانگپیا"
+        subtitle="تصاویری از زیبایی های روستای دنگپیا"
         showButtons={false}
         showScrollIndicator={true}
       />

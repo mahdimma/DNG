@@ -16,7 +16,7 @@ const IndexPage = ({ data }) => {
     <Layout title="خانه">
       {/* Hero Section */}
       <HeroSection 
-        title="به روستای دانگپیا خوش آمدید"
+        title="به روستای دنگپیا خوش آمدید"
         subtitle="زیبایی، فرهنگ و جامعه روستای تاریخی ما را کشف کنید"
         showButtons={true}
         primaryButton={{
@@ -40,7 +40,7 @@ const IndexPage = ({ data }) => {
               امکانات روستا
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              روستای دانگپیا با امکانات مدرن و خدمات باکیفیت در خدمت ساکنان است
+              روستای دنگپیا با امکانات مدرن و خدمات باکیفیت در خدمت ساکنان است
             </p>
           </div>
           

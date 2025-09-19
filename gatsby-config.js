@@ -4,8 +4,8 @@
 module.exports = {
   pathPrefix: "/DANG",
   siteMetadata: {
-    title: `روستای دانگپیا`,
-    description: `وبسایت رسمی روستای دانگپیا`,
+    title: `روستای دنگپیا`,
+    description: `وبسایت رسمی روستای دنگپیا`,
     author: `@dangepia`,
     siteUrl: `https://dangepia.ir`,
   },

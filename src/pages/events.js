@@ -430,7 +430,7 @@ const EventsPage = ({ data }) => {
   return (
     <Layout
       title="رویدادها"
-      description="رویدادها، جشنواره‌ها و گردهمایی‌های جامعه روستای دانگپیا را کشف کنید"
+      description="رویدادها، جشنواره‌ها و گردهمایی‌های جامعه روستای دنگپیا را کشف کنید"
     >
       {/* Enhanced Hero Section */}
       <HeroSection

@@ -247,7 +247,7 @@ const NewsArticleTemplate = ({ data, pageContext }) => {
                 از آخرین اخبار مطلع باشید
               </h4>
               <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-                برای دریافت جدیدترین اخبار، رویدادها و اطلاعیه‌های مهم روستای دانگپیا، به صفحه اخبار مراجعه کنید
+                برای دریافت جدیدترین اخبار، رویدادها و اطلاعیه‌های مهم روستای دنگپیا، به صفحه اخبار مراجعه کنید
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link 

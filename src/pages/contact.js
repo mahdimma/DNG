@@ -8,7 +8,7 @@ const ContactPage = () => {
   const [state, handleSubmit] = useForm("manbjnyb")
 
   return (
-    <Layout title="تماس با ما" description="با مسئولان و رهبران جامعه روستای دانگپیا در تماس باشید">
+    <Layout title="تماس با ما" description="با مسئولان و رهبران جامعه روستای دنگپیا در تماس باشید">
       <HeroSection 
         title="تماس با ما"
         subtitle="راه های ارتباطی با ما"
@@ -183,8 +183,8 @@ const ContactPage = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                       </svg>
                       <span>
-                        دفتر روستای دانگپیا<br />
-                        خیابان اصلی، دانگپیا<br />
+                        دفتر روستای دنگپیا<br />
+                        خیابان اصلی، دنگپیا<br />
                         [کدپستی]، [استان]، ایران
                       </span>
                     </div>

@@ -39,7 +39,7 @@ const NewsTemplateDemo = () => {
         author: "مدیریت روستا",
         category: "توسعه"
       },
-      excerpt: "گزارش پیشرفت پروژه‌های توسعه زیرساخت‌های روستای دانگپیا.",
+      excerpt: "گزارش پیشرفت پروژه‌های توسعه زیرساخت‌های روستای دنگپیا.",
       fields: {
         slug: "/news/infrastructure-development"
       }
