@@ -1,7 +1,7 @@
 ---
 title: "نشست هم‌اندیشی چشم‌انداز ۱۴۰۵"
 date: "2025-07-01"
-type: "meeting"
+type: "event"
 eventDate: "2025-07-19"
 persianDate: "۲۸ شهریور ۱۴۰۴"
 eventTime: "۱۴:۰۰ - ۱۸:۰۰"
