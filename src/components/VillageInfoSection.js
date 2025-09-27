@@ -3,41 +3,6 @@ import React from "react";
 const VillageInfoSection = () => {
   return (
     <section className="mb-16">
-      {/* Introduction Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12">
-        <div>
-          <h2 className="text-3xl font-bold text-gray-900 mb-6 flex items-center">
-            <div className="w-3 h-3 bg-primary-500 rounded-full ml-3"></div>
-            مقدمه
-          </h2>
-          <p className="text-lg text-gray-600 leading-relaxed text-justify">
-            دنگپیا، روستایی است از توابع بخش دابودشت شهرستان آمل در استان مازندران ایران.
-          </p>
-        </div>
-        <div className="card">
-          <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mb-6">
-            <svg className="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h8a2 2 0 012 2v2M7 7h10" />
-            </svg>
-          </div>
-          <h3 className="text-xl font-bold text-gray-900 mb-4">مکان‌یابی</h3>
-          <p className="text-gray-600">
-            این روستا در دهستان دابوی جنوبی قرار دارد و براساس سرشماری مرکز آمار ایران در سال ۱۳۸۵، جمعیت آن ۶۱۷ نفر (۱۵۷خانوار) بوده‌است.
-          </p>
-        </div>
-      </div>
-
-      {/* Population Section */}
-      <div className="mb-12">
-        <h2 className="text-3xl font-bold text-gray-900 mb-6 flex items-center">
-          <div className="w-3 h-3 bg-secondary-500 rounded-full ml-3"></div>
-          جمعیت
-        </h2>
-        <p className="text-lg text-gray-600 leading-relaxed text-justify">
-          این روستا در دهستان دابوی جنوبی قرار دارد و براساس سرشماری مرکز آمار ایران در سال ۱۳۸۵، جمعیت آن ۶۱۷ نفر (۱۵۷خانوار) بوده‌است.
-        </p>
-      </div>
-
       {/* Economy Section */}
       <div className="mb-12">
         <h2 className="text-3xl font-bold text-gray-900 mb-6 flex items-center">
@@ -153,7 +118,7 @@ const VillageInfoSection = () => {
             </div>
             <h3 className="font-bold text-gray-900 mb-2">شغل</h3>
             <p className="text-gray-600 text-sm">
-              دنگپیا دارای فرصت‌های شغلی دائمی و فصلی است. از فرصت‌های شغلی فصلی می‌توان نیاز به کارگر در هنگام نشا و برداشت(امروزه ماشینی شده‌است) اشاره کرد. از فرصت‌های دائمی می‌توان به خرید یا زارع(کسی که با سهمی در برداشت زمین دیگران را کشت می‌کند) دیگران شدن اشاره کرد.
+              دنگپیا دارای فرصت‌های شغلی دائمی و فصلی است. از فرصت‌های شغلی فصلی می‌توان نیاز به کارگر در هنگام نشا و برداشت(امروزه ماشینی شده‌است) اشاره کرد. از فرصت‌های دائمی می‌توان به زارع(کسی که با سهمی در برداشت زمین دیگران را کشت می‌کند) دیگران شدن اشاره کرد.
             </p>
           </div>
         </div>
@@ -176,7 +141,7 @@ const VillageInfoSection = () => {
             </div>
             <h3 className="font-bold text-gray-900 mb-2">حمام تاریخی</h3>
             <p className="text-gray-600 text-sm">
-              حمام تاریخی روستای دنگپیا که قدمت آن به دوره قاجاریه برمی‌گردد یکی از زیبایی‌های این روستا به‌شمار می‌رود. چندین سال است که نظراتی مبنی تغییر کاربری آن به موزه یا یک مکان آبی مدرن با طرح قدیمی بیان شده‌است ولی اقدامی صورت نگرفته‌است. متأسفانه این حمام تاریخی رها شده و به آن رسیدگی نمی‌شود.
+              حمام تاریخی روستای دنگپیا که قدمت آن به دوره قاجاریه برمی‌گردد یکی از زیبایی‌های این روستا به‌شمار می‌رود. چندین سال است که نظراتی مبنی تغییر کاربری آن به موزه یا یک مکان آبی مدرن با طرح قدیمی بیان شده‌است ولی اقدامی صورت نگرفته‌است. متأسفانه این حمام تاریخی در حال حاضر بدون بهره‌برداری است.
             </p>
           </div>
           
@@ -189,7 +154,7 @@ const VillageInfoSection = () => {
             </div>
             <h3 className="font-bold text-gray-900 mb-2">ازار دار</h3>
             <p className="text-gray-600 text-sm">
-              یکی از دیگر جاذبه‌های گردشگری این روستا درختی با قدمت بیش از هزار سال بود، در زبان محلی ازار دار نامیده می‌شد. متأسفانه این درخت در طوفان سال 95 صدمه دید و قطع شد.
+              یکی از دیگر جاذبه‌های گردشگری این روستا درختی با قدمت بیش از هزار سال بود که در زبان محلی ازار دار نامیده می‌شد. متأسفانه این درخت در طوفان سال 95 صدمه دید و قطع شد.
             </p>
           </div>
         </div>
