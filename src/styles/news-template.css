@@ -1,10 +1,43 @@
 /* Article Template Specific Styles */
 
+/* Enhanced Prose Styles for RTL and Persian */
+.prose {
+  direction: rtl;
+  text-align: right;
+}
+
+.prose :where(p):not(:where([class~="not-prose"] *)) {
+  text-align: justify;
+  hyphens: auto;
+  text-justify: inter-word;
+}
+
+.prose :where([class~="lead"]):not(:where([class~="not-prose"] *)) {
+  text-align: right;
+}
+
+.prose :where(ul):not(:where([class~="not-prose"] *)) {
+  padding-right: 1.5rem;
+  padding-left: 0;
+}
+
+.prose :where(ol):not(:where([class~="not-prose"] *)) {
+  padding-right: 1.5rem;
+  padding-left: 0;
+}
+
+.prose :where(blockquote):not(:where([class~="not-prose"] *)) {
+  border-right: 4px solid #667eea;
+  border-left: none;
+  padding-right: 1rem;
+  padding-left: 0;
+}
+
 .article-content {
   /* Typography improvements */
   color: #374151;
   line-height: 1.75;
-  font-family: 'IRANSans', 'Tahoma', sans-serif;
+  font-family: 'Vazirmatn', 'Tahoma', sans-serif;
 }
 
 .article-content h1,
@@ -52,8 +85,9 @@
 
 .article-content blockquote {
   border-right: 4px solid #667eea;
+  border-left: none;
   background-color: #f9fafb;
-  padding: 1rem;
+  padding: 1rem 1rem 1rem 0;
   margin-bottom: 1.5rem;
   font-style: italic;
 }
@@ -84,6 +118,7 @@
   width: 100%;
   margin-bottom: 1.5rem;
   border-collapse: collapse;
+  direction: rtl;
 }
 
 .article-content th,

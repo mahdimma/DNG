@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { graphql, Link } from "gatsby"
 import Layout from "../components/Layout"
 import PageHeader from "../components/PageHeader"
+import "../styles/news-template.css"
 
 const NewsArticleTemplate = ({ data, pageContext }) => {
   const article = data.markdownRemark
@@ -151,7 +152,7 @@ const NewsArticleTemplate = ({ data, pageContext }) => {
           </header>
 
           {/* Article Body */}
-          <div className="prose prose-lg max-w-none">
+          <div className="prose prose-lg max-w-none prose-headings:text-right prose-p:text-justify prose-ul:pr-6 prose-ol:pr-6 prose-blockquote:border-r-4 prose-blockquote:border-l-0 prose-blockquote:pr-4 prose-blockquote:pl-0">
             <div 
               className="article-content"
               dangerouslySetInnerHTML={{ __html: article.html }}

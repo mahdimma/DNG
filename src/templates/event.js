@@ -135,7 +135,7 @@ const EventTemplate = ({ data }) => {
 
         {/* Event Content */}
         <div 
-          className="prose prose-lg max-w-none text-gray-700 leading-relaxed"
+          className="prose prose-lg max-w-none text-gray-700 leading-relaxed prose-headings:text-right prose-p:text-justify prose-ul:pr-6 prose-ol:pr-6 prose-blockquote:border-r-4 prose-blockquote:border-l-0 prose-blockquote:pr-4 prose-blockquote:pl-0"
           dangerouslySetInnerHTML={{ __html: event.html }}
         />
 

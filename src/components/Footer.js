@@ -117,7 +117,7 @@ const Footer = () => (
       {/* Copyright */}
       <div className="border-t border-gray-700 mt-8 pt-8 text-center">
         <p className="text-gray-400">
-          © {new Date().getFullYear()} روستای دنگپیا. تمامی حقوق محفوظ است.
+          © {new Date().toLocaleDateString('fa-IR', { year: 'numeric' })} روستای دنگپیا. تمامی حقوق محفوظ است.
         </p>
         <p className="text-sm text-gray-500 mt-2">
           طراحی شده با ❤️ برای جامعه دنگپیا

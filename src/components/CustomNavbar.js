@@ -62,7 +62,8 @@ const CustomNavbar = () => {
         { name: "آب و هوا", path: "/weather" }
       ]
     },
-    { name: "تماس با ما", path: "/contact" }
+    { name: "تماس با ما", path: "/contact" },
+    { name: "شفافیت", path: "/financial"}
   ]
 
   return (
