@@ -9,8 +9,10 @@ const IndexPage = ({ data }) => {
   ).slice(0, 3) || []
   
   const upcomingEvents = data?.allMarkdownRemark?.nodes?.filter(node => 
-    node.frontmatter?.type === 'event'
-  ).slice(0, 3) || []
+  node.frontmatter?.type === 'event' && 
+  node.frontmatter?.eventDate &&
+  new Date(node.frontmatter.eventDate) > new Date()
+).slice(0, 3) || []
 
   return (
     <Layout title="خانه">
@@ -254,6 +256,7 @@ export const query = graphql`
           date(formatString: "MMMM DD, YYYY")
           title
           type
+          eventDate(formatString: "MMMM DD, YYYY")
         }
       }
     }

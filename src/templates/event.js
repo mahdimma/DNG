@@ -13,255 +13,188 @@ const EventTemplate = ({ data }) => {
       title={event.frontmatter.title}
       description={event.excerpt}
     >
-      <article style={{ maxWidth: 800, margin: `0 auto`, padding: `2rem 1rem` }}>
+      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Event Header */}
-        <header style={{ marginBottom: `3rem` }}>
-          <div style={{ marginBottom: `1rem` }}>
+        <header className="mb-12">
+          <div className="mb-6">
             <Link 
               to="/events"
-              style={{
-                color: `#667eea`,
-                textDecoration: `none`,
-                fontSize: `0.9rem`,
-                fontWeight: `bold`,
-              }}
+              className="text-primary-600 hover:text-primary-700 font-semibold inline-flex items-center"
             >
-              ← Back to Events
+              <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+              بازگشت به رویدادها
             </Link>
           </div>
           
-          <h1 style={{ 
-            fontSize: `2.5rem`,
-            lineHeight: `1.2`,
-            marginBottom: `1rem`,
-            color: `#2d3748`,
-          }}>
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
             {event.frontmatter.title}
           </h1>
           
           {/* Event Status */}
-          <div style={{ marginBottom: `1.5rem` }}>
+          <div className="mb-8">
             {isUpcoming && (
-              <span style={{
-                background: `#c6f6d5`,
-                color: `#22543d`,
-                padding: `0.5rem 1rem`,
-                borderRadius: `20px`,
-                fontSize: `0.9rem`,
-                fontWeight: `bold`,
-                display: `inline-block`,
-              }}>
-                🗓️ Upcoming Event
+              <span className="inline-flex items-center px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-semibold">
+                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                رویداد پیش رو
               </span>
             )}
             {isPast && (
-              <span style={{
-                background: `#e2e8f0`,
-                color: `#4a5568`,
-                padding: `0.5rem 1rem`,
-                borderRadius: `20px`,
-                fontSize: `0.9rem`,
-                fontWeight: `bold`,
-                display: `inline-block`,
-              }}>
-                📅 Past Event
+              <span className="inline-flex items-center px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-semibold">
+                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                رویداد گذشته
               </span>
             )}
           </div>
 
           {/* Event Details Box */}
-          <div style={{
-            background: `#f7fafc`,
-            border: `1px solid #e2e8f0`,
-            borderRadius: `8px`,
-            padding: `2rem`,
-            marginBottom: `2rem`,
-          }}>
-            <h3 style={{ 
-              marginBottom: `1.5rem`,
-              color: `#2d3748`,
-              borderBottom: `2px solid #667eea`,
-              paddingBottom: `0.5rem`,
-            }}>
-              Event Details
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 mb-8">
+            <h3 className="text-xl font-bold text-gray-900 mb-6 pb-2 border-b-2 border-primary-500">
+              جزئیات رویداد
             </h3>
             
-            <div style={{
-              display: `grid`,
-              gridTemplateColumns: `repeat(auto-fit, minmax(250px, 1fr))`,
-              gap: `1.5rem`,
-            }}>
-              <div>
-                <div style={{ 
-                  display: `flex`,
-                  alignItems: `center`,
-                  gap: `0.5rem`,
-                  marginBottom: `0.5rem`,
-                }}>
-                  <span style={{ fontSize: `1.2rem` }}>📅</span>
-                  <strong>Date & Time</strong>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="flex items-start">
+                <div className="flex-shrink-0 w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center ml-4">
+                  <svg className="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
                 </div>
-                <div style={{ color: `#4a5568`, marginLeft: `1.7rem` }}>
-                  {event.frontmatter.eventDate && (
-                    <div>{new Date(event.frontmatter.eventDate).toLocaleDateString('en-US', {
-                      weekday: 'long',
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                    })}</div>
-                  )}
-                  {event.frontmatter.eventTime && (
-                    <div>{event.frontmatter.eventTime}</div>
-                  )}
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2">تاریخ و زمان</h4>
+                  <div className="text-gray-600">
+                    {event.frontmatter.eventDate && (
+                      <div className="mb-1">
+                        {new Date(event.frontmatter.eventDate).toLocaleDateString('fa-IR', {
+                          weekday: 'long',
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric'
+                        })}
+                      </div>
+                    )}
+                    {event.frontmatter.eventTime && (
+                      <div>{event.frontmatter.eventTime}</div>
+                    )}
+                  </div>
                 </div>
               </div>
 
-              <div>
-                <div style={{ 
-                  display: `flex`,
-                  alignItems: `center`,
-                  gap: `0.5rem`,
-                  marginBottom: `0.5rem`,
-                }}>
-                  <span style={{ fontSize: `1.2rem` }}>📍</span>
-                  <strong>Location</strong>
+              <div className="flex items-start">
+                <div className="flex-shrink-0 w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center ml-4">
+                  <svg className="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
                 </div>
-                <div style={{ color: `#4a5568`, marginLeft: `1.7rem` }}>
-                  {event.frontmatter.location || 'Location TBA'}
-                </div>
-              </div>
-
-              <div>
-                <div style={{ 
-                  display: `flex`,
-                  alignItems: `center`,
-                  gap: `0.5rem`,
-                  marginBottom: `0.5rem`,
-                }}>
-                  <span style={{ fontSize: `1.2rem` }}>👥</span>
-                  <strong>Organizer</strong>
-                </div>
-                <div style={{ color: `#4a5568`, marginLeft: `1.7rem` }}>
-                  {event.frontmatter.organizer || 'Village Administration'}
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2">محل برگزاری</h4>
+                  <div className="text-gray-600">
+                    {event.frontmatter.location || 'محل تعیین نشده'}
+                  </div>
                 </div>
               </div>
 
-              <div>
-                <div style={{ 
-                  display: `flex`,
-                  alignItems: `center`,
-                  gap: `0.5rem`,
-                  marginBottom: `0.5rem`,
-                }}>
-                  <span style={{ fontSize: `1.2rem` }}>📰</span>
-                  <strong>Posted</strong>
+              <div className="flex items-start">
+                <div className="flex-shrink-0 w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center ml-4">
+                  <svg className="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                  </svg>
                 </div>
-                <div style={{ color: `#4a5568`, marginLeft: `1.7rem` }}>
-                  {event.frontmatter.date}
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2">برگزارکننده</h4>
+                  <div className="text-gray-600">
+                    {event.frontmatter.organizer || 'اداره روستا'}
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-start">
+                <div className="flex-shrink-0 w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center ml-4">
+                  <svg className="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2">تاریخ انتشار</h4>
+                  <div className="text-gray-600">
+                    {event.frontmatter.date}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
           
-          <hr style={{ border: `none`, borderTop: `2px solid #e2e8f0` }} />
+          <hr className="border-gray-200" />
         </header>
 
         {/* Event Content */}
         <div 
-          style={{
-            lineHeight: `1.8`,
-            fontSize: `1.1rem`,
-            color: `#2d3748`,
-          }}
+          className="prose prose-lg max-w-none text-gray-700 leading-relaxed"
           dangerouslySetInnerHTML={{ __html: event.html }}
         />
 
         {/* Action Buttons */}
         {isUpcoming && (
-          <div style={{
-            background: `#e6fffa`,
-            border: `1px solid #81e6d9`,
-            borderRadius: `8px`,
-            padding: `2rem`,
-            marginTop: `3rem`,
-            textAlign: `center`,
-          }}>
-            <h4 style={{ marginBottom: `1rem`, color: `#234e52` }}>
-              Interested in Attending?
+          <div className="bg-green-50 border border-green-200 rounded-lg p-8 mt-12 text-center">
+            <h4 className="text-xl font-bold text-green-900 mb-4">
+              علاقه‌مند به شرکت هستید؟
             </h4>
-            <p style={{ marginBottom: `1.5rem`, color: `#285e61` }}>
-              For more information or to register for this event, please contact us:
+            <p className="text-green-800 mb-6">
+              برای اطلاعات بیشتر یا ثبت‌نام در این رویداد، با ما تماس بگیرید:
             </p>
-            <div style={{ display: `flex`, gap: `1rem`, justifyContent: `center`, flexWrap: `wrap` }}>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a 
                 href="tel:+98XXXXXXXX"
-                style={{
-                  background: `#38b2ac`,
-                  color: `white`,
-                  padding: `0.75rem 1.5rem`,
-                  textDecoration: `none`,
-                  borderRadius: `5px`,
-                  fontWeight: `bold`,
-                }}
+                className="btn-primary inline-flex items-center justify-center"
               >
-                📞 Call Village Office
+                <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+                تماس با دفتر روستا
               </a>
               <Link 
                 to="/contact"
-                style={{
-                  background: `white`,
-                  color: `#38b2ac`,
-                  padding: `0.75rem 1.5rem`,
-                  textDecoration: `none`,
-                  borderRadius: `5px`,
-                  fontWeight: `bold`,
-                  border: `2px solid #38b2ac`,
-                }}
+                className="btn-secondary inline-flex items-center justify-center"
               >
-                ✉️ Send Message
+                <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                ارسال پیام
               </Link>
             </div>
           </div>
         )}
 
         {/* Event Footer */}
-        <footer style={{ 
-          marginTop: `4rem`,
-          paddingTop: `2rem`,
-          borderTop: `1px solid #e2e8f0`,
-        }}>
-          <div style={{
-            background: `#f7fafc`,
-            padding: `1.5rem`,
-            borderRadius: `8px`,
-            marginBottom: `2rem`,
-          }}>
-            <h4 style={{ marginBottom: `1rem` }}>Share this event</h4>
-            <div style={{ display: `flex`, gap: `1rem`, flexWrap: `wrap` }}>
+        <footer className="mt-16 pt-8 border-t border-gray-200">
+          <div className="bg-gray-50 rounded-lg p-6 mb-8">
+            <h4 className="text-lg font-bold text-gray-900 mb-4">اشتراک‌گذاری این رویداد</h4>
+            <div className="flex flex-col sm:flex-row gap-4">
               <button
                 onClick={() => {
                   if (navigator.share) {
                     navigator.share({
                       title: event.frontmatter.title,
-                      text: `Join us for ${event.frontmatter.title} on ${event.frontmatter.eventDate}`,
+                      text: `به رویداد ${event.frontmatter.title} در تاریخ ${event.frontmatter.eventDate} بپیوندید`,
                       url: window.location.href,
                     })
                   } else {
                     navigator.clipboard.writeText(window.location.href)
-                    alert('Link copied to clipboard!')
+                    alert('لینک در کلیپ‌بورد کپی شد!')
                   }
                 }}
-                style={{
-                  background: `#667eea`,
-                  color: `white`,
-                  border: `none`,
-                  padding: `0.5rem 1rem`,
-                  borderRadius: `5px`,
-                  cursor: `pointer`,
-                  fontSize: `0.9rem`,
-                }}
+                className="btn-primary flex-1"
               >
-                Share Event
+                <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                </svg>
+                اشتراک‌گذاری رویداد
               </button>
               <button
                 onClick={() => {
@@ -270,44 +203,29 @@ const EventTemplate = ({ data }) => {
                   const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.frontmatter.title)}&dates=${startDate}/${startDate}&location=${encodeURIComponent(event.frontmatter.location || '')}`
                   window.open(calendarUrl, '_blank')
                 }}
-                style={{
-                  background: `white`,
-                  color: `#667eea`,
-                  border: `2px solid #667eea`,
-                  padding: `0.5rem 1rem`,
-                  borderRadius: `5px`,
-                  cursor: `pointer`,
-                  fontSize: `0.9rem`,
-                }}
+                className="btn-secondary flex-1"
               >
-                Add to Calendar
+                <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                افزودن به تقویم
               </button>
             </div>
           </div>
 
-          <div style={{
-            background: `#e2e8f0`,
-            padding: `1.5rem`,
-            borderRadius: `8px`,
-            textAlign: `center`,
-          }}>
-            <h4>More Events</h4>
-            <p style={{ marginBottom: `1rem` }}>
-              Discover more upcoming events in Dangepia Village
+          <div className="bg-gray-100 rounded-lg p-8 text-center">
+            <h4 className="text-xl font-bold text-gray-900 mb-4">رویدادهای بیشتر</h4>
+            <p className="text-gray-600 mb-6">
+              رویدادهای پیش روی روستای دنگپیا را کشف کنید
             </p>
             <Link 
-              to="/news"
-              style={{
-                background: `#667eea`,
-                color: `white`,
-                padding: `0.75rem 1.5rem`,
-                textDecoration: `none`,
-                borderRadius: `5px`,
-                fontWeight: `bold`,
-                display: `inline-block`,
-              }}
+              to="/events"
+              className="btn-primary inline-flex items-center"
             >
-              View All Events
+              مشاهده همه رویدادها
+              <svg className="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
             </Link>
           </div>
         </footer>
