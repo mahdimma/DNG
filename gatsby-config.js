@@ -8,6 +8,11 @@ module.exports = {
     description: `وبسایت رسمی روستای دنگپیا`,
     author: `@dangepia`,
     siteUrl: `https://dangepia.ir`,
+    social: {
+    twitter: "https://twitter.com/yourprofile",
+    linkedin: "https://linkedin.com/in/yourprofile",
+    instagram: "https://instagram.com/yourprofile"
+    }
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

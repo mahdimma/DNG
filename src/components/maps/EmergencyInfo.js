@@ -5,7 +5,7 @@ const emergencyLocations = [
   {
     id: 'police',
     title: 'ایستگاه پلیس',
-    address: 'خیابان اصلی، نزدیک دفتر روستا',
+    address: 'دابودشت، درویشخیل',
     emergency: '۱۱۰',
     icon: '🚔',
     bgColor: 'bg-blue-50',
@@ -15,7 +15,7 @@ const emergencyLocations = [
   {
     id: 'fire',
     title: 'ایستگاه آتش‌نشانی',
-    address: 'خیابان ایمنی، غرب مرکز',
+    address: 'دابودشت، درویشخیل',
     emergency: '۱۲۵',
     icon: '🚒',
     bgColor: 'bg-orange-50',
@@ -25,7 +25,7 @@ const emergencyLocations = [
   {
     id: 'medical',
     title: 'درمانگاه',
-    address: 'خیابان بهداشت، موقعیت مرکزی',
+    address: 'خیابان ولیعصر، ۵۰ متری ابتدای خیابان',
     emergency: '۱۱۵',
     icon: '🏥',
     bgColor: 'bg-green-50',

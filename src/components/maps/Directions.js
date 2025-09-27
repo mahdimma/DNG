@@ -24,7 +24,7 @@ const transportationMethods = [
     iconBg: 'bg-green-100',
     textColor: 'text-green-800',
     duration: '۳۰ دقیقه',
-    tips: ['نرخ بلیت: مجموعا ۴۵۰۰۰ تومان']
+    tips: ['نرخ بلیت: مجموعا ۴۵۰۰۰ تومان، تاریخ: ۱۴۰۴/۰۶/۳۰']
   },
   {
     id: 'walking',

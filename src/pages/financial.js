@@ -11,7 +11,7 @@ const FinancialTransparencyPage = () => {
       type: "گزارش مالی سالانه",
       amount: "۲,۵۰۰,۰۰۰,۰۰۰ ریال",
       date: "۱۴۰۳/۰۶/۱۵",
-      status: "تایید شده",
+      status: "در حال بررسی",
       documentUrl: "#"
     },
     {
@@ -38,7 +38,7 @@ const FinancialTransparencyPage = () => {
       type: "گزارش هزینه‌های ساخت و ساز",
       amount: "۴۵۰,۰۰۰,۰۰۰ ریال",
       date: "۱۴۰۲/۰۴/۲۰",
-      status: "تایید شده",
+      status: "نیاز به اصلاح",
       documentUrl: "#"
     },
     {
