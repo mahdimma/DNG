@@ -58,6 +58,10 @@ const NewsArticleTemplate = ({ data, pageContext }) => {
   }
 
   const readingTime = estimateReadingTime(article.html.replace(/<[^>]*>/g, ''))
+  
+  // Convert date to ISO 8601 format with timezone
+  const publishedDate = new Date(article.frontmatter.dateRaw).toISOString()
+  const modifiedDate = new Date(article.frontmatter.dateRaw).toISOString()
 
   return (
     <Layout 
@@ -71,15 +75,17 @@ const NewsArticleTemplate = ({ data, pageContext }) => {
             "@type": "NewsArticle",
             "headline": article.frontmatter.title,
             "description": article.excerpt,
-            "datePublished": article.frontmatter.date,
-            "dateModified": article.frontmatter.date,
+            "datePublished": publishedDate,
+            "dateModified": modifiedDate,
             "author": {
               "@type": "Organization",
-              "name": article.frontmatter.author || "شورای روستای دنگپیا"
+              "name": article.frontmatter.author || "شورای روستای دنگپیا",
+              "url": "https://dangepia.ir"
             },
             "publisher": {
               "@type": "Organization",
               "name": "شورای روستای دنگپیا",
+              "url": "https://dangepia.ir",
               "logo": {
                 "@type": "ImageObject",
                 "url": "https://dangepia.ir/logo.png"
@@ -322,6 +328,7 @@ export const query = graphql`
       frontmatter {
         title
         date(formatString: "YYYY-MM-DD")
+        dateRaw: date
         author
         category
         featured

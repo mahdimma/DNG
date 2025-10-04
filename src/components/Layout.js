@@ -47,8 +47,8 @@ const Layout = ({ children, title, description, image, url }) => {
         
         {/* Additional SEO meta tags */}
         <meta name="robots" content="index, follow" />
-        <meta name="author" content="شورای روستای دنگپیا" />
-        <meta name="keywords" content="دنگپیا, روستا, کرمانشاه, اخبار, رویدادها, جامعه محلی" />
+        <meta name="author" content="روستای دنگپیا" />
+        <meta name="keywords" content="دنگپیا, روستا, مازندران, آمل, دابودشت, اخبار, رویدادها, جامعه محلی" />
         <link rel="canonical" href={pageUrl} />
         
         <html lang="fa" dir="rtl" />

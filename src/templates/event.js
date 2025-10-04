@@ -8,6 +8,15 @@ const EventTemplate = ({ data }) => {
   const eventDate = new Date(event.frontmatter.eventDate)
   const isUpcoming = eventDate > new Date()
   const isPast = eventDate < new Date()
+  
+  // Convert dates to ISO 8601 format with timezone
+  const startDateTime = event.frontmatter.eventTime 
+    ? `${event.frontmatter.eventDate}T${event.frontmatter.eventTime.split(' - ')[0]}:00+03:30`
+    : new Date(event.frontmatter.eventDate).toISOString()
+  
+  const endDateTime = event.frontmatter.eventTime && event.frontmatter.eventTime.includes(' - ')
+    ? `${event.frontmatter.eventDate}T${event.frontmatter.eventTime.split(' - ')[1]}:00+03:30`
+    : new Date(event.frontmatter.eventDate).toISOString()
 
   return (
     <Layout 
@@ -21,10 +30,10 @@ const EventTemplate = ({ data }) => {
             "@type": "Event",
             "name": event.frontmatter.title,
             "description": event.excerpt,
-            "startDate": event.frontmatter.eventDate,
-            "endDate": event.frontmatter.eventDate, // Assuming single day event
+            "startDate": startDateTime,
+            "endDate": endDateTime,
             "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-            "eventStatus": "https://schema.org/EventScheduled",
+            "eventStatus": isUpcoming ? "https://schema.org/EventScheduled" : "https://schema.org/EventPassed",
             "location": {
               "@type": "Place",
               "name": event.frontmatter.location || "روستای دنگپیا",
@@ -37,11 +46,13 @@ const EventTemplate = ({ data }) => {
             },
             "organizer": {
               "@type": "Organization",
-              "name": event.frontmatter.organizer || "شورای روستای دنگپیا"
+              "name": event.frontmatter.organizer || "شورای روستای دنگپیا",
+              "url": "https://dangepia.ir"
             },
             "performer": {
               "@type": "Organization",
-              "name": event.frontmatter.organizer || "شورای روستای دنگپیا"
+              "name": event.frontmatter.organizer || "شورای روستای دنگپیا",
+              "url": "https://dangepia.ir"
             },
             "image": [
               "https://dangepia.ir/event-image.jpg"
@@ -52,7 +63,8 @@ const EventTemplate = ({ data }) => {
               "price": "0",
               "priceCurrency": "IRR",
               "availability": "https://schema.org/InStock",
-              "validFrom": event.frontmatter.date
+              "validFrom": new Date(event.frontmatter.date).toISOString(),
+              "url": `https://dangepia.ir${event.fields.slug}`
             }
           })}
         </script>
