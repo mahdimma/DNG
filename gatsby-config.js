@@ -2,7 +2,7 @@
  * @type {import('gatsby').GatsbyConfig}
  */
 module.exports = {
-  pathPrefix: "/DANG",
+  pathPrefix: "/DANG", // Commented out - deploying to root domain
   siteMetadata: {
     title: `روستای دنگپیا`,
     description: `وبسایت رسمی روستای دنگپیا`,
@@ -16,7 +16,96 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-sitemap`,
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        output: '/',
+        createLinkInHead: true,
+        query: `
+          {
+            site {
+              siteMetadata {
+                siteUrl
+              }
+            }
+            allSitePage {
+              nodes {
+                path
+              }
+            }
+            allMarkdownRemark {
+              nodes {
+                fields {
+                  slug
+                }
+                frontmatter {
+                  date
+                  type
+                }
+              }
+            }
+          }
+        `,
+        resolveSiteUrl: () => 'https://dangepia.ir',
+        resolvePages: ({
+          allSitePage: { nodes: allPages },
+          allMarkdownRemark: { nodes: allPosts },
+        }) => {
+          const postMap = allPosts.reduce((acc, post) => {
+            const { slug } = post.fields
+            const { date, type } = post.frontmatter
+            acc[slug] = { date, type }
+            return acc
+          }, {})
+
+          return allPages.map((page) => {
+            return { ...page, ...postMap[page.path] }
+          })
+        },
+        serialize: ({ path, date, type }) => {
+          let priority = 0.5
+          let changefreq = 'monthly'
+
+          // Higher priority for news and events
+          if (type === 'news') {
+            priority = 0.8
+            changefreq = 'daily'
+          } else if (type === 'event') {
+            priority = 0.9
+            changefreq = 'weekly'
+          } else if (path === '/' || path === '/news' || path === '/events') {
+            priority = 1.0
+            changefreq = 'daily'
+          }
+
+          return {
+            url: path,
+            lastmod: date || new Date().toISOString(),
+            changefreq,
+            priority,
+          }
+        },
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        host: 'https://dangepia.ir',
+        sitemap: 'https://dangepia.ir/sitemap-index.xml',
+        policy: [
+          {
+            userAgent: '*',
+            allow: '/',
+            disallow: ['/admin/', '/private/', '/page-data/', '/.cache/', '/public/'],
+          },
+          {
+            userAgent: 'Googlebot-News',
+            allow: '/news/',
+            crawlDelay: 0,
+          },
+        ],
+      },
+    },
     `gatsby-plugin-offline`,
     `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,

@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect } from "react"
 import { graphql, Link } from "gatsby"
+import { Helmet } from "react-helmet"
 import Layout from "../components/Layout"
 import HeroSection from "../components/HeroSection"
 
@@ -432,6 +433,28 @@ const EventsPage = ({ data }) => {
       title="رویدادها"
       description="رویدادها، جشنواره‌ها و گردهمایی‌های جامعه روستای دنگپیا را کشف کنید"
     >
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "خانه",
+                "item": "https://dangepia.ir"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "رویدادها",
+                "item": "https://dangepia.ir/events"
+              }
+            ]
+          })}
+        </script>
+      </Helmet>
       {/* Enhanced Hero Section */}
       <HeroSection
         title="رویدادها و فعالیت‌ها"

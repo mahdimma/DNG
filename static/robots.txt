@@ -1,0 +1,48 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://dangepia.ir/sitemap-index.xml
+
+# Crawl delay (optional, in seconds)
+Crawl-delay: 1
+
+# Disallow admin and private paths
+Disallow: /admin/
+Disallow: /private/
+
+# Allow important paths for SEO
+Allow: /news/
+Allow: /events/
+Allow: /about/
+Allow: /contact/
+Allow: /services/
+Allow: /gallery/
+
+# Block specific file types
+Disallow: /*.json$
+Disallow: /*.xml$
+Disallow: /*.yml$
+
+# Block Gatsby specific paths
+Disallow: /page-data/
+Disallow: /.cache/
+Disallow: /public/
+
+# Google specific
+User-agent: Googlebot
+Allow: /
+
+# Google Image Bot
+User-agent: Googlebot-Image
+Allow: /
+
+# Google News Bot
+User-agent: Googlebot-News
+Allow: /news/
+Crawl-delay: 0
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1

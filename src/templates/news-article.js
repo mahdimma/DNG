@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { graphql, Link } from "gatsby"
+import { Helmet } from "react-helmet"
 import Layout from "../components/Layout"
 import PageHeader from "../components/PageHeader"
 import "../styles/news-template.css"
@@ -63,6 +64,38 @@ const NewsArticleTemplate = ({ data, pageContext }) => {
       title={article.frontmatter.title}
       description={article.excerpt}
     >
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "NewsArticle",
+            "headline": article.frontmatter.title,
+            "description": article.excerpt,
+            "datePublished": article.frontmatter.date,
+            "dateModified": article.frontmatter.date,
+            "author": {
+              "@type": "Organization",
+              "name": article.frontmatter.author || "شورای روستای دنگپیا"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "شورای روستای دنگپیا",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://dangepia.ir/logo.png"
+              }
+            },
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": `https://dangepia.ir${article.fields.slug}`
+            },
+            "articleSection": article.frontmatter.category || "اخبار",
+            "image": [
+              "https://dangepia.ir/og-image.jpg"
+            ]
+          })}
+        </script>
+      </Helmet>
       {/* Breadcrumb & Back Navigation */}
       <nav className="bg-gray-50 py-4">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -283,6 +316,9 @@ export const query = graphql`
     markdownRemark(fields: { slug: { eq: $slug } }) {
       html
       excerpt(pruneLength: 200)
+      fields {
+        slug
+      }
       frontmatter {
         title
         date(formatString: "YYYY-MM-DD")

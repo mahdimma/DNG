@@ -1,5 +1,6 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
+import { Helmet } from "react-helmet"
 import Layout from "../components/Layout"
 import HeroSection from "../components/HeroSection"
 import { EnhancedNewsSection } from "../components/news"
@@ -37,6 +38,28 @@ const NewsPage = ({ data }) => {
 
   return (
     <Layout title="آخرین اخبار" description="از جدیدترین رویدادها و اخبار روستای دنگپیا مطلع باشید">
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "خانه",
+                "item": "https://dangepia.ir"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "اخبار",
+                "item": "https://dangepia.ir/news"
+              }
+            ]
+          })}
+        </script>
+      </Helmet>
       {/* Hero Section */}
       <HeroSection 
         title="آخرین اخبار"

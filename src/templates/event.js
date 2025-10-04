@@ -1,5 +1,6 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
+import { Helmet } from "react-helmet"
 import Layout from "../components/Layout"
 
 const EventTemplate = ({ data }) => {
@@ -13,6 +14,49 @@ const EventTemplate = ({ data }) => {
       title={event.frontmatter.title}
       description={event.excerpt}
     >
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Event",
+            "name": event.frontmatter.title,
+            "description": event.excerpt,
+            "startDate": event.frontmatter.eventDate,
+            "endDate": event.frontmatter.eventDate, // Assuming single day event
+            "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+            "eventStatus": "https://schema.org/EventScheduled",
+            "location": {
+              "@type": "Place",
+              "name": event.frontmatter.location || "روستای دنگپیا",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "دنگپیا",
+                "addressRegion": "کرمانشاه",
+                "addressCountry": "IR"
+              }
+            },
+            "organizer": {
+              "@type": "Organization",
+              "name": event.frontmatter.organizer || "شورای روستای دنگپیا"
+            },
+            "performer": {
+              "@type": "Organization",
+              "name": event.frontmatter.organizer || "شورای روستای دنگپیا"
+            },
+            "image": [
+              "https://dangepia.ir/event-image.jpg"
+            ],
+            "url": `https://dangepia.ir${event.fields.slug}`,
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "IRR",
+              "availability": "https://schema.org/InStock",
+              "validFrom": event.frontmatter.date
+            }
+          })}
+        </script>
+      </Helmet>
       <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Event Header */}
         <header className="mb-12">
@@ -239,6 +283,9 @@ export const query = graphql`
     markdownRemark(fields: { slug: { eq: $slug } }) {
       html
       excerpt(pruneLength: 200)
+      fields {
+        slug
+      }
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")
