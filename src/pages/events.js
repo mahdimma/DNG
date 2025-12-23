@@ -815,7 +815,7 @@ export const query = graphql`
         }
         frontmatter {
           title
-          date
+          date(formatString: "YYYY-MM-DD")
           eventDate
           persianDate
           eventTime

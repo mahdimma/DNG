@@ -3,6 +3,19 @@ import { graphql, Link } from "gatsby"
 import { Helmet } from "react-helmet"
 import Layout from "../components/Layout"
 
+// Utility function to convert date to Persian format
+const toPersianDate = (date) => {
+  try {
+    return new Intl.DateTimeFormat('fa-IR', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    }).format(new Date(date))
+  } catch (error) {
+    return date
+  }
+}
+
 const EventTemplate = ({ data }) => {
   const event = data.markdownRemark
   const eventDate = new Date(event.frontmatter.eventDate)
@@ -179,7 +192,7 @@ const EventTemplate = ({ data }) => {
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-2">تاریخ انتشار</h4>
                   <div className="text-gray-600">
-                    {event.frontmatter.date}
+                    {toPersianDate(event.frontmatter.date)}
                   </div>
                 </div>
               </div>
@@ -300,7 +313,7 @@ export const query = graphql`
       }
       frontmatter {
         title
-        date(formatString: "MMMM DD, YYYY")
+        date(formatString: "YYYY-MM-DD")
         eventDate
         eventTime
         location
