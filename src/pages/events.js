@@ -116,7 +116,7 @@ const EventsPage = ({ data }) => {
         case "featured":
           return b.frontmatter.featured - a.frontmatter.featured
         default:
-          return new Date(a.frontmatter.eventDate) - new Date(b.frontmatter.eventDate)
+          return new Date(b.frontmatter.eventDate) - new Date(a.frontmatter.eventDate)
       }
     })
   }
@@ -161,7 +161,7 @@ const EventsPage = ({ data }) => {
         style={{ animationDelay: `${index * 100}ms` }}
       >
         {/* Live Indicator */}
-        <div className="absolute top-4 right-4 z-20">
+        <div className="absolute top-4 left-4 z-20">
           <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold ${
             isLive 
               ? "bg-red-500 text-white animate-pulse" 
@@ -176,7 +176,7 @@ const EventsPage = ({ data }) => {
 
         {/* Featured Badge */}
         {event.frontmatter.featured && (
-          <div className="absolute top-4 left-4 z-20">
+          <div className="absolute top-16 left-4 z-20">
             <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 text-xs font-bold px-3 py-1.5 rounded-full shadow-lg transform -rotate-3 group-hover:rotate-0 transition-transform duration-300">
               <span className="flex items-center gap-1">
                 <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
@@ -321,7 +321,7 @@ const EventsPage = ({ data }) => {
         
         {/* Featured Badge */}
         {event.frontmatter.featured && (
-          <div className="absolute top-4 right-4 z-20">
+          <div className="absolute top-4 left-4 z-20">
             <div className="bg-gradient-to-r from-secondary-400 to-secondary-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg transform rotate-3 group-hover:rotate-0 transition-transform duration-300">
               <span className="flex items-center gap-1">
                 <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
@@ -334,7 +334,7 @@ const EventsPage = ({ data }) => {
         )}
 
         {/* Status Indicator */}
-        <div className="absolute top-4 left-4 z-20">
+        <div className="absolute top-16 left-4 z-20">
           <div className={`w-3 h-3 rounded-full ${isPast ? 'bg-red-400' : 'bg-green-400'} shadow-lg animate-pulse`}></div>
         </div>
 
