@@ -1,6 +1,20 @@
 const path = require("path");
 const { createFilePath } = require("gatsby-source-filesystem");
 
+// Define schema for optional frontmatter fields
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions;
+  
+  const typeDefs = `
+    type MarkdownRemarkFrontmatter {
+      image: String
+      description: String
+    }
+  `;
+  
+  createTypes(typeDefs);
+};
+
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions;
 

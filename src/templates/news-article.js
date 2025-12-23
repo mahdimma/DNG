@@ -62,19 +62,54 @@ const NewsArticleTemplate = ({ data, pageContext }) => {
   // Convert date to ISO 8601 format with timezone
   const publishedDate = new Date(article.frontmatter.dateRaw).toISOString()
   const modifiedDate = new Date(article.frontmatter.dateRaw).toISOString()
+  
+  // Use article-specific image or fallback to site default
+  // Support both local images (/path/to/image.jpg) and external URLs (https://...)
+  const articleImage = article.frontmatter.image 
+    ? (article.frontmatter.image.startsWith('http://') || article.frontmatter.image.startsWith('https://'))
+      ? article.frontmatter.image
+      : `https://dangepia.ir${article.frontmatter.image}`
+    : "https://dangepia.ir/og-image.jpg"
+  
+  // Use custom description or excerpt
+  const articleDescription = article.frontmatter.description || article.excerpt
 
   return (
     <Layout 
       title={article.frontmatter.title}
-      description={article.excerpt}
+      description={articleDescription}
     >
       <Helmet>
+        {/* Open Graph Meta Tags for Social Sharing */}
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={article.frontmatter.title} />
+        <meta property="og:description" content={articleDescription} />
+        <meta property="og:url" content={`https://dangepia.ir${article.fields.slug}`} />
+        <meta property="og:image" content={articleImage} />
+        <meta property="article:published_time" content={publishedDate} />
+        <meta property="article:modified_time" content={modifiedDate} />
+        <meta property="article:section" content={article.frontmatter.category || "اخبار"} />
+        <meta property="article:author" content={article.frontmatter.author || "شورای روستای دنگپیا"} />
+        
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={article.frontmatter.title} />
+        <meta name="twitter:description" content={articleDescription} />
+        <meta name="twitter:image" content={articleImage} />
+
+        {/* Google News Structured Data */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "NewsArticle",
             "headline": article.frontmatter.title,
-            "description": article.excerpt,
+            "description": articleDescription,
+            "image": {
+              "@type": "ImageObject",
+              "url": articleImage,
+              "width": 1200,
+              "height": 630
+            },
             "datePublished": publishedDate,
             "dateModified": modifiedDate,
             "author": {
@@ -88,7 +123,9 @@ const NewsArticleTemplate = ({ data, pageContext }) => {
               "url": "https://dangepia.ir",
               "logo": {
                 "@type": "ImageObject",
-                "url": "https://dangepia.ir/logo.png"
+                "url": "https://dangepia.ir/logo.png",
+                "width": 600,
+                "height": 60
               }
             },
             "mainEntityOfPage": {
@@ -96,8 +133,37 @@ const NewsArticleTemplate = ({ data, pageContext }) => {
               "@id": `https://dangepia.ir${article.fields.slug}`
             },
             "articleSection": article.frontmatter.category || "اخبار",
-            "image": [
-              "https://dangepia.ir/og-image.jpg"
+            "articleBody": article.html.replace(/<[^>]*>/g, '').substring(0, 500),
+            "wordCount": article.html.replace(/<[^>]*>/g, '').split(/\s+/).length,
+            "isAccessibleForFree": true,
+            "inLanguage": "fa-IR"
+          })}
+        </script>
+        
+        {/* BreadcrumbList Structured Data for Google */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "خانه",
+                "item": "https://dangepia.ir/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "اخبار",
+                "item": "https://dangepia.ir/news"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": article.frontmatter.title,
+                "item": `https://dangepia.ir${article.fields.slug}`
+              }
             ]
           })}
         </script>
@@ -332,6 +398,8 @@ export const query = graphql`
         author
         category
         featured
+        image
+        description
       }
     }
   }
