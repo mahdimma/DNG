@@ -9,6 +9,8 @@ exports.createSchemaCustomization = ({ actions }) => {
     type MarkdownRemarkFrontmatter {
       image: String
       description: String
+      pdfUrl: String
+      issue: String
     }
   `;
   
@@ -26,6 +28,10 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
       slug = `/news${baseSlug}`;
     } else if (type === "event") {
       slug = `/event${baseSlug}`;
+    } else if (type === "letter") {
+      slug = `/letters${baseSlug}`;
+    } else if (type === "magazine") {
+      slug = `/magazines${baseSlug}`;
     }
     createNodeField({
       node,

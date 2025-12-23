@@ -51,6 +51,8 @@ const CustomNavbar = () => {
       dropdown: [
         { name: "اخبار", path: "/news" },
         { name: "رویدادها", path: "/events" },
+        { name: "گزارشات", path: "/letters" },
+        { name: "نشریات", path: "/magazines" },
         { name: "گالری تصاویر", path: "/gallery" }
       ]
     },
