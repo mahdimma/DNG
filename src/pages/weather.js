@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useCallback, useEffect, useMemo, useState } from "react"
 import Layout from "../components/Layout"
 import HeroSection from "../components/HeroSection"
 import AirQuality from "../components/AirQuality"
@@ -7,34 +7,82 @@ import DayForecast from "../components/DayForecast"
 const WeatherPage = () => {
   const [weatherData, setWeatherData] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [refreshing, setRefreshing] = useState(false)
   const [error, setError] = useState(null)
-  const [activeDay, setActiveDay] = useState(0);
+  const [activeDay, setActiveDay] = useState(0)
+  const [lastSuccessfulFetchAt, setLastSuccessfulFetchAt] = useState(null)
+
+  const weatherApiKey = process.env.GATSBY_WEATHER_API_KEY || "979ae4a2dd0e48b9a0b72713242608"
+  const weatherQuery = "36.5145,52.4795"
+  const forecastDays = 14
+  const refreshIntervalMs = 300000
+
+  const weatherApiUrl = useMemo(() => {
+    const params = new URLSearchParams({
+      key: weatherApiKey,
+      q: weatherQuery,
+      days: String(forecastDays),
+      aqi: "yes",
+      alerts: "yes",
+    })
+    return `https://api.weatherapi.com/v1/forecast.json?${params.toString()}`
+  }, [weatherApiKey])
 
 
-  useEffect(() => {
-    const fetchWeatherData = async () => {
+  const fetchWeatherData = useCallback(
+    async ({ showLoading = false } = {}) => {
+      const controller = new AbortController()
+
       try {
-        setLoading(true)
-        const response = await fetch('https://api.weatherapi.com/v1/forecast.json?key=979ae4a2dd0e48b9a0b72713242608&q=36.5145,52.4795&days=14&aqi=yes&alerts=yes')
+        if (showLoading) setLoading(true)
+        else setRefreshing(true)
+
+        const response = await fetch(weatherApiUrl, { signal: controller.signal })
         if (!response.ok) {
           throw new Error(`خطای شبکه: ${response.status}`)
         }
+
         const data = await response.json()
         setWeatherData(data)
+        setLastSuccessfulFetchAt(new Date())
         setError(null)
       } catch (e) {
-        setError(e.message)
-        setWeatherData(null)
+        if (e?.name === "AbortError") return
+
+        const message = e?.message || "خطای نامشخص"
+
+        // If we already have data, keep showing it and surface a non-blocking warning.
+        setError(message)
+        setWeatherData(prev => prev)
       } finally {
         setLoading(false)
+        setRefreshing(false)
       }
+
+      return () => controller.abort()
+    },
+    [weatherApiUrl]
+  )
+
+  useEffect(() => {
+    let intervalId
+    let isMounted = true
+
+    const run = async () => {
+      await fetchWeatherData({ showLoading: true })
+      if (!isMounted) return
+      intervalId = setInterval(() => {
+        fetchWeatherData({ showLoading: false })
+      }, refreshIntervalMs)
     }
 
-    fetchWeatherData()
+    run()
 
-    const interval = setInterval(fetchWeatherData, 300000) // Update every 5 minutes
-    return () => clearInterval(interval)
-  }, [])
+    return () => {
+      isMounted = false
+      if (intervalId) clearInterval(intervalId)
+    }
+  }, [fetchWeatherData, refreshIntervalMs])
 
   const getUVIndexColor = (uvIndex) => {
     if (uvIndex <= 2) return "text-green-500"
@@ -160,6 +208,13 @@ const WeatherPage = () => {
     return moonPhases[phase] || phase;
   }
 
+  const isInitialLoading = loading && !weatherData
+  const hasData = Boolean(weatherData)
+  const hasAlerts = Boolean(weatherData?.alerts?.alert?.length)
+  const lastUpdatedLabel = lastSuccessfulFetchAt
+    ? `${lastSuccessfulFetchAt.toLocaleDateString("fa-IR", { year: "numeric", month: "long", day: "numeric" })}، ${lastSuccessfulFetchAt.toLocaleTimeString("fa-IR")}`
+    : null
+
   return (
     <Layout title="آب و هوا" description="اطلاعات لحظه‌ای آب و هوا و پیش‌بینی برای روستای دنگپیا">
       <HeroSection 
@@ -170,17 +225,83 @@ const WeatherPage = () => {
       />
       
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12" dir="rtl">
-        {loading && <p className="text-center text-xl">در حال بارگذاری اطلاعات آب و هوا...</p>}
-        {error && <p className="text-center text-xl text-red-500">خطا در دریافت اطلاعات: {error}</p>}
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6">
+          <div>
+            <p className="text-sm text-gray-600">
+              به‌روزرسانی خودکار هر {toPersianDigits(Math.round(refreshIntervalMs / 60000))} دقیقه
+              {lastUpdatedLabel ? ` • آخرین دریافت موفق: ${toPersianDigits(lastUpdatedLabel)}` : ""}
+            </p>
+            {error && hasData && (
+              <p className="text-sm text-orange-700 mt-1" role="status" aria-live="polite">
+                بروزرسانی جدید انجام نشد. نمایش آخرین داده‌های موجود.
+              </p>
+            )}
+          </div>
+
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              className="btn-outline inline-flex items-center px-4 py-2"
+              onClick={() => fetchWeatherData({ showLoading: !hasData })}
+              disabled={loading || refreshing}
+              aria-busy={loading || refreshing}
+            >
+              {refreshing ? "در حال بروزرسانی…" : "بروزرسانی"}
+            </button>
+          </div>
+        </div>
+
+        {isInitialLoading && (
+          <div className="bg-white p-6 rounded-xl shadow-lg" role="status" aria-live="polite">
+            <p className="text-center text-xl">در حال بارگذاری اطلاعات آب و هوا…</p>
+            <p className="text-center text-sm text-gray-500 mt-2">ممکن است چند ثانیه طول بکشد.</p>
+          </div>
+        )}
+
+        {error && !hasData && !isInitialLoading && (
+          <div className="bg-white p-6 rounded-xl shadow-lg" role="alert">
+            <p className="text-center text-xl text-red-600">خطا در دریافت اطلاعات آب و هوا</p>
+            <p className="text-center text-sm text-gray-600 mt-2">لطفاً دوباره تلاش کنید.</p>
+            <div className="flex justify-center mt-4">
+              <button
+                type="button"
+                className="btn-primary inline-flex items-center px-6 py-3"
+                onClick={() => fetchWeatherData({ showLoading: true })}
+              >
+                تلاش مجدد
+              </button>
+            </div>
+            <p className="text-center text-xs text-gray-400 mt-4">جزئیات: {error}</p>
+          </div>
+        )}
+
+        {!isInitialLoading && !hasData && !error && (
+          <div className="bg-white p-6 rounded-xl shadow-lg" role="status" aria-live="polite">
+            <p className="text-center text-xl">اطلاعاتی برای نمایش وجود ندارد.</p>
+            <div className="flex justify-center mt-4">
+              <button
+                type="button"
+                className="btn-primary inline-flex items-center px-6 py-3"
+                onClick={() => fetchWeatherData({ showLoading: true })}
+              >
+                دریافت اطلاعات
+              </button>
+            </div>
+          </div>
+        )}
         
         {weatherData && (
           <>
             {/* Alerts Section */}
-            {weatherData.alerts && weatherData.alerts.alert.length > 0 && (
-              <section className="mb-12">
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">هشدارها</h2>
+            {hasAlerts && (
+              <section className="mb-12" aria-labelledby="weather-alerts-heading">
+                <h2 id="weather-alerts-heading" className="text-2xl font-bold text-gray-800 mb-4">هشدارها</h2>
                 {weatherData.alerts.alert.map((alert, index) => (
-                  <div key={index} className="bg-red-100 border-r-4 border-red-500 text-red-700 p-4 rounded-lg shadow-md" role="alert">
+                  <div
+                    key={index}
+                    className="bg-red-100 border-r-4 border-red-500 text-red-700 p-4 rounded-lg shadow-md"
+                    role="alert"
+                  >
                     <p className="font-bold">{alert.headline}</p>
                     <p>{alert.desc}</p>
                   </div>
@@ -189,11 +310,11 @@ const WeatherPage = () => {
             )}
 
             {/* Current Weather Section */}
-            <section className="mb-12">
+            <section className="mb-12" aria-labelledby="current-weather-heading">
               <div className="bg-white p-6 rounded-xl shadow-lg">
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <h2 className="text-3xl font-bold text-gray-900">
+                    <h2 id="current-weather-heading" className="text-3xl font-bold text-gray-900">
                       آب و هوای فعلی در دنگپیا
                     </h2>
                     <p className="text-gray-500">
@@ -210,7 +331,13 @@ const WeatherPage = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                   <div className="flex items-center gap-4">
-                    <img src={`https:${weatherData.current.condition.icon}`} alt={weatherData.current.condition.text} className="w-24 h-24"/>
+                    <img
+                      src={`https:${weatherData.current.condition.icon}`}
+                      alt={translateCondition(weatherData.current.condition.text)}
+                      className="w-24 h-24"
+                      loading="lazy"
+                      decoding="async"
+                    />
                     <div>
                       <p className="text-6xl font-bold text-gray-800">{toPersianDigits(weatherData.current.temp_c)}°</p>
                       <p className="text-xl text-gray-600">{translateCondition(weatherData.current.condition.text)}</p>
@@ -264,8 +391,9 @@ const WeatherPage = () => {
             </section>
 
             {/* Forecast Section */}
-            <section className="mb-12">
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">پیش‌بینی {toPersianDigits(weatherData.forecast.forecastday.length)} روز آینده</h2>
+            <section className="mb-12" aria-labelledby="forecast-heading">
+              <h2 id="forecast-heading" className="text-2xl font-bold text-gray-800 mb-2">پیش‌بینی {toPersianDigits(weatherData.forecast.forecastday.length)} روز آینده</h2>
+              <p className="text-sm text-gray-600 mb-4">برای مشاهده جزئیات هر روز، روی همان روز کلیک کنید.</p>
               <div className="space-y-4">
                 {weatherData.forecast.forecastday.map((day, index) => (
                   <DayForecast

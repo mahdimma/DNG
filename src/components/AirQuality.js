@@ -204,12 +204,18 @@ const AirQuality = ({ data, toPersianDigits }) => {
       <div className="mt-6 border-t pt-2 space-y-2">
         {/* AQI Help Section */}
         <div className="border-b pb-2">
-          <div className="flex justify-between items-center cursor-pointer p-2 rounded-md hover:bg-gray-50" onClick={() => setShowAqiHelp(!showAqiHelp)}>
+          <button
+            type="button"
+            className="w-full flex justify-between items-center p-2 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+            onClick={() => setShowAqiHelp(!showAqiHelp)}
+            aria-expanded={showAqiHelp}
+            aria-controls="aqi-help"
+          >
             <h4 className="text-md font-semibold text-gray-700">راهنمای شاخص کیفیت هوا (AQI)</h4>
             <svg className={`w-5 h-5 text-gray-500 transition-transform duration-300 ${showAqiHelp ? 'transform rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
-          </div>
+          </button>
           {showAqiHelp && (
-            <div className="mt-2 pl-2 pr-4 space-y-4">
+            <div id="aqi-help" className="mt-2 pl-2 pr-4 space-y-4">
               {aqiHelpContent.map(item => (
                 <div key={item.level} className="flex items-start gap-3 text-xs">
                   <span 
@@ -228,12 +234,18 @@ const AirQuality = ({ data, toPersianDigits }) => {
 
         {/* Pollutants Help Section */}
         <div>
-          <div className="flex justify-between items-center cursor-pointer p-2 rounded-md hover:bg-gray-50" onClick={() => setShowPollutantHelp(!showPollutantHelp)}>
+          <button
+            type="button"
+            className="w-full flex justify-between items-center p-2 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+            onClick={() => setShowPollutantHelp(!showPollutantHelp)}
+            aria-expanded={showPollutantHelp}
+            aria-controls="pollutant-help"
+          >
             <h4 className="text-md font-semibold text-gray-700">درباره آلاینده‌ها</h4>
             <svg className={`w-5 h-5 text-gray-500 transition-transform duration-300 ${showPollutantHelp ? 'transform rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
-          </div>
+          </button>
           {showPollutantHelp && (
-            <div className="mt-2 pl-2 pr-4 space-y-4">
+            <div id="pollutant-help" className="mt-2 pl-2 pr-4 space-y-4">
               {Object.values(pollutantInfo).map(p => (
                 <div key={p.name} className="text-xs">
                   <p className="font-bold text-gray-800">{p.name}</p>
