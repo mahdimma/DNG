@@ -57,18 +57,18 @@ const Footer = () => {
   ].filter((item) => typeof item.href === "string" && item.href.trim().length > 0)
 
   return (
-    <footer className="bg-gray-900 text-white" aria-label="پاورقی سایت">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <footer className="bg-gray-900 text-white border-t border-gray-800" aria-label="پاورقی سایت">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-y-12 md:gap-x-10">
           {/* About */}
-          <div className="space-y-4">
+          <div className="space-y-4 md:col-span-5">
             <h2 className="text-xl font-bold text-primary-400">{siteTitle}</h2>
             <p className="text-gray-300 leading-relaxed">
               به روستای زیبای ما خوش آمدید. با آخرین اخبار، رویدادها و خدمات در ارتباط باشید.
             </p>
 
             {socialLinks.length > 0 ? (
-              <div className="flex items-center gap-4" aria-label="شبکه‌های اجتماعی">
+              <div className="flex items-center gap-3 pt-1" aria-label="شبکه‌های اجتماعی">
                 {socialLinks.map((item) => (
                   <a
                     key={item.key}
@@ -76,7 +76,7 @@ const Footer = () => {
                     target="_blank"
                     rel="noreferrer noopener"
                     aria-label={item.label}
-                    className={`text-gray-400 hover:text-primary-400 transition-colors duration-200 rounded ${focusRing}`}
+                    className={`text-gray-400 hover:text-primary-400 hover:bg-gray-800/60 transition-colors duration-200 rounded-md p-2 ${focusRing}`}
                   >
                     <span className="sr-only">{item.label}</span>
                     {item.icon}
@@ -87,13 +87,13 @@ const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <nav className="space-y-4" aria-label="پیوندهای سریع">
+          <nav className="space-y-4 md:col-span-3" aria-label="پیوندهای سریع">
             <h3 className="text-lg font-semibold text-primary-400">پیوندهای سریع</h3>
             <ul className="space-y-2">
               <li>
                 <Link
                   to="/about"
-                  className={`text-gray-300 hover:text-primary-400 transition-colors duration-200 inline-flex items-center gap-2 rounded ${focusRing}`}
+                  className={`text-gray-300 hover:text-primary-400 hover:underline underline-offset-4 transition-colors duration-200 inline-flex items-center gap-2 rounded ${focusRing}`}
                 >
                   <span>درباره ما</span>
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -104,7 +104,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="/news"
-                  className={`text-gray-300 hover:text-primary-400 transition-colors duration-200 inline-flex items-center gap-2 rounded ${focusRing}`}
+                  className={`text-gray-300 hover:text-primary-400 hover:underline underline-offset-4 transition-colors duration-200 inline-flex items-center gap-2 rounded ${focusRing}`}
                 >
                   <span>اخبار</span>
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -115,7 +115,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="/services"
-                  className={`text-gray-300 hover:text-primary-400 transition-colors duration-200 inline-flex items-center gap-2 rounded ${focusRing}`}
+                  className={`text-gray-300 hover:text-primary-400 hover:underline underline-offset-4 transition-colors duration-200 inline-flex items-center gap-2 rounded ${focusRing}`}
                 >
                   <span>خدمات</span>
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -126,7 +126,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="/contact"
-                  className={`text-gray-300 hover:text-primary-400 transition-colors duration-200 inline-flex items-center gap-2 rounded ${focusRing}`}
+                  className={`text-gray-300 hover:text-primary-400 hover:underline underline-offset-4 transition-colors duration-200 inline-flex items-center gap-2 rounded ${focusRing}`}
                 >
                   <span>تماس با ما</span>
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -138,14 +138,14 @@ const Footer = () => {
           </nav>
 
           {/* Legal + Contact */}
-          <div className="space-y-4">
+          <div className="space-y-4 md:col-span-4">
             <nav aria-label="قوانین و مقررات" className="space-y-4">
               <h3 className="text-lg font-semibold text-primary-400">قوانین و مقررات</h3>
               <ul className="space-y-2">
                 <li>
                   <Link
                     to="/privacy-policy"
-                    className={`text-gray-300 hover:text-primary-400 transition-colors duration-200 inline-flex items-center gap-2 rounded ${focusRing}`}
+                    className={`text-gray-300 hover:text-primary-400 hover:underline underline-offset-4 transition-colors duration-200 inline-flex items-center gap-2 rounded ${focusRing}`}
                   >
                     <span>حریم خصوصی</span>
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -156,7 +156,7 @@ const Footer = () => {
                 <li>
                   <Link
                     to="/terms-of-service"
-                    className={`text-gray-300 hover:text-primary-400 transition-colors duration-200 inline-flex items-center gap-2 rounded ${focusRing}`}
+                    className={`text-gray-300 hover:text-primary-400 hover:underline underline-offset-4 transition-colors duration-200 inline-flex items-center gap-2 rounded ${focusRing}`}
                   >
                     <span>شرایط خدمات</span>
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -172,7 +172,7 @@ const Footer = () => {
               <div className="text-sm text-gray-300 space-y-1">
                 <a
                   href="mailto:info@dangepia.ir"
-                  className={`hover:text-primary-400 transition-colors duration-200 rounded inline-flex ${focusRing}`}
+                  className={`hover:text-primary-400 hover:underline underline-offset-4 transition-colors duration-200 rounded inline-flex ${focusRing}`}
                 >
                   info@dangepia.ir
                 </a>
@@ -182,7 +182,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-gray-700 mt-10 pt-8">
+        <div className="border-t border-gray-800 mt-12 pt-8">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between text-center sm:text-right">
             <p className="text-gray-400">
               © {new Date().toLocaleDateString("fa-IR", { year: "numeric" })} {siteTitle}. تمامی حقوق محفوظ است.

@@ -36,29 +36,31 @@ const Header = ({ siteTitle }) => {
 
   return (
     <header
-      className="gradient-bg shadow-lg sticky top-0 z-50"
+      className="bg-gradient-to-br from-primary-500 via-primary-600 to-primary-700 shadow-lg sticky top-0 z-50"
       itemScope
       itemType="https://schema.org/WPHeader"
     >
       {/* Theme color for mobile browsers (improves UX, indirect SEO) */}
       <meta name="theme-color" content="#10b981" /> {/* Tailwind's green-500 */}
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16 md:h-18">
           {/* Logo/Site Title with complete Organization Schema */}
           <div
             itemScope
             itemType="https://schema.org/Organization"
-            className="flex-shrink-0"
+            className="flex-shrink-0 group"
           >
             <Link
               to="/"
-              className="text-2xl font-bold text-white hover:text-green-100 transition-colors duration-200"
+              className="flex items-center gap-3 text-2xl font-bold text-white hover:text-green-100 transition-all duration-300 group-hover:scale-105"
               aria-label={`${siteTitle} – بازگشت به صفحه اصلی`}
               itemProp="url"
-              aria-current="page"
             >
-              <span itemProp="name">{siteTitle}</span>
+              <div className="w-10 h-10 bg-white/30 rounded-xl flex items-center justify-center shadow-lg group-hover:bg-white/40 transition-all duration-300 p-1.5">
+                <img src="/logo.png" alt="Dangepia Logo" className="w-full h-full object-contain" />
+              </div>
+              <span itemProp="name" className="hidden sm:block">{siteTitle}</span>
             </Link>
 
             {/* Hidden structured data for Organization */}

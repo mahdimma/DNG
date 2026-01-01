@@ -2,11 +2,11 @@
   "occasions": [
     {
       "id": "birthday-sample",
-      "title": "(نمونه)",
-      "description": "این یک نمونه برای  است و هر سال تکرار می‌شود.",
+      "title": "سالروز وفات خلیل بابایی",
+      "description": "سال ۱۴۰۴ هجری شمسی درگذشت. فرزند خیرالله بابایی.",
       "repeat": "yearly",
-      "on": { "jm": 1, "jd": 1 },
-      "start": { "jy": 1404, "jm": 8, "jd": 12 }
+      "on": { "jm": 10, "jd": 11 },
+      "start": { "jy": 1404, "jm": 10, "jd": 11 }
     },
     {
       "id": "birthday-sample",
