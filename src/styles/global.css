@@ -254,6 +254,14 @@
   animation: flash 2.5s ease-in-out infinite;
 }
 
+.animate-scroll-wheel {
+  animation: scrollWheel 2s ease-in-out infinite;
+}
+
+.animate-gentle-bounce {
+  animation: gentleBounce 2.5s ease-in-out infinite;
+}
+
 .animate-smooth-bounce {
   animation: smoothBounce 2s ease-in-out infinite;
 }
@@ -262,10 +270,71 @@
   animation: gentlePulse 3s ease-in-out infinite;
 }
 
-/* Mobile-specific animations */
+/* Keyframes for scroll wheel animation */
+@keyframes scrollWheel {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(10px);
+    opacity: 0.3;
+  }
+}
+
+@keyframes gentleBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes gentlePulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.1);
+  }
+}
+
+/* Mobile-specific animations - optimized for performance */
 @media (max-width: 640px) {
   .animate-flash {
     animation: mobileFlash 2s ease-in-out infinite;
+  }
+  
+  .animate-scroll-wheel {
+    animation: scrollWheel 2s ease-in-out infinite;
+  }
+  
+  .animate-gentle-bounce {
+    animation: gentleBounce 2.2s ease-in-out infinite;
+  }
+  
+  /* Simpler mobile animations */
+  @keyframes scrollWheel {
+    0%, 100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    50% {
+      transform: translateY(8px);
+      opacity: 0.4;
+    }
+  }
+  
+  @keyframes gentleBounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
   }
   
   .animate-bounce {
@@ -274,6 +343,15 @@
   
   .animate-pulse {
     animation-duration: 3s;
+  }
+  
+  /* Reduce animations on low-end devices */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-scroll-wheel,
+    .animate-gentle-bounce,
+    .animate-bounce {
+      animation: none;
+    }
   }
 }
 

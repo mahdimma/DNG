@@ -61,7 +61,8 @@ const CustomNavbar = () => {
       dropdown: [
         { name: "خدمات", path: "/services" },
         { name: "نقشه", path: "/maps" },
-        { name: "آب و هوا", path: "/weather" }
+        { name: "آب و هوا", path: "/weather" },
+        { name: "تقویم فارسی", path: "/persian-calendar" }
       ]
     },
     { name: "تماس با ما", path: "/contact" },

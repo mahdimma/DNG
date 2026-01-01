@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { Link } from "gatsby"
 
 const HeroSection = ({ 
@@ -9,7 +9,51 @@ const HeroSection = ({
   secondaryButton = null,
   showScrollIndicator = true 
 }) => {
+  const [isVisible, setIsVisible] = useState(true);
+  const [hasInteracted, setHasInteracted] = useState(false);
+
+  useEffect(() => {
+    if (!showScrollIndicator) return;
+
+    let timeoutId;
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const viewportHeight = window.innerHeight;
+      
+      // Hide indicator after scrolling more than 10% of viewport
+      if (scrollPosition > viewportHeight * 0.1) {
+        setIsVisible(false);
+        setHasInteracted(true);
+      } else if (!hasInteracted) {
+        setIsVisible(true);
+      }
+    };
+
+    const handleMouseMove = () => {
+      if (!hasInteracted) {
+        // Show indicator on mouse activity
+        setIsVisible(true);
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+          if (!hasInteracted && window.scrollY === 0) {
+            setIsVisible(true);
+          }
+        }, 3000);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('mousemove', handleMouseMove);
+      clearTimeout(timeoutId);
+    };
+  }, [showScrollIndicator, hasInteracted]);
+
   const handleScrollDown = () => {
+    setHasInteracted(true);
     const nextSection = document.querySelector('main > section:nth-child(2), main > div:first-child, .content-section');
     if (nextSection) {
       nextSection.scrollIntoView({ 
@@ -70,14 +114,26 @@ const HeroSection = ({
         )}
       </div>
       
-      {/* Enhanced Mobile-First Responsive Scroll Indicator */}
+      {/* Mobile-Optimized Scroll Indicator - Positioned to avoid button conflicts */}
       {showScrollIndicator && (
-        <div className="absolute bottom-2 xs:bottom-3 sm:bottom-4 md:bottom-6 lg:bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+        <div 
+          className={`absolute left-1/2 transform -translate-x-1/2 z-10
+                     ${showButtons && (primaryButton || secondaryButton) 
+                       ? 'bottom-1 xs:bottom-2 sm:bottom-2 md:bottom-2 lg:bottom-3' 
+                       : 'bottom-4 xs:bottom-5 sm:bottom-6 md:bottom-8 lg:bottom-10'}
+                     transition-all duration-500 ease-out
+                     ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6 pointer-events-none'}`}
+        >
           <div 
-            className="flex flex-col items-center text-white/90 cursor-pointer group hover:text-white active:scale-95 transition-all duration-300 
-                       p-1 xs:p-2 sm:p-3 md:p-4 rounded-xl 
+            className="flex flex-col items-center text-white cursor-pointer group 
+                       active:scale-90 transition-transform duration-200 
+                       p-3 xs:p-4 sm:p-5 rounded-2xl 
                        touch-manipulation select-none
-                       min-h-[50px] xs:min-h-[60px] sm:min-h-[70px] md:min-h-[80px]"
+                       bg-black/40 sm:bg-black/30 md:bg-white/10
+                       hover:bg-black/50 sm:hover:bg-black/40 md:hover:bg-white/20
+                       active:bg-black/60 sm:active:bg-black/50 md:active:bg-white/30
+                       focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-0
+                       shadow-lg sm:shadow-xl"
             onClick={handleScrollDown}
             role="button"
             tabIndex={0}
@@ -88,49 +144,44 @@ const HeroSection = ({
               }
             }}
             aria-label="اسکرول به پایین برای مشاهده محتوا"
+            title="برای مشاهده محتوا کلیک کنید"
           >
-            {/* Text indicator - mobile-optimized with smaller text */}
-            <span className="text-[8px] xs:text-[9px] sm:text-xs md:text-sm 
-                           mb-1 xs:mb-1.5 sm:mb-2 md:mb-3 
-                           animate-pulse font-medium tracking-wide text-center 
-                           px-1 xs:px-2 sm:px-3
+            {/* Simple text - hidden on very small screens */}
+            <span className="hidden xs:block text-[10px] sm:text-xs md:text-sm 
+                           mb-2 sm:mb-3 
+                           font-semibold tracking-wider text-center 
                            leading-tight
-                           max-w-[90px] xs:max-w-[110px] sm:max-w-[130px] md:max-w-none">
-              برای مشاهده محتوا به پایین بکشید
+                           text-white drop-shadow-md">
+              به پایین بکشید
             </span>
             
-            {/* Mouse scroll indicator - mobile-enhanced */}
-            <div className="relative mb-1 xs:mb-1.5 sm:mb-2 md:mb-3 
-                          group-hover:scale-110 group-active:scale-105 
-                          transition-transform duration-300">
-              <div className="w-3 h-5 xs:w-4 xs:h-6 sm:w-5 sm:h-7 md:w-6 md:h-8 lg:w-7 lg:h-10 
-                           border-[1.5px] xs:border-2 border-white/70 rounded-full 
+            {/* Simplified mouse icon - larger and clearer on mobile */}
+            <div className="relative mb-2 sm:mb-3 
+                          group-hover:scale-105 group-active:scale-95 
+                          transition-transform duration-200">
+              <div className="w-5 h-8 xs:w-6 xs:h-9 sm:w-6 sm:h-10 md:w-7 md:h-11 
+                           border-2 sm:border-[2.5px] border-white rounded-full 
                            flex justify-center relative overflow-hidden 
-                           bg-white/5 backdrop-blur-sm 
-                           group-hover:border-white/90 group-active:border-white 
-                           transition-colors duration-300
-                           shadow-sm xs:shadow-md">
-                <div className="w-0.5 xs:w-0.5 sm:w-1 
-                             h-1 xs:h-1.5 sm:h-2 md:h-2.5 
-                             bg-white/80 rounded-full 
-                             mt-0.5 xs:mt-1 sm:mt-1.5 md:mt-2 
-                             animate-flash shadow-sm 
-                             group-hover:bg-white group-active:bg-white/90 
-                             transition-colors duration-300"></div>
-                {/* Enhanced glow effect for mobile */}
-                <div className="absolute inset-0 rounded-full bg-gradient-to-b 
-                             from-white/10 to-transparent 
-                             group-hover:from-white/20 group-active:from-white/25 
-                             transition-all duration-300"></div>
+                           bg-white/20 sm:bg-white/15 md:bg-white/10
+                           group-hover:border-white group-hover:bg-white/25
+                           transition-all duration-200
+                           shadow-md sm:shadow-lg">
+                {/* Animated scroll dot - simpler on mobile */}
+                <div className="w-1 xs:w-1 sm:w-1.5 
+                             h-1.5 xs:h-2 sm:h-2.5 
+                             bg-white rounded-full 
+                             mt-1.5 xs:mt-2 sm:mt-2.5 
+                             animate-scroll-wheel
+                             shadow-sm"></div>
               </div>
             </div>
             
-            {/* Down arrow - mobile-optimized */}
-            <div className="animate-bounce">
-              <svg className="w-3 h-3 xs:w-4 xs:h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7
-                           opacity-80 group-hover:opacity-100 group-active:opacity-100 
-                           transition-all duration-300 drop-shadow-sm
-                           stroke-[2] xs:stroke-[2.5] sm:stroke-[2.5]" 
+            {/* Down arrow - larger and bolder on mobile */}
+            <div className="animate-gentle-bounce">
+              <svg className="w-5 h-5 xs:w-6 xs:h-6 sm:w-6 sm:h-6 md:w-7 md:h-7
+                           transition-all duration-200 
+                           drop-shadow-lg
+                           stroke-[2.5] sm:stroke-[3]" 
                    fill="none" 
                    stroke="currentColor" 
                    viewBox="0 0 24 24"
@@ -140,14 +191,6 @@ const HeroSection = ({
                       d="M19 14l-7 7m0 0l-7-7m7 7V3" />
               </svg>
             </div>
-            
-            {/* Mobile-optimized pulse background */}
-            <div className="absolute inset-0 rounded-xl bg-white/5 animate-ping 
-                         opacity-10 xs:opacity-15 sm:opacity-20 
-                         scale-110 xs:scale-125 sm:scale-150 
-                         group-hover:opacity-20 xs:group-hover:opacity-25 sm:group-hover:opacity-30 
-                         group-active:opacity-30 
-                         transition-opacity duration-300"></div>
           </div>
         </div>
       )}

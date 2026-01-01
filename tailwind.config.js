@@ -41,6 +41,9 @@ module.exports = {
       fontFamily: {
         'persian': ['Vazirmatn', 'Tahoma', 'Arial', 'sans-serif'],
       },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+      },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
         'slide-in': 'slideIn 0.5s ease-out',

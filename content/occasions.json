@@ -1,0 +1,47 @@
+{
+  "occasions": [
+    {
+      "id": "birthday-sample",
+      "title": "(نمونه)",
+      "description": "این یک نمونه برای  است و هر سال تکرار می‌شود.",
+      "repeat": "yearly",
+      "on": { "jm": 1, "jd": 1 },
+      "start": { "jy": 1404, "jm": 8, "jd": 12 }
+    },
+    {
+      "id": "birthday-sample",
+      "title": "(نمونه)",
+      "description": "این یک نمونه برای  است و هر سال تکرار می‌شود.",
+      "repeat": "yearly",
+      "color": "red",
+      "on": { "jm": 1, "jd": 1 },
+      "start": { "jy": 1404, "jm": 8, "jd": 12 }
+    }
+  ],
+  "disabledOccasions": [
+    {
+      "id": "birthday-sample",
+      "title": "تولد (نمونه)",
+      "description": "این یک نمونه برای  است و هر سال تکرار می‌شود.",
+      "repeat": "yearly",
+      "on": { "jm": 1, "jd": 1 },
+      "start": { "jy": 1404, "jm": 6, "jd": 15 }
+    },
+    {
+      "id": "monthly-sample",
+      "title": "یادآوری ماهانه (نمونه)",
+      "description": "این مورد هر ماه در روز ۱۰ تکرار می‌شود.",
+      "repeat": "monthly",
+      "on": { "jd": 10 },
+      "start": { "jy": 1404, "jm": 1, "jd": 15 }
+    },
+    {
+      "id": "weekly-sample",
+      "title": "مناسبت هفتگی (نمونه)",
+      "description": "این مورد هر هفته در روز جمعه تکرار می‌شود.",
+      "repeat": "weekly",
+      "on": { "weekday": 6 },
+      "start": { "jy": 1404, "jm": 1, "jd": 15 }
+    }
+  ]
+}
