@@ -9,8 +9,8 @@ const AdminPage = () => {
   ])
   
   const [events, setEvents] = useState([
-    { id: 1, title: "Annual Harvest Festival 2025", date: "2025-09-15", eventDate: "2025-09-20", status: "published" },
-    { id: 2, title: "Village Council Monthly Meeting", date: "2025-07-15", eventDate: "2025-08-01", status: "published" },
+    { id: 1, title: "Annual Harvest Festival 2025", date: "2025-09-15", status: "published" },
+    { id: 2, title: "Village Council Monthly Meeting", date: "2025-07-15", status: "published" },
   ])
 
   const [newArticle, setNewArticle] = useState({
@@ -24,7 +24,6 @@ const AdminPage = () => {
   const [newEvent, setNewEvent] = useState({
     title: '',
     content: '',
-    eventDate: '',
     eventTime: '',
     location: '',
     organizer: '',
@@ -53,7 +52,7 @@ const AdminPage = () => {
       status: 'draft'
     }
     setEvents([event, ...events])
-    setNewEvent({ title: '', content: '', eventDate: '', eventTime: '', location: '', organizer: '', type: 'event' })
+    setNewEvent({ title: '', content: '', eventTime: '', location: '', organizer: '', type: 'event' })
     alert('Event created successfully!')
   }
 
@@ -370,44 +369,23 @@ const AdminPage = () => {
                     />
                   </div>
 
-                  <div style={{ display: `grid`, gridTemplateColumns: `1fr 1fr`, gap: `1rem`, marginBottom: `1rem` }}>
-                    <div>
-                      <label style={{ display: `block`, marginBottom: `0.5rem`, fontWeight: `bold` }}>
-                        Event Date *
-                      </label>
-                      <input
-                        type="date"
-                        value={newEvent.eventDate}
-                        onChange={(e) => setNewEvent({...newEvent, eventDate: e.target.value})}
-                        required
-                        style={{
-                          width: `100%`,
-                          padding: `0.75rem`,
-                          border: `1px solid #e2e8f0`,
-                          borderRadius: `5px`,
-                          fontSize: `1rem`,
-                        }}
-                      />
-                    </div>
-
-                    <div>
-                      <label style={{ display: `block`, marginBottom: `0.5rem`, fontWeight: `bold` }}>
-                        Event Time
-                      </label>
-                      <input
-                        type="text"
-                        value={newEvent.eventTime}
-                        onChange={(e) => setNewEvent({...newEvent, eventTime: e.target.value})}
-                        style={{
-                          width: `100%`,
-                          padding: `0.75rem`,
-                          border: `1px solid #e2e8f0`,
-                          borderRadius: `5px`,
-                          fontSize: `1rem`,
-                        }}
-                        placeholder="e.g., 10:00 AM - 6:00 PM"
-                      />
-                    </div>
+                  <div style={{ marginBottom: `1rem` }}>
+                    <label style={{ display: `block`, marginBottom: `0.5rem`, fontWeight: `bold` }}>
+                      Event Time
+                    </label>
+                    <input
+                      type="text"
+                      value={newEvent.eventTime}
+                      onChange={(e) => setNewEvent({...newEvent, eventTime: e.target.value})}
+                      style={{
+                        width: `100%`,
+                        padding: `0.75rem`,
+                        border: `1px solid #e2e8f0`,
+                        borderRadius: `5px`,
+                        fontSize: `1rem`,
+                      }}
+                      placeholder="e.g., 10:00 AM - 6:00 PM"
+                    />
                   </div>
 
                   <div style={{ marginBottom: `1rem` }}>
@@ -501,8 +479,7 @@ const AdminPage = () => {
                     }}>
                       <h4 style={{ margin: `0 0 0.5rem 0` }}>{event.title}</h4>
                       <div style={{ fontSize: `0.9rem`, color: `#666`, marginBottom: `1rem` }}>
-                        <span>Event Date: {event.eventDate}</span>
-                        <span> • Posted: {event.date}</span>
+                        <span>Posted: {event.date}</span>
                         <span> • Status: 
                           <span style={{
                             color: event.status === 'published' ? `green` : `orange`,

@@ -16,7 +16,7 @@ const IndexPage = ({ data }) => {
 
   return (
     <Layout title="خانه">
-      {/* Hero Section */}
+      {/* Hero Section with Full Features Enabled */}
       <HeroSection 
         title="به روستای دنگپیا خوش آمدید"
         subtitle="زیبایی، فرهنگ و جامعه روستای تاریخی ما را کشف کنید"
@@ -32,6 +32,10 @@ const IndexPage = ({ data }) => {
           icon: "M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
         }}
         showScrollIndicator={true}
+        backgroundImage="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Lut_Desert%2C_Kerman_Province%2C_Iran.jpg/1920px-Lut_Desert%2C_Kerman_Province%2C_Iran.jpg"
+        overlayOpacity={0.65}ش
+        enableParallax={true}
+        enableTypingEffect={true}
       />
 
       {/* Features Section */}

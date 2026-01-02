@@ -30,23 +30,13 @@ const toPersianShortDate = (date) => {
   }
 }
 
-// Function to get Persian date from event - either from persianDate field or convert from eventDate
+// Function to get Persian date from event by converting eventDate
 const getEventPersianDate = (event) => {
-  // If persianDate is available in frontmatter, use it directly
-  if (event.frontmatter.persianDate) {
-    return event.frontmatter.persianDate
-  }
-  // Otherwise, convert from Gregorian eventDate
   return toPersianDate(event.frontmatter.eventDate)
 }
 
-// Function to get Persian short date from event - either from persianDate field or convert from eventDate
+// Function to get Persian short date from event by converting eventDate
 const getEventPersianShortDate = (event) => {
-  // If persianDate is available in frontmatter, use it directly
-  if (event.frontmatter.persianDate) {
-    return event.frontmatter.persianDate
-  }
-  // Otherwise, convert from Gregorian eventDate
   return toPersianShortDate(event.frontmatter.eventDate)
 }
 
@@ -100,7 +90,7 @@ const EventsPage = ({ data }) => {
   }, [events])
 
   // Filter and sort events
-  const filterAndSortEvents = (eventsList) => {
+  const filterAndSortEvents = (eventsList, isUpcoming = false) => {
     let filtered = eventsList
     
     if (selectedCategory !== "همه") {
@@ -116,7 +106,13 @@ const EventsPage = ({ data }) => {
         case "featured":
           return b.frontmatter.featured - a.frontmatter.featured
         default:
-          return new Date(b.frontmatter.eventDate) - new Date(a.frontmatter.eventDate)
+          // For upcoming events, sort ascending (soonest first)
+          // For past events, sort descending (most recent first)
+          if (isUpcoming) {
+            return new Date(a.frontmatter.eventDate) - new Date(b.frontmatter.eventDate)
+          } else {
+            return new Date(b.frontmatter.eventDate) - new Date(a.frontmatter.eventDate)
+          }
       }
     })
   }
@@ -157,43 +153,97 @@ const EventsPage = ({ data }) => {
     
     return (
       <article
-        className="group relative overflow-hidden bg-gradient-to-br from-green-50 via-white to-emerald-50 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 border-2 border-green-200 hover:border-green-300 transform hover:-translate-y-2 animate-fade-in"
+        className="group relative overflow-hidden bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 border-2 border-green-200 hover:border-green-300 transform hover:-translate-y-2 animate-fade-in"
         style={{ animationDelay: `${index * 100}ms` }}
       >
-        {/* Live Indicator */}
-        <div className="absolute top-4 left-4 z-20">
-          <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold ${
-            isLive 
-              ? "bg-red-500 text-white animate-pulse" 
-              : "bg-green-500 text-white"
-          }`}>
-            <div className={`w-2 h-2 rounded-full ${
-              isLive ? "bg-white animate-ping" : "bg-white"
-            }`}></div>
-            {isLive ? "در حال برگزاری" : "امروز"}
-          </div>
-        </div>
-
-        {/* Featured Badge */}
-        {event.frontmatter.featured && (
-          <div className="absolute top-16 left-4 z-20">
-            <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 text-xs font-bold px-3 py-1.5 rounded-full shadow-lg transform -rotate-3 group-hover:rotate-0 transition-transform duration-300">
-              <span className="flex items-center gap-1">
-                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
-                ویژه
-              </span>
+        {/* Event Image */}
+        {event.frontmatter.image && (
+          <div className="relative h-64 overflow-hidden">
+            <img
+              src={event.frontmatter.image}
+              alt={event.frontmatter.title}
+              className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+            
+            {/* Live Indicator on Image */}
+            <div className="absolute top-4 left-4 z-20">
+              <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold shadow-lg ${
+                isLive 
+                  ? "bg-red-500 text-white animate-pulse" 
+                  : "bg-green-500 text-white"
+              }`}>
+                <div className={`w-2 h-2 rounded-full ${
+                  isLive ? "bg-white animate-ping" : "bg-white"
+                }`}></div>
+                {isLive ? "در حال برگزاری" : "امروز"}
+              </div>
             </div>
+
+            {/* Featured Badge on Image */}
+            {event.frontmatter.featured && (
+              <div className="absolute top-4 right-4 z-20">
+                <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 text-xs font-bold px-3 py-1.5 rounded-full shadow-lg transform -rotate-3 group-hover:rotate-0 transition-transform duration-300">
+                  <span className="flex items-center gap-1">
+                    <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    ویژه
+                  </span>
+                </div>
+              </div>
+            )}
+
+            {/* Event Type Badge */}
+            {event.frontmatter.type && (
+              <div className="absolute bottom-4 right-4">
+                <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold bg-white/90 backdrop-blur-sm text-green-700 border border-white/50 shadow-lg">
+                  {event.frontmatter.type === 'obituary' ? '🕊️ ترحیم' : '📅 رویداد'}
+                </span>
+              </div>
+            )}
           </div>
         )}
 
-        {/* Animated Background Pattern */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-10 right-10 w-20 h-20 bg-green-200 rounded-full animate-bounce"></div>
-          <div className="absolute bottom-10 left-10 w-16 h-16 bg-emerald-200 rounded-full animate-bounce" style={{ animationDelay: '1s' }}></div>
-          <div className="absolute top-1/2 left-1/2 w-12 h-12 bg-green-300 rounded-full animate-bounce" style={{ animationDelay: '2s' }}></div>
-        </div>
+        {/* No Image Fallback */}
+        {!event.frontmatter.image && (
+          <div className="relative h-48 bg-gradient-to-br from-green-50 via-white to-emerald-50">
+            {/* Animated Background Pattern */}
+            <div className="absolute inset-0 opacity-20">
+              <div className="absolute top-10 right-10 w-20 h-20 bg-green-200 rounded-full animate-bounce"></div>
+              <div className="absolute bottom-10 left-10 w-16 h-16 bg-emerald-200 rounded-full animate-bounce" style={{ animationDelay: '1s' }}></div>
+              <div className="absolute top-1/2 left-1/2 w-12 h-12 bg-green-300 rounded-full animate-bounce" style={{ animationDelay: '2s' }}></div>
+            </div>
+            
+            {/* Live Indicator */}
+            <div className="absolute top-4 left-4 z-20">
+              <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold ${
+                isLive 
+                  ? "bg-red-500 text-white animate-pulse" 
+                  : "bg-green-500 text-white"
+              }`}>
+                <div className={`w-2 h-2 rounded-full ${
+                  isLive ? "bg-white animate-ping" : "bg-white"
+                }`}></div>
+                {isLive ? "در حال برگزاری" : "امروز"}
+              </div>
+            </div>
+
+            {/* Featured Badge */}
+            {event.frontmatter.featured && (
+              <div className="absolute top-16 left-4 z-20">
+                <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 text-xs font-bold px-3 py-1.5 rounded-full shadow-lg transform -rotate-3 group-hover:rotate-0 transition-transform duration-300">
+                  <span className="flex items-center gap-1">
+                    <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    ویژه
+                  </span>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
 
         <div className="relative z-10 p-8">
           {/* Event Category & Current Time */}
@@ -316,27 +366,83 @@ const EventsPage = ({ data }) => {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        {/* Gradient Overlay Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary-50 via-white to-secondary-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-        
-        {/* Featured Badge */}
-        {event.frontmatter.featured && (
-          <div className="absolute top-4 left-4 z-20">
-            <div className="bg-gradient-to-r from-secondary-400 to-secondary-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg transform rotate-3 group-hover:rotate-0 transition-transform duration-300">
-              <span className="flex items-center gap-1">
-                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
-                ویژه
-              </span>
+        {/* Event Image */}
+        {event.frontmatter.image && (
+          <div className="relative h-56 overflow-hidden">
+            <img
+              src={event.frontmatter.image}
+              alt={event.frontmatter.title}
+              className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+            />
+            {/* Image Overlay */}
+            <div className={`absolute inset-0 bg-gradient-to-t ${
+              isPast 
+                ? 'from-gray-900/70 via-gray-900/30 to-transparent'
+                : 'from-primary-900/60 via-primary-900/20 to-transparent'
+            }`}></div>
+            
+            {/* Featured Badge on Image */}
+            {event.frontmatter.featured && (
+              <div className="absolute top-4 right-4 z-20">
+                <div className="bg-gradient-to-r from-secondary-400 to-secondary-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg transform rotate-3 group-hover:rotate-0 transition-transform duration-300">
+                  <span className="flex items-center gap-1">
+                    <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    ویژه
+                  </span>
+                </div>
+              </div>
+            )}
+
+            {/* Status Badge on Image */}
+            <div className="absolute top-4 left-4 z-20">
+              <div className={`px-3 py-1 rounded-full text-xs font-bold shadow-lg ${
+                isPast 
+                  ? "bg-red-500/90 text-white backdrop-blur-sm" 
+                  : "bg-green-500/90 text-white backdrop-blur-sm"
+              }`}>
+                {isPast ? "گذشته" : "آینده"}
+              </div>
             </div>
+
+            {/* Event Type Badge on Image */}
+            {event.frontmatter.type && (
+              <div className="absolute bottom-4 right-4">
+                <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold bg-white/90 backdrop-blur-sm text-primary-700 border border-white/50 shadow-lg">
+                  {event.frontmatter.type === 'obituary' ? '🕊️ ترحیم' : '📅 رویداد'}
+                </span>
+              </div>
+            )}
           </div>
         )}
 
-        {/* Status Indicator */}
-        <div className="absolute top-16 left-4 z-20">
-          <div className={`w-3 h-3 rounded-full ${isPast ? 'bg-red-400' : 'bg-green-400'} shadow-lg animate-pulse`}></div>
-        </div>
+        {/* No Image Fallback */}
+        {!event.frontmatter.image && (
+          <div className="relative h-48">
+            {/* Gradient Overlay Background */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary-50 via-white to-secondary-50"></div>
+            
+            {/* Featured Badge */}
+            {event.frontmatter.featured && (
+              <div className="absolute top-4 left-4 z-20">
+                <div className="bg-gradient-to-r from-secondary-400 to-secondary-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg transform rotate-3 group-hover:rotate-0 transition-transform duration-300">
+                  <span className="flex items-center gap-1">
+                    <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    ویژه
+                  </span>
+                </div>
+              </div>
+            )}
+
+            {/* Status Indicator */}
+            <div className="absolute top-16 left-4 z-20">
+              <div className={`w-3 h-3 rounded-full ${isPast ? 'bg-red-400' : 'bg-green-400'} shadow-lg animate-pulse`}></div>
+            </div>
+          </div>
+        )}
 
         <div className="relative z-10 p-8">
           {/* Event Category & Date */}
@@ -652,7 +758,7 @@ const EventsPage = ({ data }) => {
         )}
 
         {/* Upcoming Events Section */}
-        {filterAndSortEvents(upcomingEvents).length > 0 && (
+        {filterAndSortEvents(upcomingEvents, true).length > 0 && (
           <section id="upcoming" className="mb-16">
             <div className="flex items-center justify-between mb-8">
               <div>
@@ -671,7 +777,7 @@ const EventsPage = ({ data }) => {
                 ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3" 
                 : "grid-cols-1"
             }`}>
-              {filterAndSortEvents(upcomingEvents).map((event, index) => (
+              {filterAndSortEvents(upcomingEvents, true).map((event, index) => (
                 <ModernEventCard key={index} event={event} index={index} />
               ))}
             </div>
@@ -817,12 +923,14 @@ export const query = graphql`
           title
           date(formatString: "YYYY-MM-DD")
           eventDate
-          persianDate
           eventTime
           location
           organizer
           featured
           category
+          image
+          type
+          description
         }
       }
     }

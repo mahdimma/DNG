@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { graphql, Link } from "gatsby"
 import { Helmet } from "react-helmet"
 import Layout from "../components/Layout"
@@ -21,6 +21,7 @@ const EventTemplate = ({ data }) => {
   const eventDate = new Date(event.frontmatter.eventDate)
   const isUpcoming = eventDate > new Date()
   const isPast = eventDate < new Date()
+  const [imageModalOpen, setImageModalOpen] = useState(false)
   
   // Convert dates to ISO 8601 format with timezone
   const startDateTime = event.frontmatter.eventTime 
@@ -82,6 +83,7 @@ const EventTemplate = ({ data }) => {
           })}
         </script>
       </Helmet>
+
       <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Event Header */}
         <header className="mb-12">
@@ -202,12 +204,104 @@ const EventTemplate = ({ data }) => {
           <hr className="border-gray-200" />
         </header>
 
+        {/* Event Image - Smaller size above content */}
+        {event.frontmatter.image && (
+          <div className="mb-8 flex justify-center">
+            <div 
+              className="relative rounded-xl overflow-hidden shadow-xl cursor-pointer group transition-all duration-300 hover:shadow-2xl max-w-2xl w-full"
+              onClick={() => setImageModalOpen(true)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === 'Enter' && setImageModalOpen(true)}
+            >
+              <img
+                src={event.frontmatter.image}
+                alt={event.frontmatter.title}
+                className="w-full h-auto max-h-80 object-cover"
+              />
+              
+              {/* Hover overlay */}
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
+                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white">
+                  <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                  </svg>
+                  <p className="text-sm mt-2 font-semibold">کلیک برای بزرگنمایی</p>
+                </div>
+              </div>
+              
+              {/* Badges on image */}
+              <div className="absolute top-4 right-4 flex gap-2">
+                {event.frontmatter.type && (
+                  <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold bg-white/90 backdrop-blur-sm text-gray-900 shadow-lg">
+                    {event.frontmatter.type === 'obituary' ? '🕊️ ترحیم' : '📅 رویداد'}
+                  </span>
+                )}
+                {event.frontmatter.category && (
+                  <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold bg-primary-500/90 backdrop-blur-sm text-white shadow-lg">
+                    {event.frontmatter.category}
+                  </span>
+                )}
+              </div>
+              
+              {/* Image caption */}
+              {event.frontmatter.description && (
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent text-white p-3 text-center">
+                  <p className="text-xs md:text-sm">{event.frontmatter.description}</p>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
         {/* Event Content */}
         <div 
           className="prose prose-lg max-w-none text-gray-700 leading-relaxed prose-headings:text-right prose-p:text-justify prose-ul:pr-6 prose-ol:pr-6 prose-blockquote:border-r-4 prose-blockquote:border-l-0 prose-blockquote:pr-4 prose-blockquote:pl-0"
           dangerouslySetInnerHTML={{ __html: event.html }}
         />
 
+        {/* Image Modal/Lightbox */}
+        {imageModalOpen && event.frontmatter.image && (
+          <div 
+            className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4 overflow-auto"
+            onClick={() => setImageModalOpen(false)}
+            role="dialog"
+            aria-modal="true"
+          >
+            <button
+              className="absolute top-4 left-4 text-white/90 hover:text-white transition-colors z-10 bg-black/50 rounded-full p-2 backdrop-blur-sm"
+              onClick={() => setImageModalOpen(false)}
+              aria-label="بستن تصویر"
+            >
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+            
+            <div 
+              className="max-w-5xl w-full flex flex-col gap-4 my-auto" 
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={event.frontmatter.image}
+                alt={event.frontmatter.title}
+                className="w-full max-h-[70vh] object-contain rounded-lg shadow-2xl"
+              />
+              
+              {/* Description below image */}
+              {event.frontmatter.description && (
+                <div className="bg-white/10 backdrop-blur-sm text-white p-4 rounded-lg text-center">
+                  <p className="text-sm md:text-base">{event.frontmatter.description}</p>
+                </div>
+              )}
+            </div>
+            
+            <p className="absolute bottom-4 text-white/60 text-sm">
+              کلیک در هر نقطه برای بستن
+            </p>
+          </div>
+        )}
+        
         {/* Action Buttons */}
         {isUpcoming && (
           <div className="bg-green-50 border border-green-200 rounded-lg p-8 mt-12 text-center">
@@ -319,6 +413,10 @@ export const query = graphql`
         location
         organizer
         featured
+        image
+        type
+        description
+        category
       }
     }
   }

@@ -1,9 +1,9 @@
 ---
 title: "نشست هم‌اندیشی چشم‌انداز ۱۴۰۵"
-date: "2025-07-01"
+date: "2025-09-10"
 type: "event"
-eventDate: "2025-07-19"
-persianDate: "۲۸ شهریور ۱۴۰۴"
+eventDate: "2025-09-19"
+category: "جلسه"
 eventTime: "۱۴:۰۰ - ۱۸:۰۰"
 location: "سالن اجتماعات مرکز فرهنگی شهر"
 organizer: "کمیته برنامه‌ریزی استراتژیک"
