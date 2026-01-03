@@ -1,5 +1,10 @@
 /* Events Page Custom Styles */
 
+/* Modal fixed positioning */
+.fixed {
+  position: fixed !important;
+}
+
 /* Smooth animations with reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   * {

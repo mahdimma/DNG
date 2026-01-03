@@ -140,7 +140,7 @@ const EventTemplate = ({ data }) => {
                 <svg className="ml-3 w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
-                🎉 رویداد پیش رو
+                رویداد پیش رو
               </span>
             )}
             {isPast && (
@@ -162,26 +162,26 @@ const EventTemplate = ({ data }) => {
           </div>
 
           {/* Event Details Box */}
-          <div className="bg-gradient-to-br from-white via-primary-50/30 to-white border-3 border-primary-200 rounded-3xl p-10 mb-12 shadow-2xl hover:shadow-primary-200 transition-all duration-300 hover:border-primary-300">
-            <h3 className="text-3xl font-black text-gray-900 mb-10 pb-5 border-b-4 border-primary-500 flex items-center gap-4">
-              <div className="w-14 h-14 bg-gradient-to-br from-primary-500 to-primary-600 rounded-2xl flex items-center justify-center shadow-lg transform hover:rotate-12 transition-transform">
-                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          <div className="bg-gradient-to-br from-white via-primary-50/30 to-white border-2 border-primary-200 rounded-2xl p-6 mb-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-primary-300">
+            <h3 className="text-xl font-bold text-gray-900 mb-6 pb-3 border-b-2 border-primary-500 flex items-center gap-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center shadow-md">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              📝 جزئیات رویداد
+              جزئیات رویداد
             </h3>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="flex items-start group hover-lift bg-gradient-to-br from-white to-primary-50/30 p-6 rounded-2xl border-2 border-primary-100 hover:border-primary-300 transition-all">
-                <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-primary-100 via-primary-200 to-primary-300 rounded-2xl flex items-center justify-center ml-5 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg">
-                  <svg className="w-9 h-9 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="flex items-start group hover-lift bg-gradient-to-br from-white to-primary-50/30 p-4 rounded-xl border border-primary-100 hover:border-primary-300 transition-all">
+                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary-100 via-primary-200 to-primary-300 rounded-xl flex items-center justify-center ml-3 group-hover:scale-110 transition-all duration-300 shadow-md">
+                  <svg className="w-6 h-6 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                 </div>
                 <div>
-                  <h4 className="font-black text-gray-900 mb-4 text-xl flex items-center gap-2">📅 تاریخ و زمان</h4>
-                  <div className="text-gray-700 text-lg">
+                  <h4 className="font-bold text-gray-900 mb-2 text-base">تاریخ و زمان</h4>
+                  <div className="text-gray-700 text-sm">
                     {event.frontmatter.eventDate && (
                       <div className="mb-2 font-semibold">
                         {new Date(event.frontmatter.eventDate).toLocaleDateString('fa-IR', {
@@ -207,7 +207,7 @@ const EventTemplate = ({ data }) => {
                   </svg>
                 </div>
                 <div>
-                  <h4 className="font-black text-gray-900 mb-4 text-xl flex items-center gap-2">📍 محل برگزاری</h4>
+                  <h3 className="font-black text-gray-900 mb-4 text-xl flex items-center gap-2">📍 محل برگزاری</h3>
                   <div className="text-gray-700 font-black text-lg">
                     {event.frontmatter.location || 'محل تعیین نشده'}
                   </div>
@@ -221,7 +221,7 @@ const EventTemplate = ({ data }) => {
                   </svg>
                 </div>
                 <div>
-                  <h4 className="font-black text-gray-900 mb-4 text-xl flex items-center gap-2">👥 برگزارکننده</h4>
+                  <h3 className="font-black text-gray-900 mb-4 text-xl flex items-center gap-2">👥 برگزارکننده</h3>
                   <div className="text-gray-700 font-black text-lg">
                     {event.frontmatter.organizer || 'اداره روستا'}
                   </div>
@@ -235,7 +235,7 @@ const EventTemplate = ({ data }) => {
                   </svg>
                 </div>
                 <div>
-                  <h4 className="font-black text-gray-900 mb-4 text-xl flex items-center gap-2">📄 تاریخ انتشار</h4>
+                  <h3 className="font-black text-gray-900 mb-4 text-xl flex items-center gap-2">📄 تاریخ انتشار</h3>
                   <div className="text-gray-700 font-black text-lg">
                     {toPersianDate(event.frontmatter.date)}
                   </div>
@@ -279,7 +279,7 @@ const EventTemplate = ({ data }) => {
               <div className="absolute top-6 right-6 flex gap-3">
                 {event.frontmatter.type && (
                   <span className="inline-flex items-center px-5 py-2.5 rounded-2xl text-sm font-bold bg-white/95 backdrop-blur-md text-gray-900 shadow-2xl border-2 border-white/50">
-                    {event.frontmatter.type === 'obituary' ? '🕊️ ترحیم' : '🏆 رویداد'}
+                    {event.frontmatter.type === 'obituary' ? '🕊️ ترحیم' : 'رویداد'}
                   </span>
                 )}
                 {event.frontmatter.category && (
@@ -308,30 +308,29 @@ const EventTemplate = ({ data }) => {
         {/* Image Modal/Lightbox */}
         {imageModalOpen && event.frontmatter.image && (
           <div 
-            className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4"
+            className="fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center p-4"
             onClick={() => setImageModalOpen(false)}
             role="dialog"
             aria-modal="true"
-            style={{ position: 'fixed' }}
           >
             <button
-              className="absolute top-4 left-4 text-white/90 hover:text-white transition-colors z-10 bg-black/50 rounded-full p-2 backdrop-blur-sm"
+              className="absolute top-3 left-3 text-white/90 hover:text-white transition-colors z-10 bg-black/50 rounded-full p-1.5 backdrop-blur-sm"
               onClick={() => setImageModalOpen(false)}
               aria-label="بستن تصویر"
             >
-              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
             
             <div 
-              className="max-w-4xl w-full flex flex-col gap-4" 
+              className="max-w-3xl w-full flex flex-col gap-3" 
               onClick={(e) => e.stopPropagation()}
             >
               <img
                 src={event.frontmatter.image}
                 alt={event.frontmatter.title}
-                className="w-full max-h-[80vh] object-contain rounded-lg shadow-2xl"
+                className="w-full max-h-[75vh] object-contain rounded-lg shadow-2xl"
               />
               
               {/* Description below image */}
@@ -362,9 +361,9 @@ const EventTemplate = ({ data }) => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h4 className="text-3xl font-black text-white mb-4">
-                🎉 علاقه‌مند به شرکت هستید؟
-              </h4>
+              <h3 className="text-3xl font-black text-white mb-4">
+                علاقه‌مند به شرکت هستید؟
+              </h3>
               <p className="text-white/90 mb-8 text-lg max-w-2xl mx-auto">
                 برای اطلاعات بیشتر یا ثبت‌نام در این رویداد، با ما تماس بگیرید:
               </p>

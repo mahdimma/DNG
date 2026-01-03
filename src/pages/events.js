@@ -224,7 +224,7 @@ const EventsPage = ({ data }) => {
             {event.frontmatter.type && (
               <div className="absolute bottom-4 right-4">
                 <span className="inline-flex items-center px-4 py-2 rounded-xl text-sm font-bold bg-white/95 backdrop-blur-md text-green-700 border-2 border-green-200 shadow-2xl">
-                  {event.frontmatter.type === 'obituary' ? '🕊️ ترحیم' : '🏆 رویداد'}
+                  {event.frontmatter.type === 'obituary' ? '🕊️ ترحیم' : 'رویداد'}
                 </span>
               </div>
             )}
@@ -233,7 +233,7 @@ const EventsPage = ({ data }) => {
 
         {/* No Image Fallback */}
         {!event.frontmatter.image && (
-          <div className="relative h-44 bg-gradient-to-br from-green-100 via-emerald-50 to-green-100 overflow-hidden">
+          <div className="relative h-36 bg-gradient-to-br from-green-100 via-emerald-50 to-green-100 overflow-hidden">
             {/* Animated Background Pattern */}
             <div className="absolute inset-0">
               <div className="absolute top-0 right-0 w-40 h-40 bg-green-200/40 rounded-full blur-3xl animate-pulse"></div>
@@ -281,9 +281,9 @@ const EventsPage = ({ data }) => {
           </div>
         )}
 
-        <div className="relative z-10 p-5">
+        <div className="relative z-10 p-4">
           {/* Event Category & Current Time */}
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between mb-3">
             {event.frontmatter.category && (
               <span className="inline-flex items-center px-4 py-2 rounded-xl text-sm font-bold bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 border-2 border-green-200 shadow-sm">
                 🏷️ {event.frontmatter.category}
@@ -306,7 +306,7 @@ const EventsPage = ({ data }) => {
           </div>
 
           {/* Title with special styling for current events */}
-          <h3 className="text-xl md:text-2xl font-black text-gray-900 mb-4 group-hover:text-green-600 transition-colors duration-300 leading-tight">
+          <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-3 group-hover:text-green-600 transition-colors duration-300 leading-tight">
             <Link
               to={event.fields?.slug || "#"}
               className="hover:underline decoration-4 decoration-green-400 underline-offset-4 decoration-wavy"
@@ -316,22 +316,22 @@ const EventsPage = ({ data }) => {
           </h3>
 
           {/* Excerpt */}
-          <p className="text-gray-700 text-sm leading-relaxed mb-4 line-clamp-2">
+          <p className="text-gray-700 text-xs leading-relaxed mb-3 line-clamp-2">
             {event.excerpt}
           </p>
 
           {/* Event Details with enhanced styling */}
-          <div className="grid grid-cols-1 gap-2 mb-4 p-4 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border-2 border-green-200 group-hover:border-green-300 group-hover:shadow-lg transition-all duration-300">
+          <div className="grid grid-cols-1 gap-2 mb-3 p-3 bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg border border-green-200 group-hover:border-green-300 transition-all duration-300">
             {event.frontmatter.eventTime && (
-              <div className="flex items-center text-sm">
-                <div className="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center ml-2">
-                  <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="flex items-center text-xs">
+                <div className="w-7 h-7 rounded-lg bg-green-100 flex items-center justify-center ml-2">
+                  <svg className="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
                 <div>
                   <p className="text-xs text-gray-600 mb-0.5">زمان</p>
-                  <span className="text-gray-900 font-bold">{event.frontmatter.eventTime}</span>
+                  <span className="text-gray-900 text-xs font-semibold">{event.frontmatter.eventTime}</span>
                   {isLive && (
                     <span className="mr-2 text-red-600 text-sm font-bold animate-pulse">● زنده</span>
                   )}
@@ -374,9 +374,9 @@ const EventsPage = ({ data }) => {
               className="flex-1 group/btn relative overflow-hidden inline-flex items-center justify-center px-4 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white text-sm font-bold rounded-xl hover:from-green-600 hover:to-emerald-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
             >
               <span className="relative z-10 flex items-center">
-                {isLive ? "👉 پیوستن به رویداد" : "🔎 مشاهده جزئیات"}
+                {isLive ? "پیوستن به رویداد" : "مشاهده جزئیات"}
                 <svg
-                  className="mr-2 w-4 h-4 group-hover/btn:-translate-x-1 transition-transform duration-300"
+                  className="mr-2 w-3.5 h-3.5 group-hover/btn:-translate-x-1 transition-transform duration-300"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -466,7 +466,7 @@ const EventsPage = ({ data }) => {
                   ? "bg-gray-500/95 text-white border-gray-400" 
                   : "bg-gradient-to-r from-green-500 to-emerald-600 text-white border-green-400"
               }`}>
-                {isPast ? "📅 گذشته" : "🎉 آینده"}
+                {isPast ? "📅 گذشته" : "آینده"}
               </div>
             </div>
 
@@ -474,7 +474,7 @@ const EventsPage = ({ data }) => {
             {event.frontmatter.type && (
               <div className="absolute bottom-4 right-4">
                 <span className="inline-flex items-center px-4 py-2 rounded-xl text-sm font-bold bg-white/95 backdrop-blur-md text-primary-700 border-2 border-white/50 shadow-2xl">
-                  {event.frontmatter.type === 'obituary' ? '🕊️ ترحیم' : '🎯 رویداد'}
+                  {event.frontmatter.type === 'obituary' ? '🕊️ ترحیم' : 'رویداد'}
                 </span>
               </div>
             )}
@@ -483,7 +483,7 @@ const EventsPage = ({ data }) => {
 
         {/* No Image Fallback */}
         {!event.frontmatter.image && (
-          <div className={`relative h-40 overflow-hidden ${
+          <div className={`relative h-36 overflow-hidden ${
             isPast 
               ? "bg-gradient-to-br from-gray-100 via-gray-50 to-gray-100" 
               : "bg-gradient-to-br from-primary-100 via-primary-50 to-secondary-100"
@@ -526,9 +526,9 @@ const EventsPage = ({ data }) => {
           </div>
         )}
 
-        <div className="relative z-10 p-5">
+        <div className="relative z-10 p-4">
           {/* Event Category & Date */}
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between mb-3">
             {event.frontmatter.category && (
               <span className={`inline-flex items-center px-4 py-2 rounded-xl text-sm font-bold border-2 shadow-sm ${
                 isPast 
@@ -549,7 +549,7 @@ const EventsPage = ({ data }) => {
           </div>
 
           {/* Title */}
-          <h3 className={`text-lg md:text-xl font-black mb-4 leading-tight transition-colors duration-300 ${
+          <h3 className={`text-base md:text-lg font-bold mb-3 leading-tight transition-colors duration-300 ${
             isPast 
               ? "text-gray-700 group-hover:text-gray-900" 
               : "text-gray-900 group-hover:text-primary-600"
@@ -563,14 +563,14 @@ const EventsPage = ({ data }) => {
           </h3>
 
           {/* Excerpt */}
-          <p className={`text-sm leading-relaxed mb-4 line-clamp-2 ${
+          <p className={`text-xs leading-relaxed mb-3 line-clamp-2 ${
             isPast ? "text-gray-600" : "text-gray-700"
           }`}>
             {event.excerpt}
           </p>
 
           {/* Event Details Grid */}
-          <div className={`grid grid-cols-1 gap-2 mb-4 p-4 rounded-xl border-2 transition-all duration-300 ${
+          <div className={`grid grid-cols-1 gap-1.5 mb-3 p-3 rounded-lg border transition-all duration-300 ${
             isPast 
               ? "bg-gray-50 border-gray-200 group-hover:border-gray-300" 
               : "bg-gradient-to-br from-primary-50 to-secondary-50 border-primary-200 group-hover:border-primary-300 group-hover:shadow-lg"
@@ -627,7 +627,7 @@ const EventsPage = ({ data }) => {
               }`}
             >
               <span className="relative z-10 flex items-center">
-                {isPast ? "📖 مشاهده خاطرات" : "🎉 ثبت نام"}
+                {isPast ? "مشاهده جزئیات" : "مشاهده جزئیات"}
                 <svg
                   className="mr-2 w-4 h-4 group-hover/btn:-translate-x-1 transition-transform duration-300"
                   fill="none"
