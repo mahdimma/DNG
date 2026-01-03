@@ -32,7 +32,7 @@ const IndexPage = ({ data }) => {
           icon: "M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
         }}
         showScrollIndicator={true}
-        backgroundImage="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Lut_Desert%2C_Kerman_Province%2C_Iran.jpg/1920px-Lut_Desert%2C_Kerman_Province%2C_Iran.jpg"
+        backgroundImage="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Zagedan_Lakes%2C_Mountain_cirque%2C_Caucasus_Mountains.jpg/1280px-Zagedan_Lakes%2C_Mountain_cirque%2C_Caucasus_Mountains.jpg"
         overlayOpacity={0.65}ش
         enableParallax={true}
         enableTypingEffect={true}
