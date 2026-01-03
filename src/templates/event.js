@@ -207,7 +207,7 @@ const EventTemplate = ({ data }) => {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-black text-gray-900 mb-4 text-xl flex items-center gap-2">📍 محل برگزاری</h3>
+                  <h4 className="font-black text-gray-900 mb-4 text-xl flex items-center gap-2">📍 محل برگزاری</h4>
                   <div className="text-gray-700 font-black text-lg">
                     {event.frontmatter.location || 'محل تعیین نشده'}
                   </div>
@@ -221,7 +221,7 @@ const EventTemplate = ({ data }) => {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-black text-gray-900 mb-4 text-xl flex items-center gap-2">👥 برگزارکننده</h3>
+                  <h4 className="font-black text-gray-900 mb-4 text-xl flex items-center gap-2">👥 برگزارکننده</h4>
                   <div className="text-gray-700 font-black text-lg">
                     {event.frontmatter.organizer || 'اداره روستا'}
                   </div>
@@ -235,7 +235,7 @@ const EventTemplate = ({ data }) => {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-black text-gray-900 mb-4 text-xl flex items-center gap-2">📄 تاریخ انتشار</h3>
+                  <h4 className="font-black text-gray-900 mb-4 text-xl flex items-center gap-2">📄 تاریخ انتشار</h4>
                   <div className="text-gray-700 font-black text-lg">
                     {toPersianDate(event.frontmatter.date)}
                   </div>
@@ -361,9 +361,9 @@ const EventTemplate = ({ data }) => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="text-3xl font-black text-white mb-4">
-                علاقه‌مند به شرکت هستید؟
-              </h3>
+              <h4 className="text-3xl font-black text-white mb-4">
+                🎉 علاقه‌مند به شرکت هستید؟
+              </h4>
               <p className="text-white/90 mb-8 text-lg max-w-2xl mx-auto">
                 برای اطلاعات بیشتر یا ثبت‌نام در این رویداد، با ما تماس بگیرید:
               </p>
